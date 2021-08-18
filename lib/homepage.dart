@@ -17,6 +17,7 @@ class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(
@@ -69,7 +70,7 @@ class _HomepageState extends State<Homepage> {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(25.0),
+              padding: const EdgeInsets.fromLTRB(22, 8, 20, 8),
               child: Text(
                 "Main\nCategories",
                 textAlign: TextAlign.left,
@@ -78,7 +79,57 @@ class _HomepageState extends State<Homepage> {
                 ),
               ),
             ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Column(
+                  children: [
+                    // 1st row
+                    Flex(
+                      direction: Axis.vertical,
+                      children: [
+                        categoryButton(screenHeight, screenWidth, "Category",
+                            "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
+                        categoryButton(screenHeight, screenWidth, "Category",
+                            "https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?cs=srgb&dl=pexels-william-choquette-2641886.jpg&fm=jpg"),
+                        categoryButton(screenHeight, screenWidth, "Category",
+                            "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+            ),
           )
+        ],
+      ),
+    );
+  }
+
+  SizedBox categoryButton(
+      double screenHeight, double screenWidth, String name, String imageUrl) {
+    return SizedBox(
+      height: screenHeight / 6,
+      width: screenWidth / 4,
+      // color: Colors.white,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          CircleAvatar(
+            radius: 50,
+            backgroundColor: Colors.orange,
+            foregroundImage: NetworkImage(imageUrl),
+          ),
+          Text(
+            name,
+            overflow: TextOverflow.ellipsis,
+            style: GoogleFonts.lato(
+                // color:
+                ),
+          ),
         ],
       ),
     );

@@ -19,9 +19,10 @@ Widget topBar(BuildContext context) {
                 bottomSheet(context, height2);
               },
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(4.0),
                     child: Icon(
                       Icons.location_on_outlined,
                       color: topBarColor,

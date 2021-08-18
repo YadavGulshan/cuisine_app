@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         appBarTheme: AppBarTheme(color: Colors.white),
         primaryTextTheme: GoogleFonts.latoTextTheme(),
+        // brightness: Brightness.dark,
       ),
       home: const Homepage(),
     );
