@@ -6,9 +6,14 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Homepage extends StatelessWidget {
+class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
 
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -58,6 +63,18 @@ class Homepage extends StatelessWidget {
                       ),
                     ),
                   ),
+                ),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: Text(
+                "Main\nCategories",
+                textAlign: TextAlign.left,
+                style: GoogleFonts.lato(
+                  fontSize: 28,
                 ),
               ),
             ),
