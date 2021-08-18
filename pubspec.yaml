@@ -42,6 +42,7 @@ dependencies:
       url: git://github.com/Baseflow/baseflow_plugin_template.git
       ref: v2.0.0-nullsafety
   android_intent: ^2.0.2
+  permission_handler: ^8.1.4+2
 
 dev_dependencies:
   flutter_test:

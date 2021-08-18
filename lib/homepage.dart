@@ -67,18 +67,6 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          // SliverToBoxAdapter(
-          //   child: Padding(
-          //     padding: const EdgeInsets.fromLTRB(22, 8, 20, 8),
-          //     child: Text(
-          //       "Categories",
-          //       textAlign: TextAlign.left,
-          //       style: GoogleFonts.lato(
-          //         fontSize: 28,
-          //       ),
-          //     ),
-          //   ),
-          // ),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
