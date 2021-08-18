@@ -1,4 +1,8 @@
+import 'dart:ui';
+
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/widgets/topbar.dart';
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -7,66 +11,53 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         slivers: [
+          SliverAppBar(
+            title: topBar(context),
+          ),
           SliverToBoxAdapter(
-            child: SafeArea(
-                child: SizedBox(
-              height: MediaQuery.of(context).size.height / 16,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Row(
-                    children: [
-                      InkWell(
-                        onTap: () {},
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: InkWell(
+                child: DottedBorder(
+                  borderType: BorderType.RRect,
+                  strokeWidth: 0.3,
+                  strokeCap: StrokeCap.round,
+                  radius: const Radius.circular(22),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(22),
+                    child: InkWell(
+                      onTap: () {},
+                      splashColor: Colors.transparent,
+                      child: Container(
+                        height: screenHeight / 21,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[100],
+                        ),
                         child: Row(
-                          children: [
-                            const Padding(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: const [
+                            Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Icon(
-                                Icons.location_on_outlined,
-                                color: topBar,
+                                Icons.search,
+                                size: 20,
                               ),
                             ),
-                            SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.5,
-                              child: Text(
-                                "Patlipada Village, Thane West",
-                                overflow: TextOverflow.ellipsis,
-                                maxLines: 1,
-                                style: GoogleFonts.lato(
-                                  decoration: TextDecoration.underline,
-                                  decorationStyle: TextDecorationStyle.dotted,
-                                  decorationColor: topBar,
-                                  letterSpacing: 0.6,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
+                            Spacer(),
+                            Text("Cuisines, restaurants, and more"),
+                            Spacer(),
+                            Spacer(),
                           ],
                         ),
-                      )
-                    ],
+                      ),
+                    ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.menu_rounded),
-                  )
-                ],
-              ),
-            )),
-          ),
-          SliverAppBar(
-            title: InkWell(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  decoration: BoxDecoration(color: Colors.grey[100]),
                 ),
               ),
             ),
@@ -75,4 +66,23 @@ class Homepage extends StatelessWidget {
       ),
     );
   }
+}
+
+Future<dynamic> bottomSheet(BuildContext context, double height) {
+  return showModalBottomSheet(
+      backgroundColor: Colors.white,
+      context: context,
+      useRootNavigator: true,
+      builder: (BuildContext context) {
+        return Container(
+          color: Colors.white,
+          height: height / 1.5,
+          child: TextButton(
+            child: const Text("WORK IN PROGRESS"),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        );
+      });
 }

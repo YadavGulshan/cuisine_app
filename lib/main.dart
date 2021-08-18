@@ -1,5 +1,6 @@
 import 'package:cuisine_app/homepage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,6 +15,8 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        appBarTheme: AppBarTheme(color: Colors.white),
+        primaryTextTheme: GoogleFonts.latoTextTheme(),
       ),
       home: const Homepage(),
     );
