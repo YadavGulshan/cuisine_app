@@ -72,7 +72,7 @@ class _HomepageState extends State<Homepage> {
             child: Padding(
               padding: const EdgeInsets.fromLTRB(22, 8, 20, 8),
               child: Text(
-                "Main\nCategories",
+                "Categories",
                 textAlign: TextAlign.left,
                 style: GoogleFonts.lato(
                   fontSize: 28,
@@ -88,13 +88,19 @@ class _HomepageState extends State<Homepage> {
                 child: Column(
                   children: [
                     // 1st row
-                    Flex(
-                      direction: Axis.vertical,
+                    Wrap(
+                      direction: Axis.horizontal,
                       children: [
                         categoryButton(screenHeight, screenWidth, "Category",
                             "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
                         categoryButton(screenHeight, screenWidth, "Category",
                             "https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?cs=srgb&dl=pexels-william-choquette-2641886.jpg&fm=jpg"),
+                        categoryButton(screenHeight, screenWidth, "Category",
+                            "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
+                        categoryButton(screenHeight, screenWidth, "Category",
+                            "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
+                        categoryButton(screenHeight, screenWidth, "Category",
+                            "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
                         categoryButton(screenHeight, screenWidth, "Category",
                             "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
                       ],
@@ -108,10 +114,13 @@ class _HomepageState extends State<Homepage> {
       ),
     );
   }
+}
 
-  SizedBox categoryButton(
-      double screenHeight, double screenWidth, String name, String imageUrl) {
-    return SizedBox(
+Widget categoryButton(
+    double screenHeight, double screenWidth, String name, String imageUrl) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: SizedBox(
       height: screenHeight / 6,
       width: screenWidth / 4,
       // color: Colors.white,
@@ -132,6 +141,6 @@ class _HomepageState extends State<Homepage> {
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
 }
