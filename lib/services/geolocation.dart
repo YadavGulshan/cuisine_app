@@ -9,24 +9,34 @@ class LocationService extends StatefulWidget {
 }
 
 class LocationServiceState extends State<LocationService> {
-  var locationDetail = "";
-
+  final longitude = "";
+  final latitude = "";
   Future getCurrenLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.whileInUse ||
-        permission == LocationPermission.always) {
-      // Get user location
 
+    if (!serviceEnabled) {
+      // Location services are not enabled don't continue
+      // accessing the position and request users of the
+      // App to enable the location services.
+      await Geolocator.openLocationSettings();
+      // Checking again if user grants the permission
+      serviceEnabled = await Geolocator.isLocationServiceEnabled();
+
+      if (!serviceEnabled) {
+        return Future.error("User location service is not enabled");
+      }
     }
     if (permission == LocationPermission.denied) {
-      // Ask for permission and then recall this function.
+      // Ask for permission
       permission = await Geolocator.requestPermission();
-      getCurrenLocation();
     } else {
       // Throw another method to user. i.e. provide location manually.
       await Geolocator.openAppSettings();
       await Geolocator.openLocationSettings();
     }
+    // Get location
+    return await Geolocator.getCurrentPosition();
   }
 
   @override
