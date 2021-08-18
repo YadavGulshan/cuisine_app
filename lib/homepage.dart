@@ -1,6 +1,4 @@
 import 'dart:ui';
-
-import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/widgets/topbar.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +19,8 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics()),
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
         slivers: [
           SliverAppBar(
             title: topBar(context),
@@ -68,29 +67,36 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(22, 8, 20, 8),
-              child: Text(
-                "Categories",
-                textAlign: TextAlign.left,
-                style: GoogleFonts.lato(
-                  fontSize: 28,
-                ),
-              ),
-            ),
-          ),
+          // SliverToBoxAdapter(
+          //   child: Padding(
+          //     padding: const EdgeInsets.fromLTRB(22, 8, 20, 8),
+          //     child: Text(
+          //       "Categories",
+          //       textAlign: TextAlign.left,
+          //       style: GoogleFonts.lato(
+          //         fontSize: 28,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: Column(
+                child: ExpansionTile(
+                  // leading: ,
+                  title: Text(
+                    "Categories",
+                    textAlign: TextAlign.left,
+                    style: GoogleFonts.lato(
+                      fontSize: 28,
+                    ),
+                  ),
                   children: [
-                    // 1st row
                     Wrap(
-                      direction: Axis.horizontal,
                       children: [
+                        // Use future builder here, by returning categoryButton
                         categoryButton(screenHeight, screenWidth, "Category",
                             "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
                         categoryButton(screenHeight, screenWidth, "Category",
@@ -120,26 +126,29 @@ Widget categoryButton(
     double screenHeight, double screenWidth, String name, String imageUrl) {
   return Padding(
     padding: const EdgeInsets.all(8.0),
-    child: SizedBox(
-      height: screenHeight / 6,
-      width: screenWidth / 4,
-      // color: Colors.white,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          CircleAvatar(
-            radius: 50,
-            backgroundColor: Colors.orange,
-            foregroundImage: NetworkImage(imageUrl),
-          ),
-          Text(
-            name,
-            overflow: TextOverflow.ellipsis,
-            style: GoogleFonts.lato(
-                // color:
-                ),
-          ),
-        ],
+    child: GestureDetector(
+      onTap: () {},
+      child: SizedBox(
+        height: screenHeight / 6,
+        width: screenWidth / 4,
+        // color: Colors.white,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            CircleAvatar(
+              radius: 50,
+              backgroundColor: Colors.orange,
+              foregroundImage: NetworkImage(imageUrl),
+            ),
+            Text(
+              name,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.lato(
+                  // color:
+                  ),
+            ),
+          ],
+        ),
       ),
     ),
   );
