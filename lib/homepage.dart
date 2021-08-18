@@ -85,7 +85,11 @@ class _HomepageState extends State<Homepage> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: ExpansionTile(
-                  // leading: ,
+                  leading: Image.asset(
+                    "assets/category_logo.jpg",
+                    height: 30,
+                    width: 30,
+                  ),
                   title: Text(
                     "Categories",
                     textAlign: TextAlign.left,
@@ -93,10 +97,12 @@ class _HomepageState extends State<Homepage> {
                       fontSize: 28,
                     ),
                   ),
+                  initiallyExpanded:
+                      true, // TODO: if children inside the wrapper is more than 8 then prefer initially expanded to false.
                   children: [
                     Wrap(
                       children: [
-                        // Use future builder here, by returning categoryButton
+                        // TODO: Use future builder here, by returning categoryButton
                         categoryButton(screenHeight, screenWidth, "Category",
                             "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
                         categoryButton(screenHeight, screenWidth, "Category",
