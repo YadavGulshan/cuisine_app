@@ -12,6 +12,13 @@ Widget topBar(BuildContext context, String address) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.menu_rounded,
+            color: Colors.black,
+          ),
+        ),
         Row(
           children: [
             InkWell(
@@ -21,13 +28,6 @@ Widget topBar(BuildContext context, String address) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(4.0),
-                    child: Icon(
-                      Icons.location_on_outlined,
-                      color: topBarColor,
-                    ),
-                  ),
                   SizedBox(
                     width: width2 / 1.5,
                     child: Text(
@@ -45,18 +45,18 @@ Widget topBar(BuildContext context, String address) {
                       ),
                     ),
                   ),
+                  const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: Icon(
+                      Icons.location_on_outlined,
+                      color: topBarColor,
+                    ),
+                  ),
                 ],
               ),
             )
           ],
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.menu_rounded,
-            color: Colors.black,
-          ),
-        )
       ],
     ),
   );
