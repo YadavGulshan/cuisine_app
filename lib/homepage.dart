@@ -5,8 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({Key? key}) : super(key: key);
-
+  const Homepage({
+    Key? key,
+    required this.longitude,
+    required this.latitude,
+    required this.address,
+  }) : super(key: key);
+  final String longitude;
+  final String latitude;
+  final String address;
   @override
   State<Homepage> createState() => _HomepageState();
 }
@@ -14,6 +21,8 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
+    var long = widget.longitude;
+    var lat = widget.latitude;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -46,7 +55,7 @@ class _HomepageState extends State<Homepage> {
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: const [
+                          children: [
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Icon(
@@ -55,7 +64,8 @@ class _HomepageState extends State<Homepage> {
                               ),
                             ),
                             Spacer(),
-                            Text("Cuisines, restaurants, and more"),
+                            // Text("Cuisines, restaurants, and more"),
+                            Text("$long $lat"),
                             Spacer(),
                             Spacer(),
                           ],

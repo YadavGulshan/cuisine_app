@@ -1,4 +1,4 @@
-import 'package:cuisine_app/homepage.dart';
+import 'package:cuisine_app/services/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,14 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        appBarTheme: AppBarTheme(color: Colors.white),
-        primaryTextTheme: GoogleFonts.latoTextTheme(),
-        // brightness: Brightness.dark,
-      ),
-      home: const Homepage(),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(color: Colors.white),
+          primaryTextTheme: GoogleFonts.latoTextTheme(),
+          // brightness: Brightness.dark,
+        ),
+        // home: const Homepage(),
+        home: const LocationService());
   }
 }

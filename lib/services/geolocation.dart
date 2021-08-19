@@ -1,5 +1,7 @@
+import 'package:cuisine_app/homepage.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:geocoder/geocoder.dart';
 
 class LocationService extends StatefulWidget {
   const LocationService({Key? key}) : super(key: key);
@@ -9,38 +11,65 @@ class LocationService extends StatefulWidget {
 }
 
 class LocationServiceState extends State<LocationService> {
-  final longitude = "";
-  final latitude = "";
-  Future getCurrenLocation() async {
+  double longitude = 0.0;
+  double latitude = 0.0;
+  var address;
+  var statusCode;
+  void getCurrenLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     LocationPermission permission = await Geolocator.checkPermission();
 
     if (!serviceEnabled) {
-      // Location services are not enabled don't continue
-      // accessing the position and request users of the
-      // App to enable the location services.
+      // Service is disabled.
       await Geolocator.openLocationSettings();
-      // Checking again if user grants the permission
+
+      // Check again to see if the user enabled the service.
       serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
-      if (!serviceEnabled) {
-        return Future.error("User location service is not enabled");
-      }
+      // If still service is disabled, show an error message.
+      // if (!serviceEnabled) {
+      //   return 403;
+      // }
     }
+
+    // Check if the location service is enabled.
     if (permission == LocationPermission.denied) {
-      // Ask for permission
+      // Ask for permission again.
       permission = await Geolocator.requestPermission();
-    } else {
-      // Throw another method to user. i.e. provide location manually.
-      await Geolocator.openAppSettings();
-      await Geolocator.openLocationSettings();
+
+      // If permission is denied, return 403
+      // if (permission == LocationPermission.denied) {
+      //   return 403;
+      // }
     }
+
     // Get location
-    return await Geolocator.getCurrentPosition();
+    var postition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
+
+    // Set the lon and lat
+    setState(() {
+      longitude = postition.longitude;
+      latitude = postition.latitude;
+      final coordinates = Coordinates(longitude, latitude);
+      address = Geocoder.local.findAddressesFromCoordinates(coordinates);
+    });
+
+    // return 200;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getCurrenLocation();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Homepage(
+      latitude: latitude.toString(),
+      longitude: longitude.toString(),
+      address: address.toString(),
+    );
   }
 }

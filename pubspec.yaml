@@ -37,12 +37,9 @@ dependencies:
   google_fonts: ^2.1.0
   dotted_border: ^2.0.0+1
   geolocator: ^7.4.0
-  baseflow_plugin_template:
-    git:
-      url: git://github.com/Baseflow/baseflow_plugin_template.git
-      ref: v2.0.0-nullsafety
   android_intent: ^2.0.2
   permission_handler: ^8.1.4+2
+  geocoder: ^0.2.1
 
 dev_dependencies:
   flutter_test:
@@ -69,8 +66,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
-    - packages/baseflow_plugin_template/logo.png
-    - packages/baseflow_plugin_template/poweredByBaseflow.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
