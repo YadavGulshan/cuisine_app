@@ -32,7 +32,7 @@ class _HomepageState extends State<Homepage> {
         ),
         slivers: [
           SliverAppBar(
-            title: topBar(context),
+            title: topBar(context, widget.address),
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -55,7 +55,7 @@ class _HomepageState extends State<Homepage> {
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
+                          children: const [
                             Padding(
                               padding: EdgeInsets.all(8.0),
                               child: Icon(
@@ -64,8 +64,9 @@ class _HomepageState extends State<Homepage> {
                               ),
                             ),
                             Spacer(),
-                            // Text("Cuisines, restaurants, and more"),
-                            Text("$long $lat"),
+                            Text("Cuisines, restaurants, and more"),
+                            // Text("$long $lat"),
+                            // Text(widget.address),
                             Spacer(),
                             Spacer(),
                           ],

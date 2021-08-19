@@ -6,8 +6,8 @@ INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidMan
 INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:1:1-36:12
 MERGED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:1:1-36:12
 MERGED from [:geolocator_android] /home/Gulshan/Projects/cuisine_app/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
-MERGED from [:geocoder] /home/Gulshan/Projects/cuisine_app/build/geocoder/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:permission_handler] /home/Gulshan/Projects/cuisine_app/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:android_intent] /home/Gulshan/Projects/cuisine_app/build/android_intent/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/340206bb4856bf61e48bd10632b21882/jetified-play-services-location-17.0.0/AndroidManifest.xml:2:1-9:12
@@ -127,10 +127,10 @@ INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidMan
 INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml
 MERGED from [:geolocator_android] /home/Gulshan/Projects/cuisine_app/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:geolocator_android] /home/Gulshan/Projects/cuisine_app/build/geolocator_android/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:geocoder] /home/Gulshan/Projects/cuisine_app/build/geocoder/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
-MERGED from [:geocoder] /home/Gulshan/Projects/cuisine_app/build/geocoder/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:permission_handler] /home/Gulshan/Projects/cuisine_app/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:permission_handler] /home/Gulshan/Projects/cuisine_app/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:android_intent] /home/Gulshan/Projects/cuisine_app/build/android_intent/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44

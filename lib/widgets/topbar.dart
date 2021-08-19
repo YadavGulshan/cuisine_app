@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../constants.dart';
 
-Widget topBar(BuildContext context) {
+Widget topBar(BuildContext context, String address) {
   var height2 = MediaQuery.of(context).size.height;
   var width2 = MediaQuery.of(context).size.width;
   return SizedBox(
@@ -31,7 +31,7 @@ Widget topBar(BuildContext context) {
                   SizedBox(
                     width: width2 / 1.5,
                     child: Text(
-                      "Patlipada Village, Thane West",
+                      address,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: GoogleFonts.lato(
