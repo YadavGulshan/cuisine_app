@@ -1,3 +1,4 @@
+import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/widgets.dart';
@@ -20,7 +21,7 @@ class ToolBarTile extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
           onTap: ontap,
-          leading: Icon(icon),
+          leading: Icon(icon, color: topBarColor),
           title: Text(
             title,
             style: GoogleFonts.lato(
