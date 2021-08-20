@@ -16,73 +16,86 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
     // double screenWidth = MediaQuery.of(context).size.width;
-    return Container(
-      color: const Color(0xFF27282C),
-      child: Column(
-        children: [
-          Container(
-            height: screenHeight / 5,
-            color: const Color(0xFF1D1E20),
-            child: SafeArea(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const CircleAvatar(
-                    radius: 50,
-                    backgroundImage: NetworkImage(
-                        "https://randomuser.me/api/portraits/men/5.jpg"),
-                  ),
-                  Center(
-                    child: Text(
-                      "Gulshan Yadav",
-                      style: GoogleFonts.lato(
-                        fontSize: 20,
-                        color: Colors.white,
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        // color: const Color(0xFF27282C),
+        child: Column(
+          children: [
+            Container(
+              color: const Color(0xFFE3E3E3),
+              height: screenHeight / 5,
+              // color: const Color(0xFF1D1E20),
+              child: SafeArea(
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const CircleAvatar(
+                      radius: 50,
+                      backgroundImage: NetworkImage(
+                          "https://randomuser.me/api/portraits/men/5.jpg"),
+                    ),
+                    Center(
+                      child: Text(
+                        "Gulshan Yadav",
+                        style: GoogleFonts.lato(
+                          fontSize: 24,
+                          // color: Colors.white,
+                        ),
                       ),
                     ),
-                  ),
-                  IconButton(
-                      onPressed: () {},
-                      icon: const Icon(
-                        Icons.close,
-                        color: Color(0xFFB2B1B6),
-                        size: 32,
-                      ))
-                ],
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: const Icon(
+                          Icons.close,
+                          color: Color(0xFFB2B1B6),
+                          size: 32,
+                        ))
+                  ],
+                ),
               ),
             ),
-          ),
-          ToolBarTile(
-            icon: Icons.home,
-            title: "Home",
-            ontap: () {
-              setState(() {
-                // widget.value = 0;
-              });
-            },
-          ),
-          ToolBarTile(
-              icon: Icons.card_travel, title: "Your Orders", ontap: () {}),
-          ToolBarTile(
-            icon: Icons.book,
-            title: "Address Book",
-            ontap: () {},
-          ),
-          ToolBarTile(
-            icon: Icons.info,
-            title: "About",
-            ontap: () {},
-          ),
-          ToolBarTile(
-            icon: Icons.logout,
-            title: "Log out",
-            ontap: () {},
-          ),
-          const Spacer(
-            flex: 10,
-          ),
-        ],
+            Padding(
+              padding: const EdgeInsets.fromLTRB(25, 14, 14, 0),
+              child: Container(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "FOOD AND GROCERIES ORDERS",
+                  style: GoogleFonts.lato(
+                    color: Colors.grey[600],
+                  ),
+                ),
+              ),
+            ),
+            ToolBarTile(
+                icon: Icons.card_travel, title: "Your Orders", ontap: () {}),
+            ToolBarTile(
+                icon: Icons.favorite_border_outlined,
+                title: "Favourite Orders",
+                ontap: () {}),
+            ToolBarTile(
+              icon: Icons.library_books_outlined,
+              title: "Address Book",
+              ontap: () {},
+            ),
+            ToolBarTile(
+              icon: Icons.info_outline,
+              title: "About",
+              ontap: () {},
+            ),
+            ToolBarTile(
+              icon: Icons.logout,
+              title: "Log out",
+              ontap: () {},
+            ),
+            const Spacer(
+              flex: 10,
+            ),
+          ],
+        ),
       ),
     );
   }

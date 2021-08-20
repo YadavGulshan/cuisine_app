@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/widgets.dart';
 
 class ToolBarTile extends StatelessWidget {
   const ToolBarTile({
@@ -16,13 +17,14 @@ class ToolBarTile extends StatelessWidget {
     return Expanded(
       flex: 2,
       child: Padding(
-        padding: const EdgeInsets.all(14.0),
+        padding: const EdgeInsets.all(8.0),
         child: ListTile(
           onTap: ontap,
+          leading: Icon(icon),
           title: Text(
             title,
             style: GoogleFonts.lato(
-              color: const Color(0xFFB2B1B6),
+              // color: const Color(0xFFB2B1B6),
               fontSize: 18,
             ),
           ),
