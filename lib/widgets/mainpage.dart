@@ -1,5 +1,6 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/custom_drawer.dart';
+import 'package:cuisine_app/widgets/bottomsheet.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,7 +26,9 @@ class _MainPageState extends State<MainPage> {
       slivers: [
         SliverAppBar(
           leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                bottomSheet(context, screenHeight / 1.2);
+              },
               icon: const Icon(Icons.location_on_outlined, color: topBarColor)),
           title: SizedBox(
             width: MediaQuery.of(context).size.width / 1.5,
