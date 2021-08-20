@@ -15,17 +15,20 @@ class ToolBarTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       flex: 2,
-      child: ListTile(
-        onTap: ontap,
-        leading: Icon(
-          icon,
-          color: Colors.white,
-        ),
-        title: Text(
-          title,
-          style: GoogleFonts.lato(
-            color: Colors.white,
-            fontSize: 18,
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: ListTile(
+          onTap: ontap,
+          // leading: Icon(
+          //   icon,
+          //   color: Colors.white,
+          // ),
+          title: Text(
+            title,
+            style: GoogleFonts.lato(
+              color: const Color(0xFFB2B1B6),
+              fontSize: 18,
+            ),
           ),
         ),
       ),
