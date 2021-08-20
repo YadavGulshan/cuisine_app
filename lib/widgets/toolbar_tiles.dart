@@ -19,10 +19,6 @@ class ToolBarTile extends StatelessWidget {
         padding: const EdgeInsets.all(14.0),
         child: ListTile(
           onTap: ontap,
-          // leading: Icon(
-          //   icon,
-          //   color: Colors.white,
-          // ),
           title: Text(
             title,
             style: GoogleFonts.lato(

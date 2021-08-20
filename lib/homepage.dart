@@ -1,6 +1,3 @@
-import 'dart:math';
-
-import 'package:cuisine_app/widgets/custom_drawer.dart';
 import 'package:cuisine_app/widgets/mainpage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -25,60 +22,21 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   @override
   Widget build(BuildContext context) {
-    var screenHeight = MediaQuery.of(context).size.height;
-    var screenWidth = MediaQuery.of(context).size.width;
-    double value = 0;
+    // var screenHeight = MediaQuery.of(context).size.height;
+    // var screenWidth = MediaQuery.of(context).size.width;
+    // double value = 0;
     return Scaffold(
-      body: Stack(
-        children: [
-          MyCustomDrawer(value: value),
-          Transformer(
-            value: value,
-            address: widget.address,
-          ),
-        ],
-      ),
-      // body: ,
-    );
-  }
-}
-
-class Transformer extends StatefulWidget {
-  Transformer({Key? key, required this.value, required this.address})
-      : super(key: key);
-  double value = 0;
-  String address;
-  @override
-  _TransformerState createState() => _TransformerState();
-}
-
-class _TransformerState extends State<Transformer> {
-  @override
-  Widget build(BuildContext context) {
-    return TweenAnimationBuilder(
-        tween: Tween<double>(begin: 0, end: widget.value),
-        duration: const Duration(microseconds: 500),
-        builder: (_, double val, __) {
-          return Transform(
-            transform: Matrix4.identity()
-              ..setEntry(3, 2, 0.001)
-              ..setEntry(0, 3, 250 * val)
-              ..rotateY((pi / 6) * val),
-            child: Scaffold(
-              body: MainPage(
-                value: widget.value,
-                address: widget.address,
-              ),
-              drawer: myDrawer(context),
-            ),
-          );
-        });
+        body: MainPage(
+      address: widget.address,
+    )
+        // body: ,
+        );
   }
 }
 
 Widget myDrawer(BuildContext context) {
   double screenHeight = MediaQuery.of(context).size.height;
-  double screenWidth = MediaQuery.of(context).size.width;
+  // double screenWidth = MediaQuery.of(context).size.width;
   return Container(
     color: const Color(0xFF27282C),
     child: Column(

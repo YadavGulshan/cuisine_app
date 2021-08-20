@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyCustomDrawer extends StatefulWidget {
-  MyCustomDrawer({Key? key, required this.value}) : super(key: key);
-  double value;
+  const MyCustomDrawer({
+    Key? key,
+  }) : super(key: key);
+  // double value;
   @override
   State<MyCustomDrawer> createState() => _MyCustomDrawerState();
 }
@@ -13,7 +15,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
   @override
   Widget build(BuildContext context) {
     double screenHeight = MediaQuery.of(context).size.height;
-    double screenWidth = MediaQuery.of(context).size.width;
+    // double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       color: const Color(0xFF27282C),
       child: Column(
@@ -56,7 +58,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
             title: "Home",
             ontap: () {
               setState(() {
-                widget.value = 0;
+                // widget.value = 0;
               });
             },
           ),

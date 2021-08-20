@@ -1,12 +1,12 @@
-import 'package:cuisine_app/widgets/topbar.dart';
+import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/screens/custom_drawer.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class MainPage extends StatefulWidget {
-  MainPage({Key? key, required this.value, required this.address})
-      : super(key: key);
-  double value;
+  MainPage({Key? key, required this.address}) : super(key: key);
   String address;
   @override
   State<MainPage> createState() => _MainPageState();
@@ -24,28 +24,40 @@ class _MainPageState extends State<MainPage> {
       ),
       slivers: [
         SliverAppBar(
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                icon: const Icon(
-                  Icons.menu,
-                  color: Colors.blue,
-                ),
+          leading: IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.location_on_outlined, color: topBarColor)),
+          title: SizedBox(
+            width: MediaQuery.of(context).size.width / 1.5,
+            child: Text(
+              widget.address,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+              style: GoogleFonts.lato(
+                decoration: TextDecoration.underline,
+                decorationStyle: TextDecorationStyle.dotted,
+                decorationColor: topBarColor,
+                letterSpacing: 0.6,
+                fontWeight: FontWeight.w400,
+                fontSize: 18,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: IconButton(
                 onPressed: () {
-                  Scaffold.of(context).openDrawer();
+                  pushNewScreen(context, screen: const MyCustomDrawer());
                 },
-                tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-              );
-            },
-          ),
-          title: TopBar(
-            address: widget.address,
-            ontap: () {
-              setState(() {
-                widget.value == 0 ? widget.value = 1 : widget.value = 0;
-              });
-            },
-          ),
+                icon: const Icon(
+                  Icons.menu_rounded,
+                  color: Colors.black,
+                ),
+              ),
+            ),
+          ],
         ),
         SliverToBoxAdapter(
           child: Padding(
@@ -64,25 +76,25 @@ class _MainPageState extends State<MainPage> {
                     child: Container(
                       height: screenHeight / 21,
                       decoration: BoxDecoration(
-                        color: Colors.grey[100],
+                        color: Colors.grey[50],
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: const [
-                          Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.search,
-                              size: 20,
-                            ),
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const Icon(
+                            Icons.search,
+                            size: 20,
                           ),
-                          Spacer(),
-                          Text("Cuisines, restaurants, and more"),
+                          // Spacer(),
+                          Text(
+                            "Cuisines, restaurants, and more",
+                            style: GoogleFonts.lato(fontSize: 18),
+                          ),
                           // Text("$long $lat"),
                           // Text(widget.address),
-                          Spacer(
-                            flex: 2,
-                          ),
+                          // Spacer(
+                          //   flex: 2,
+                          // ),
                         ],
                       ),
                     ),
@@ -98,11 +110,7 @@ class _MainPageState extends State<MainPage> {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: ExpansionTile(
-                leading: Image.asset(
-                  "assets/category_logo.jpg",
-                  height: 30,
-                  width: 30,
-                ),
+                textColor: topBarColor,
                 title: Text(
                   "Categories",
                   textAlign: TextAlign.left,

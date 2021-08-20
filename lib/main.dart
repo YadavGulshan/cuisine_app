@@ -1,3 +1,4 @@
+import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.purple,
           appBarTheme: const AppBarTheme(color: Colors.white),
           primaryTextTheme: GoogleFonts.latoTextTheme(),
           // brightness: Brightness.dark,

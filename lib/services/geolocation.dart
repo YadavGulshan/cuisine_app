@@ -49,7 +49,7 @@ class LocationServiceState extends State<LocationService> {
         await placemarkFromCoordinates(postition.latitude, postition.longitude);
 
     Placemark placemark = newPlace[1];
-    // debugPrint("########Placemark: " + placemark.toString());
+    debugPrint("########Placemark: " + placemark.toString());
     // Set the lon and lat
     setState(() {
       latitude = postition.latitude;
