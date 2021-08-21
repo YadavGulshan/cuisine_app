@@ -1,5 +1,6 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/custom_drawer.dart';
+import 'package:cuisine_app/screens/search_page.dart';
 import 'package:cuisine_app/widgets/bottomsheet.dart';
 import 'package:cuisine_app/widgets/categories_scroller.dart';
 import 'package:cuisine_app/widgets/homepage_cuisines.dart';
@@ -50,10 +51,15 @@ class _MainPageState extends State<MainPage> {
           floating: true,
           actions: [
             IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.search,
-                  color: topBarColor,
+                onPressed: () {
+                  pushNewScreen(context, screen: SearchPage());
+                },
+                icon: Theme(
+                  data: Theme.of(context).copyWith(),
+                  child: Icon(
+                    Icons.search,
+                    // color: topBarColor,
+                  ),
                 )),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -61,9 +67,12 @@ class _MainPageState extends State<MainPage> {
                 onPressed: () {
                   bottomSheet(context, screenHeight / 1.2);
                 },
-                icon: const Icon(
-                  Icons.account_circle_outlined,
-                  color: topBarColor,
+                icon: Theme(
+                  data: Theme.of(context).copyWith(),
+                  child: const Icon(
+                    Icons.account_circle_outlined,
+                    // color: topBarColor,
+                  ),
                 ),
               ),
             ),
