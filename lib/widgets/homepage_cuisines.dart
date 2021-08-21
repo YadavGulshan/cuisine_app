@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Cuisine extends StatelessWidget {
   const Cuisine({
@@ -46,11 +47,11 @@ class Cuisine extends StatelessWidget {
                                 fontSize: 18,
                               ),
                             ),
-                            Text("Name of Restaurant")
+                            const Text("Name of Restaurant")
                           ],
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Padding(
                         padding: const EdgeInsets.all(14.0),
                         child: ClipRRect(
