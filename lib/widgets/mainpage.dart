@@ -1,7 +1,9 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/custom_drawer.dart';
 import 'package:cuisine_app/widgets/bottomsheet.dart';
-import 'package:dotted_border/dotted_border.dart';
+import 'package:cuisine_app/widgets/categories_scroller.dart';
+import 'package:cuisine_app/widgets/homepage_cuisines.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -14,6 +16,24 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  ScrollController controller = ScrollController();
+  bool closeTopContainer = false;
+  double topContainer = 0;
+  List<Widget> itemsData = [];
+
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(() {
+      double value = controller.offset / 119;
+
+      setState(() {
+        topContainer = value;
+        closeTopContainer = controller.offset > 50;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -62,90 +82,17 @@ class _MainPageState extends State<MainPage> {
             ),
           ],
         ),
+        // Categories section
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InkWell(
-              child: DottedBorder(
-                borderType: BorderType.RRect,
-                strokeWidth: 0.3,
-                strokeCap: StrokeCap.round,
-                radius: const Radius.circular(22),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(22),
-                  child: InkWell(
-                    onTap: () {},
-                    splashColor: Colors.transparent,
-                    child: Container(
-                      height: screenHeight / 21,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[50],
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          const Icon(
-                            Icons.search,
-                            size: 20,
-                          ),
-                          // Spacer(),
-                          Text(
-                            "Cuisines, restaurants, and more",
-                            style: GoogleFonts.lato(fontSize: 18),
-                          ),
-                          // Text("$long $lat"),
-                          // Text(widget.address),
-                          // Spacer(
-                          //   flex: 2,
-                          // ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+          child: AnimatedOpacity(
+            duration: const Duration(milliseconds: 200),
+            opacity: 1.0,
+            child: const CategoriesScroller(),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: ExpansionTile(
-                textColor: topBarColor,
-                title: Text(
-                  "Categories",
-                  textAlign: TextAlign.left,
-                  style: GoogleFonts.lato(
-                    fontSize: 28,
-                  ),
-                ),
-                initiallyExpanded:
-                    true, // TODO: if children inside the wrapper is more than 8 then prefer initially expanded to false.
-                children: [
-                  Wrap(
-                    children: [
-                      // TODO: Use future builder here, by returning categoryButton
-                      categoryButton(screenHeight, screenWidth, "Category",
-                          "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
-                      categoryButton(screenHeight, screenWidth, "Category",
-                          "https://images.pexels.com/photos/2641886/pexels-photo-2641886.jpeg?cs=srgb&dl=pexels-william-choquette-2641886.jpg&fm=jpg"),
-                      categoryButton(screenHeight, screenWidth, "Category",
-                          "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
-                      categoryButton(screenHeight, screenWidth, "Category",
-                          "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
-                      categoryButton(screenHeight, screenWidth, "Category",
-                          "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
-                      categoryButton(screenHeight, screenWidth, "Category",
-                          "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640"),
-                    ],
-                  )
-                ],
-              ),
-            ),
-          ),
-        )
+
+        // List of products
+        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth)
       ],
     );
   }
