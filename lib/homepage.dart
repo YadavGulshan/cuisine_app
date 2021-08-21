@@ -28,19 +28,98 @@ class _HomepageState extends State<Homepage> {
     // var screenWidth = MediaQuery.of(context).size.width;
     // double value = 0;
     return Scaffold(
-        body: GestureDetector(
-      onPanUpdate: (details) {
-        // Swiping in left direction.
-        if (details.delta.dx < 0) {
-          pushNewScreen(context, screen: const MyCustomDrawer());
-        }
-      },
-      child: MainPage(
+      body: MainPage(
         address: widget.address,
       ),
-    )
-        // body: ,
-        );
+      drawer: Drawer(
+        child: Container(
+          // color: Colors.white,
+          // color: const Color(0xFF27282C),
+          child: Column(
+            children: [
+              Container(
+                color: const Color(0xFF232830),
+                height: MediaQuery.of(context).size.height / 5,
+                // color: const Color(0xFF1D1E20),
+                child: SafeArea(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const CircleAvatar(
+                        radius: 50,
+                        backgroundImage: NetworkImage(
+                            "https://randomuser.me/api/portraits/men/5.jpg"),
+                      ),
+                      Center(
+                        child: Container(
+                          height: 25,
+                          width: MediaQuery.of(context).size.width / 2,
+                          // color: Colors.black,
+                          child: Text(
+                            "Gulshan Yadav",
+                            overflow: TextOverflow.ellipsis,
+                            style: GoogleFonts.lato(
+                              fontSize: 24,
+                              // color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              TitleWidget(
+                title: "FOOD AND GROCERIES ORDERS",
+                padding: const EdgeInsets.fromLTRB(25, 14, 14, 0),
+                fontSize: 14,
+              ),
+              ToolBarTile(
+                  icon: Icons.card_travel, title: "Your Orders", ontap: () {}),
+              ToolBarTile(
+                  icon: Icons.favorite_border_outlined,
+                  title: "Favourite Orders",
+                  ontap: () {}),
+              ToolBarTile(
+                icon: Icons.library_books_outlined,
+                title: "Address Book",
+                ontap: () {},
+              ),
+              ToolBarTile(
+                icon: Icons.info_outline,
+                title: "About",
+                ontap: () {},
+              ),
+              ToolBarTile(
+                icon: Icons.logout,
+                title: "Log out",
+                ontap: () {},
+              ),
+              TitleWidget(
+                title: "Send Feedback",
+                padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+                fontSize: 18,
+              ),
+              TitleWidget(
+                title: "Report a Safety Emergency",
+                padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+                fontSize: 18,
+              ),
+              TitleWidget(
+                title: "Rate us on Play Store",
+                fontSize: 18,
+                padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+              ),
+              const Spacer(
+                flex: 3,
+              ),
+            ],
+          ),
+        ),
+      ),
+      // body: ,
+    );
   }
 }
 

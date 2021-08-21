@@ -45,54 +45,44 @@ class _MainPageState extends State<MainPage> {
       ),
       slivers: [
         SliverAppBar(
-          leading: IconButton(
-              onPressed: () {
-                bottomSheet(context, screenHeight / 1.2);
-              },
-              icon: const Icon(Icons.location_on_outlined, color: topBarColor)),
-          title: SizedBox(
-            width: MediaQuery.of(context).size.width / 1.5,
-            child: Text(
-              widget.address,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-              style: GoogleFonts.lato(
-                decoration: TextDecoration.underline,
-                decorationStyle: TextDecorationStyle.dotted,
-                decorationColor: topBarColor,
-                letterSpacing: 0.6,
-                fontWeight: FontWeight.w400,
-                fontSize: 18,
-                color: Colors.black,
-              ),
-            ),
-          ),
+          pinned: true,
+          elevation: 0.4,
+          floating: true,
           actions: [
+            IconButton(
+                onPressed: () {},
+                icon: Icon(
+                  Icons.search,
+                  color: topBarColor,
+                )),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
                 onPressed: () {
-                  pushNewScreen(context, screen: const MyCustomDrawer());
+                  bottomSheet(context, screenHeight / 1.2);
                 },
                 icon: const Icon(
-                  Icons.menu_rounded,
-                  color: Colors.black,
+                  Icons.account_circle_outlined,
+                  color: topBarColor,
                 ),
               ),
             ),
           ],
         ),
         // Categories section
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: AnimatedOpacity(
-            duration: const Duration(milliseconds: 200),
+            duration: Duration(milliseconds: 200),
             opacity: 1.0,
-            child: const CategoriesScroller(),
+            child: CategoriesScroller(),
           ),
         ),
 
         // List of products
-        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth)
+        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
+        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
+        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
+        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
       ],
     );
   }
