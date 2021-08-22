@@ -113,35 +113,3 @@ class _MainPageState extends State<MainPage> {
     );
   }
 }
-
-Widget categoryButton(
-    double screenHeight, double screenWidth, String name, String imageUrl) {
-  return Padding(
-    padding: const EdgeInsets.all(8.0),
-    child: GestureDetector(
-      onTap: () {},
-      child: SizedBox(
-        height: screenHeight / 6,
-        width: screenWidth / 4,
-        // color: Colors.white,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            CircleAvatar(
-              radius: 50,
-              backgroundColor: Colors.orange,
-              foregroundImage: NetworkImage(imageUrl),
-            ),
-            Text(
-              name,
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.lato(
-                  // color:
-                  ),
-            ),
-          ],
-        ),
-      ),
-    ),
-  );
-}

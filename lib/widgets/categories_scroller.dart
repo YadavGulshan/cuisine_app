@@ -1,70 +1,47 @@
+import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoriesScroller extends StatelessWidget {
   const CategoriesScroller({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double categoryHeight = MediaQuery.of(context).size.height * 0.2;
+    // final double categoryHeight = MediaQuery.of(context).size.height * 0.2;
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
-      child: Container(
-        decoration: BoxDecoration(shape: BoxShape.circle),
-        margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
         child: Row(
-          children: const <Widget>[
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?crop=entropy&cs=srgb&dl=pexels-pixabay-315755.jpg&fit=crop&fm=jpg&h=960&w=640"),
-                radius: 40,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?crop=entropy&cs=srgb&dl=pexels-pixabay-315755.jpg&fit=crop&fm=jpg&h=960&w=640"),
-                radius: 40,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?crop=entropy&cs=srgb&dl=pexels-pixabay-315755.jpg&fit=crop&fm=jpg&h=960&w=640"),
-                radius: 40,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?crop=entropy&cs=srgb&dl=pexels-pixabay-315755.jpg&fit=crop&fm=jpg&h=960&w=640"),
-                radius: 40,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?crop=entropy&cs=srgb&dl=pexels-pixabay-315755.jpg&fit=crop&fm=jpg&h=960&w=640"),
-                radius: 40,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: CircleAvatar(
-                backgroundImage: NetworkImage(
-                    "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?crop=entropy&cs=srgb&dl=pexels-pixabay-315755.jpg&fit=crop&fm=jpg&h=960&w=640"),
-                radius: 40,
-              ),
-            ),
+          children: <Widget>[
+            categoryButton("Category", testUrl),
+            categoryButton("Category", testUrl),
+            categoryButton("Category", testUrl),
+            categoryButton("Category", testUrl),
           ],
         ),
       ),
     );
   }
+}
+
+Widget categoryButton(
+  // double screenHeight,
+  // double screenWidth,
+  String name,
+  String imageUrl,
+) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Column(
+      children: [
+        CircleAvatar(
+          backgroundImage: NetworkImage(imageUrl),
+          radius: 40,
+        ),
+        Text(name)
+      ],
+    ),
+  );
 }
