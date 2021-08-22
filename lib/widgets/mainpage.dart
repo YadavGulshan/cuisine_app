@@ -77,17 +77,7 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
           actions: [
-            IconButton(
-                onPressed: () {
-                  pushNewScreen(context, screen: const SearchPage());
-                },
-                icon: Theme(
-                  data: Theme.of(context).copyWith(),
-                  child: const Icon(
-                    Icons.search,
-                    // color: topBarColor,
-                  ),
-                )),
+            // Menu Icon button
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: IconButton(
@@ -97,7 +87,7 @@ class _MainPageState extends State<MainPage> {
                 icon: Theme(
                   data: Theme.of(context).copyWith(),
                   child: const Icon(
-                    Icons.account_circle_outlined,
+                    Icons.menu_outlined,
                     // color: topBarColor,
                   ),
                 ),
