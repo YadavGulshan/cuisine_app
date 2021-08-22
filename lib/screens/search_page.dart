@@ -33,9 +33,9 @@ class SearchPage extends StatelessWidget {
                           size: 20,
                         ),
                       ),
-                      TextFormField(
-                        decoration: InputDecoration(),
-                      ),
+                      // TextFormField(
+                      //   decoration: InputDecoration(),
+                      // ),
                     ],
                   ),
                 ),
