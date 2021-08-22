@@ -28,11 +28,14 @@ class MyApp extends StatelessWidget {
         // ),
         theme: ThemeData(
           // Define the default brightness and colors.
-          brightness: Brightness.dark,
-          primaryColor: Colors.lightBlue[800],
-          iconTheme: IconThemeData(color: topBarColor),
-          primaryIconTheme: IconThemeData(color: topBarColor),
+          brightness: appTheme,
+          primaryColor: primaryLightColor,
+          iconTheme: const IconThemeData(color: primaryColor),
+          primaryIconTheme: const IconThemeData(color: primaryColor),
           // accentColor: Colors.cyan[600],
+          appBarTheme: (appTheme == Brightness.dark)
+              ? AppBarTheme(color: Colors.grey[850])
+              : const AppBarTheme(color: Colors.white),
 
           // Define the default font family.
           // fontFamily: 'Georgia',

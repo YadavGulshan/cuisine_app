@@ -49,14 +49,41 @@ class _MainPageState extends State<MainPage> {
           pinned: true,
           elevation: 0.4,
           floating: true,
+          leading: IconButton(
+            icon: Theme(
+              data: Theme.of(context).copyWith(),
+              child: const Icon(Icons.location_on_outlined),
+            ),
+            onPressed: () {
+              // bottomSheet(context, 20);
+            },
+          ),
+          title: SizedBox(
+            height: 20,
+            width: screenWidth * 0.6,
+            child: Text(
+              widget.address,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.lato(
+                fontSize: 18,
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w600,
+                decorationStyle: TextDecorationStyle.dotted,
+                decoration: TextDecoration.underline,
+                color: (appTheme == Brightness.light)
+                    ? Colors.black
+                    : Colors.white,
+              ),
+            ),
+          ),
           actions: [
             IconButton(
                 onPressed: () {
-                  pushNewScreen(context, screen: SearchPage());
+                  pushNewScreen(context, screen: const SearchPage());
                 },
                 icon: Theme(
                   data: Theme.of(context).copyWith(),
-                  child: Icon(
+                  child: const Icon(
                     Icons.search,
                     // color: topBarColor,
                   ),

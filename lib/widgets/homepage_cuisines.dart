@@ -1,3 +1,4 @@
+import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -17,19 +18,22 @@ class Cuisine extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 0, 20, 35),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(25),
+          borderRadius: BorderRadius.circular(15),
           child: Container(
-              height: screenHeight * 0.35,
+              // height: screenHeight * 0.35,
+              height: 200,
               // width: screenWidth * 0.9,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(40),
-                color: Colors.grey[800],
+                borderRadius: BorderRadius.circular(25),
+                color: (appTheme == Brightness.light)
+                    ? Colors.white
+                    : Colors.grey[800],
               ),
               child: Column(
                 children: [
                   // Image goes here.
                   Container(
-                    height: screenHeight * 0.25,
+                    height: screenHeight * 0.15,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: NetworkImage(
