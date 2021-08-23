@@ -6,6 +6,7 @@ import 'package:cuisine_app/widgets/categories_scroller.dart';
 import 'package:cuisine_app/widgets/homepage_cuisines.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -44,63 +45,137 @@ class _MainPageState extends State<MainPage> {
       physics: const BouncingScrollPhysics(
         parent: AlwaysScrollableScrollPhysics(),
       ),
+      shrinkWrap: true,
       slivers: [
         SliverAppBar(
           pinned: true,
           elevation: 0.4,
-          floating: true,
-          leading: IconButton(
-            icon: Theme(
-              data: Theme.of(context).copyWith(),
-              child: const Icon(Icons.location_on_outlined),
-            ),
-            onPressed: () {
-              // bottomSheet(context, 20);
-            },
-          ),
-          title: SizedBox(
-            height: 20,
-            width: screenWidth * 0.6,
-            child: Text(
-              widget.address,
-              overflow: TextOverflow.ellipsis,
-              style: GoogleFonts.lato(
-                fontSize: 18,
-                fontStyle: FontStyle.normal,
-                fontWeight: FontWeight.w600,
-                decorationStyle: TextDecorationStyle.dotted,
-                decoration: TextDecoration.underline,
-                color: (appTheme == Brightness.light)
-                    ? Colors.black
-                    : Colors.white,
-              ),
-            ),
-          ),
-          actions: [
-            // Menu Icon button
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: IconButton(
-                onPressed: () {
-                  bottomSheet(context, screenHeight / 1.2);
-                },
-                icon: Theme(
-                  data: Theme.of(context).copyWith(),
-                  child: const Icon(
-                    Icons.menu_outlined,
-                    // color: topBarColor,
-                  ),
+          expandedHeight: 110,
+          // toolbarHeight: 150,
+          floating: false,
+          flexibleSpace: FlexibleSpaceBar(
+            collapseMode: CollapseMode.pin,
+            background: SafeArea(
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: primaryLightColor,
+                ),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            IconButton(
+                              icon: Theme(
+                                data: Theme.of(context).copyWith(),
+                                child: const Icon(Icons.location_on_outlined),
+                              ),
+                              onPressed: () {
+                                // bottomSheet(context, 20);
+                              },
+                            ),
+                            SizedBox(
+                              height: 20,
+                              width: screenWidth * 0.65,
+                              child: Text(
+                                widget.address,
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.lato(
+                                  fontSize: 17,
+                                  fontStyle: FontStyle.normal,
+                                  fontWeight: FontWeight.w600,
+                                  decorationStyle: TextDecorationStyle.dotted,
+                                  decoration: TextDecoration.underline,
+                                  color: (appTheme == Brightness.light)
+                                      ? Colors.black
+                                      : Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: IconButton(
+                            onPressed: () {
+                              bottomSheet(context, screenHeight / 1.2);
+                            },
+                            icon: Theme(
+                              data: Theme.of(context).copyWith(),
+                              child: const Icon(
+                                Icons.menu_outlined,
+                                // color: topBarColor,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
+          ),
+          bottom: PreferredSize(
+            child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: primaryColor,
+                    width: 1,
+                  ),
+
+                  // box shadow
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.grey,
+                      blurRadius: 4.0,
+                    ),
+                  ],
+                  color: primaryLightColor,
+                ),
+                height: screenHeight * 0.055,
+                width: screenWidth * 0.9,
+                child: InkWell(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Icon(
+                          Icons.search_outlined,
+                        ),
+                        Text("Restaurant name, cuisine and more"),
+                      ],
+                    ),
+                  ),
+                )),
+            preferredSize: const Size.fromHeight(0),
+          ),
         ),
-        // Categories section
-        const SliverToBoxAdapter(
-          child: AnimatedOpacity(
-            duration: Duration(milliseconds: 200),
-            opacity: 1.0,
-            child: CategoriesScroller(),
+
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                child: Align(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    "Categories",
+                    style: GoogleFonts.lato(fontSize: 28, wordSpacing: 2),
+                  ),
+                ),
+              ),
+              const AnimatedOpacity(
+                duration: Duration(milliseconds: 200),
+                opacity: 1.0,
+                child: CategoriesScroller(),
+              ),
+            ],
           ),
         ),
 
@@ -112,4 +187,75 @@ class _MainPageState extends State<MainPage> {
       ],
     );
   }
+}
+
+// An app bar having title and search field
+
+class SearchBar implements SliverPersistentHeaderDelegate {
+  SearchBar({required this.minExtent, required this.maxExtent});
+  final double minExtent;
+  final double maxExtent;
+
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+              color: primaryLightColor,
+              height: maxExtent,
+              alignment: Alignment.center,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Search for a Cuisine",
+                      style: GoogleFonts.lato(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: (appTheme == Brightness.light)
+                            ? Colors.grey[600]
+                            : Colors.white,
+                      ),
+                    ),
+                    Theme(
+                        data: Theme.of(context).copyWith(),
+                        child: const Icon(Icons.search_outlined)),
+                  ],
+                ),
+              )),
+        ),
+      ),
+    );
+  }
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    // TODO: implement shouldRebuild
+    // throw UnimplementedError();
+    return true;
+  }
+
+  @override
+  // TODO: implement showOnScreenConfiguration
+  PersistentHeaderShowOnScreenConfiguration? get showOnScreenConfiguration =>
+      null;
+
+  @override
+  // TODO: implement snapConfiguration
+  FloatingHeaderSnapConfiguration? get snapConfiguration => null;
+
+  @override
+  // TODO: implement stretchConfiguration
+  OverScrollHeaderStretchConfiguration? get stretchConfiguration => null;
+
+  @override
+  // TODO: implement vsync
+  TickerProvider? get vsync => null;
 }
