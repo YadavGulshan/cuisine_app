@@ -49,3 +49,6 @@ app.*.map.json
 
 # ENV file
 .env
+
+
+TODO.txt

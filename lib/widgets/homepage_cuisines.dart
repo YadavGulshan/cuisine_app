@@ -29,6 +29,12 @@ class Cuisine extends StatelessWidget {
             color: (appTheme == Brightness.light)
                 ? primaryLightColor
                 : Colors.grey[800],
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 4.0,
+              ),
+            ],
           ),
           child: Column(
             children: [
