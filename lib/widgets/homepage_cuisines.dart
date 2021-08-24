@@ -17,97 +17,118 @@ class Cuisine extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+        padding: const EdgeInsets.fromLTRB(20, 25, 20, 2),
 
         // Elevation is used to create shadow on the card
-        child: Container(
-          // height: screenHeight * 0.35,
-          height: 250,
-          // width: screenWidth * 0.9,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(25),
-            color: (appTheme == Brightness.light)
-                ? primaryLightColor
-                : Colors.grey[800],
-            boxShadow: const [
-              BoxShadow(
-                color: Colors.grey,
-                blurRadius: 4.0,
-              ),
-            ],
-          ),
-          child: Column(
-            children: [
-              // Image goes here.
-              Container(
-                height: screenHeight * 0.2,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(25),
-                    topRight: Radius.circular(25),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Container(
+            height: screenHeight * 0.35,
+            // height: 250,
+            // width: screenWidth * 0.9,
+            decoration: BoxDecoration(
+              color: (appTheme == Brightness.light)
+                  ? primaryLightColor
+                  : Colors.grey[800],
+            ),
+            child: Column(
+              children: [
+                // Image goes here.
+                Container(
+                  height: screenHeight * 0.23,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        // topLeft: Radius.circular(12),
+                        // topRight: Radius.circular(12),
+                        ),
+                    image: DecorationImage(
+                        image: NetworkImage(
+                          "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640",
+                        ),
+                        fit: BoxFit.cover),
                   ),
-                  image: DecorationImage(
-                      image: NetworkImage(
-                        "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640",
-                      ),
-                      fit: BoxFit.cover),
                 ),
-              ),
 
-              // Name Description and price.
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                          width: screenWidth * 0.5,
-                          // color: Colors.red,
-                          child: Text(
-                            "Pasta shcoeo",
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.lato(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                // Name Description and price.
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              height: 20,
+                              width: screenWidth * 0.5,
+                              // color: Colors.red,
+                              child: Text(
+                                "Pasta shcoeo",
+                                overflow: TextOverflow.ellipsis,
+                                style: GoogleFonts.lato(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                          width: screenWidth * 0.5,
-                          child: const Text("Tasty Pasta"),
-                        )
-                      ],
-                    ),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(20),
-                      child: Container(
-                        height: screenHeight / 24,
-                        width: screenWidth / 7,
-                        color: Colors.green,
-                        child: Center(
-                          child: Text(
-                            "20000",
-                            overflow: TextOverflow.ellipsis,
-                            style: GoogleFonts.lato(
-                              // fontWeight: FontWeight.bold,
-                              // fontSize: 18,
-                              color: Colors.white,
+                          SizedBox(
+                            height: 40,
+                            width: screenWidth * 0.5,
+                            child: const Text(
+                              "This restaurant sucks, don't go there. gq gigiqgeh dsxogoh",
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
                             ),
-                          ),
-                        ),
+                          )
+                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(14.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: Container(
+                              height: screenHeight / 24,
+                              width: screenWidth / 6.5,
+                              color: Colors.green,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "4.5",
+                                    overflow: TextOverflow.ellipsis,
+                                    style: GoogleFonts.lato(
+                                      // fontWeight: FontWeight.bold,
+                                      // fontSize: 18,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const Icon(
+                                    Icons.star,
+                                    color: Colors.white,
+                                    size: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // Price section.
+                          Text("₹200 for one",
+                              style: GoogleFonts.lato(
+                                color: Colors.grey,
+                              ))
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

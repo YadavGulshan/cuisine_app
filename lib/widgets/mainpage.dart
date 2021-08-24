@@ -6,6 +6,7 @@ import 'package:cuisine_app/widgets/categories_scroller.dart';
 import 'package:cuisine_app/widgets/homepage_cuisines.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -165,8 +166,12 @@ class _MainPageState extends State<MainPage> {
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
-                    "Categories",
-                    style: GoogleFonts.lato(fontSize: 28, wordSpacing: 2),
+                    "Eat what makes you happy",
+                    style: GoogleFonts.lato(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      wordSpacing: 0.6,
+                    ),
                   ),
                 ),
               ),
