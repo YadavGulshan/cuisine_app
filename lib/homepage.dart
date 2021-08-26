@@ -1,35 +1,42 @@
 import 'package:cuisine_app/screens/custom_drawer.dart';
+import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/widgets/mainpage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
 
 import 'widgets/toolbar_tiles.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({
     Key? key,
-    required this.longitude,
-    required this.latitude,
-    required this.address,
   }) : super(key: key);
 
-  final String longitude;
-  final String latitude;
-  final String address;
   @override
   _HomepageState createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
+  void _fetchLocation() async {
+    Provider.of<CurrentLocation>(context, listen: false).getCurrenLocation();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchLocation();
+  }
+
   @override
   Widget build(BuildContext context) {
+    String address = Provider.of<CurrentLocation>(context).addressStatus;
     // var screenHeight = MediaQuery.of(context).size.height;
     // var screenWidth = MediaQuery.of(context).size.width;
     // double value = 0;
     return Scaffold(
       body: MainPage(
-        address: widget.address,
+        address: address,
       ),
 
       // body: ,
