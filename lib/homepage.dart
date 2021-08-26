@@ -1,9 +1,7 @@
-import 'package:cuisine_app/screens/custom_drawer.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/widgets/mainpage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
 import 'widgets/toolbar_tiles.dart';

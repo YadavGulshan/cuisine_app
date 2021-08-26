@@ -117,6 +117,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
   }
 }
 
+// ignore: must_be_immutable
 class TitleWidget extends StatelessWidget {
   TitleWidget({
     Key? key,

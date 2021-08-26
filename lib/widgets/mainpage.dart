@@ -1,6 +1,6 @@
+// ignore_for_file: implementation_imports
+
 import 'package:cuisine_app/constants.dart';
-import 'package:cuisine_app/screens/custom_drawer.dart';
-import 'package:cuisine_app/screens/search_page.dart';
 import 'package:cuisine_app/widgets/bottomsheet.dart';
 import 'package:cuisine_app/widgets/categories_scroller.dart';
 import 'package:cuisine_app/widgets/homepage_cuisines.dart';
@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+// ignore: must_be_immutable
 class MainPage extends StatefulWidget {
   MainPage({Key? key, required this.address}) : super(key: key);
   String address;
@@ -198,7 +198,9 @@ class _MainPageState extends State<MainPage> {
 
 class SearchBar implements SliverPersistentHeaderDelegate {
   SearchBar({required this.minExtent, required this.maxExtent});
+  @override
   final double minExtent;
+  @override
   final double maxExtent;
 
   @override
