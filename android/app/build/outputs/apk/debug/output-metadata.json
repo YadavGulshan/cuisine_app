@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.example.cuisine_app",
+  "applicationId": "com.example.cuisine",
   "variantName": "processDebugResources",
   "elements": [
     {
