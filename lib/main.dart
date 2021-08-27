@@ -1,6 +1,6 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/homepage.dart';
-import 'package:cuisine_app/login_page.dart';
+import 'package:cuisine_app/screens/login_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/services/login.dart';
 import 'package:flutter/material.dart';
