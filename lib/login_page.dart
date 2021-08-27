@@ -1,20 +1,21 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/services/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
-  final loginAction;
-  final String loginError;
+  // final String loginError;
   const LoginPage({
     Key? key,
-    this.loginAction,
-    required this.loginError,
+    // required this.loginError,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final loginAction = Provider.of<AuthState>(context).login();
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -47,7 +48,11 @@ class LoginPage extends StatelessWidget {
                         fontSize: 32,
                       ),
                     ),
-                    button(screen, "LOGIN"),
+                    InkWell(
+                        onTap: () {
+                          loginAction;
+                        },
+                        child: button(screen, "LOGIN")),
                     button(screen, "SIGN UP"),
                   ],
                 ),

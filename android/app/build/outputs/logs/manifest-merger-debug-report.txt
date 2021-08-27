@@ -249,7 +249,7 @@ ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/
 		ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:33:13-74
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:${appAuthRedirectScheme}
 ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:35:13-42:29
-intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:com.redirectScheme.comm
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:com.example.cuisine
 ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:35:13-42:29
 action#android.intent.action.VIEW
 ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:36:17-69
