@@ -15,7 +15,6 @@ class LoginPage extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final loginAction = Provider.of<AuthState>(context).login();
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -50,7 +49,8 @@ class LoginPage extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          loginAction;
+                          Provider.of<AuthState>(context, listen: false)
+                              .login();
                         },
                         child: button(screen, "LOGIN")),
                     button(screen, "SIGN UP"),

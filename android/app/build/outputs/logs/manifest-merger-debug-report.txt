@@ -48,7 +48,7 @@ INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/debug/AndroidMa
 INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/debug/AndroidManifest.xml:1:1-7:12
 	package
-		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:2:5-34
+		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:2:5-32
 		INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/debug/AndroidManifest.xml
 	android:versionName
@@ -105,7 +105,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/Gulsh
 		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:8:9-36
 	android:icon
 		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:9:9-43
-activity#com.example.cuisine.MainActivity
+activity#com.auth0.cuisine.MainActivity
 ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:10:9-29:20
 	android:launchMode
 		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:12:13-43
@@ -249,7 +249,7 @@ ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/
 		ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:33:13-74
 intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:${appAuthRedirectScheme}
 ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:35:13-42:29
-intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:com.example.cuisine
+intent-filter#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+category:name:android.intent.category.DEFAULT+data:scheme:com.auth0.cuisine
 ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:35:13-42:29
 action#android.intent.action.VIEW
 ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:36:17-69

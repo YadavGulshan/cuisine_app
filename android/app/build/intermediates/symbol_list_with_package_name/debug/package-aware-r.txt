@@ -1,4 +1,4 @@
-com.example.cuisine
+com.auth0.cuisine
 attr alpha
 attr buttonSize
 attr circleCrop

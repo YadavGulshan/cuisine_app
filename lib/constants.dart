@@ -19,5 +19,5 @@ const FlutterSecureStorage secureStorage = FlutterSecureStorage();
 const AUTH0_DOMAIN = 'bufferoverflow.eu.auth0.com';
 const AUTH0_CLIENT_ID = 'WjeGvua61kk0jmYdql3FGFh3PJLdgNwG';
 
-const AUTH0_REDIRECT_URI = 'com.auth0.flutterdemo://login-callback';
+const AUTH0_REDIRECT_URI = 'com.auth0.cuisine://login-callback';
 const AUTH0_ISSUER = 'https://$AUTH0_DOMAIN';
