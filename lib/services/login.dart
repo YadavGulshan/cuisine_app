@@ -1,18 +1,17 @@
 import 'dart:convert';
-
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:http/http.dart' as http;
 
 class AuthState extends ChangeNotifier {
-  bool isBusy = false;
-  bool isLoggedIn = false;
+  bool _isBusy = false;
+  bool _isLoggedIn = false;
   String errorMessage = "";
   String name = "";
   String picture = "";
   String email = "";
-  var logs;
+  var logs = [];
   // Parse the id token from auth0
   Map<String, dynamic> parseIdToken(String idToken) {
     final parts = idToken.split(r'.');
@@ -41,7 +40,7 @@ class AuthState extends ChangeNotifier {
 
   // Perform the login action
   Future<void> login() async {
-    isBusy = true;
+    _isBusy = true;
     errorMessage = '';
     notifyListeners();
     try {
@@ -67,8 +66,8 @@ class AuthState extends ChangeNotifier {
       // debugPrint("id token: " + idToken.toString());
 
       // Update the user's profile and change the state
-      isBusy = false;
-      isLoggedIn = true;
+      _isBusy = false;
+      _isLoggedIn = true;
       name = idToken['name'];
       picture = profile['picture'];
       email = profile['email'];
@@ -77,10 +76,12 @@ class AuthState extends ChangeNotifier {
       notifyListeners();
     } catch (e, s) {
       // debugPrint('login error: $e - stack: $s');
-      logs.add("exception: $e", "Stack: $s");
-
-      isBusy = false;
-      isLoggedIn = false;
+      logs.add(DateTime.now());
+      logs.add("exception: $e");
+      logs.add("Stack: $s");
+      logs.add("=====");
+      _isBusy = false;
+      _isLoggedIn = false;
       errorMessage = e.toString();
       notifyListeners();
     }
@@ -92,8 +93,8 @@ class AuthState extends ChangeNotifier {
     await secureStorage.delete(key: 'refresh_token');
 
     // Update the state
-    isLoggedIn = false;
-    isBusy = false;
+    _isLoggedIn = false;
+    _isBusy = false;
 
     notifyListeners();
   }
@@ -108,7 +109,7 @@ class AuthState extends ChangeNotifier {
     if (storedRefreshToken == null) {
       return;
     } else {
-      isBusy = true;
+      _isBusy = true;
       notifyListeners();
 
       try {
@@ -128,17 +129,49 @@ class AuthState extends ChangeNotifier {
         secureStorage.write(key: 'refresh_token', value: response.refreshToken);
 
         // Change the state of app.
-        isBusy = false;
-        isLoggedIn = true;
+        _isBusy = false;
+        _isLoggedIn = true;
         name = idToken['name'];
         picture = profile['picture'];
         // Now notify the listeners.
         notifyListeners();
       } catch (e, s) {
-        logs.add("exception: $e", "Stack: $s");
+        logs.add(DateTime.now());
+        logs.add("exception: $e");
+        logs.add("Stack: $s");
+        logs.add("=====");
         // print('error on refresh token: $e - stack: $s');
         logoutAction();
       }
     }
+  }
+
+  // Getters.
+  bool get isbusy {
+    return _isBusy;
+  }
+
+  bool get isLoggedIn {
+    return _isLoggedIn;
+  }
+
+  String get errors {
+    return errorMessage;
+  }
+
+  String get username {
+    return name;
+  }
+
+  String get profileUrl {
+    return picture;
+  }
+
+  String get emailAddr {
+    return email;
+  }
+
+  get log {
+    return logs;
   }
 }
