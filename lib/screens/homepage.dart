@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'widgets/toolbar_tiles.dart';
+import '../widgets/toolbar_tiles.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({
