@@ -12,6 +12,7 @@ class AuthState extends ChangeNotifier {
   String name = "";
   String picture = "";
   String email = "";
+  var logs;
   // Parse the id token from auth0
   Map<String, dynamic> parseIdToken(String idToken) {
     final parts = idToken.split(r'.');
@@ -74,8 +75,9 @@ class AuthState extends ChangeNotifier {
 
       // Notify the listeners
       notifyListeners();
-    } catch (e) {
+    } catch (e, s) {
       // debugPrint('login error: $e - stack: $s');
+      logs.add("exception: $e", "Stack: $s");
 
       isBusy = false;
       isLoggedIn = false;
@@ -132,7 +134,11 @@ class AuthState extends ChangeNotifier {
         picture = profile['picture'];
         // Now notify the listeners.
         notifyListeners();
-      } catch (e) {}
+      } catch (e, s) {
+        logs.add("exception: $e", "Stack: $s");
+        // print('error on refresh token: $e - stack: $s');
+        logoutAction();
+      }
     }
   }
 }
