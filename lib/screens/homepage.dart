@@ -3,7 +3,7 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/user/search_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
-import 'package:cuisine_app/widgets/bottomsheet.dart';
+import 'package:cuisine_app/screens/user/bottomsheet.dart';
 import 'package:cuisine_app/widgets/categories_scroller.dart';
 import 'package:cuisine_app/widgets/homepage_cuisines.dart';
 import 'package:flutter/cupertino.dart';

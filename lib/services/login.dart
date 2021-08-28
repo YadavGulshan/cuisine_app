@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/auth/login_page.dart';
 import 'package:cuisine_app/user.dart';
-import 'package:cuisine_app/widgets/homepage.dart';
+import 'package:cuisine_app/screens/homepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
