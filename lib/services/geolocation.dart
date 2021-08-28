@@ -80,18 +80,6 @@ class CurrentLocation extends ChangeNotifier {
   double longitude = 0.0;
   double latitude = 0.0;
   String address = '';
-  // Getters
-  double get longitudeStatus {
-    return longitude;
-  }
-
-  double get latitudeStatus {
-    return latitude;
-  }
-
-  String get addressStatus {
-    return address;
-  }
 
   // Setter for location
   void getCurrenLocation() async {
@@ -137,5 +125,18 @@ class CurrentLocation extends ChangeNotifier {
         "${placemark.name.toString()}, ${placemark.subLocality.toString()}";
 
     notifyListeners();
+  }
+
+  // Getters
+  double get longitudeStatus {
+    return longitude;
+  }
+
+  double get latitudeStatus {
+    return latitude;
+  }
+
+  String get addressStatus {
+    return address;
   }
 }

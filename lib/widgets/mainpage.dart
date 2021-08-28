@@ -1,6 +1,8 @@
 // ignore_for_file: implementation_imports
 
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/screens/search_page.dart';
+import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/widgets/bottomsheet.dart';
 import 'package:cuisine_app/widgets/categories_scroller.dart';
 import 'package:cuisine_app/widgets/homepage_cuisines.dart';
@@ -9,11 +11,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/src/rendering/sliver_persistent_header.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {
-  MainPage({Key? key, required this.address}) : super(key: key);
-  String address;
+  const MainPage({
+    Key? key,
+  }) : super(key: key);
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -24,9 +29,15 @@ class _MainPageState extends State<MainPage> {
   double topContainer = 0;
   List<Widget> itemsData = [];
 
+  void _fetchLocation() async {
+    Provider.of<CurrentLocation>(context, listen: false).getCurrenLocation();
+  }
+
   @override
   void initState() {
     super.initState();
+    // Fetch the location.
+    _fetchLocation();
     controller.addListener(() {
       double value = controller.offset / 119;
 
@@ -39,9 +50,14 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Get the location from the provider.
+    CurrentLocation provider = Provider.of<CurrentLocation>(context);
+
+    // Screen size.
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
+    // Using slivers for better User experience.
     return CustomScrollView(
       physics: const BouncingScrollPhysics(
         parent: AlwaysScrollableScrollPhysics(),
@@ -69,20 +85,21 @@ class _MainPageState extends State<MainPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
+                            // Location icon button. It will open the bottom sheet.
                             IconButton(
                               icon: Theme(
                                 data: Theme.of(context).copyWith(),
                                 child: const Icon(Icons.location_on_outlined),
                               ),
                               onPressed: () {
-                                // bottomSheet(context, 20);
+                                bottomSheet(context, screenHeight);
                               },
                             ),
                             SizedBox(
                               height: 20,
                               width: screenWidth * 0.65,
                               child: Text(
-                                widget.address,
+                                provider.address,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.lato(
                                   fontSize: 17,
@@ -140,7 +157,12 @@ class _MainPageState extends State<MainPage> {
                 ),
                 height: screenHeight * 0.055,
                 width: screenWidth * 0.9,
+
+                // Search bar button.
                 child: InkWell(
+                  onTap: () {
+                    pushNewScreen(context, screen: const SearchPage());
+                  },
                   child: Align(
                     alignment: Alignment.center,
                     child: Row(
