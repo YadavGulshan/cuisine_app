@@ -1,15 +1,15 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:cuisine_app/constants.dart';
-import 'package:cuisine_app/services/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
+  var loginCallback;
   // final String loginError;
-  const LoginPage({
+  LoginPage({
+    required this.loginCallback,
     Key? key,
     // required this.loginError,
   }) : super(key: key);
@@ -25,9 +25,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Lottie.network(
-                "https://assets5.lottiefiles.com/packages/lf20_q5pk6p1k.json",
-              ),
+              Lottie.asset("assets/loginpage_animation.json"),
               Container(
                 height: screen.height * 0.27,
                 width: screen.width * 0.85,
@@ -49,8 +47,7 @@ class LoginPage extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          Provider.of<AuthState>(context, listen: false)
-                              .login();
+                          loginCallback();
                         },
                         child: button(screen, "LOGIN")),
                     button(screen, "SIGN UP"),

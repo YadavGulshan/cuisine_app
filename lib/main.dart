@@ -1,8 +1,10 @@
+import 'package:cuisine_app/authstream.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/homepage.dart';
 import 'package:cuisine_app/screens/login_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/services/login.dart';
+import 'package:cuisine_app/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,31 +23,32 @@ class MyApp extends StatelessWidget {
           value: CurrentLocation(),
         ),
         ChangeNotifierProvider.value(
-          value: AuthState(),
+          value: User(),
         )
       ],
       child: MaterialApp(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            // Define the default brightness and colors.
-            brightness: appTheme,
-            primaryColor: primaryLightColor,
-            iconTheme: const IconThemeData(color: primaryColor),
-            primaryIconTheme: const IconThemeData(color: primaryColor),
-            // accentColor: Colors.cyan[600],
-            appBarTheme: (appTheme == Brightness.dark)
-                ? AppBarTheme(color: Colors.grey[850])
-                : const AppBarTheme(color: Colors.white),
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          // Define the default brightness and colors.
+          brightness: appTheme,
+          primaryColor: primaryLightColor,
+          iconTheme: const IconThemeData(color: primaryColor),
+          primaryIconTheme: const IconThemeData(color: primaryColor),
+          // accentColor: Colors.cyan[600],
+          appBarTheme: (appTheme == Brightness.dark)
+              ? AppBarTheme(color: Colors.grey[850])
+              : const AppBarTheme(color: Colors.white),
 
-            textTheme: const TextTheme(
-              headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-              headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-              bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-            ),
+          textTheme: const TextTheme(
+            headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+            headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
           ),
-          // home: const Homepage(),
-          home: LoginPage()),
+        ),
+        // home: const Homepage(),
+        home: const AuthState(),
+      ),
     );
   }
 }
