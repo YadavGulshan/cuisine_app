@@ -187,6 +187,8 @@ class AuthState extends StatefulWidget {
 
   @override
   _AuthStateState createState() => _AuthStateState();
+
+  static of() {}
 }
 
 class _AuthStateState extends State<AuthState> {
@@ -292,18 +294,22 @@ class _AuthStateState extends State<AuthState> {
 
   // Initial action to be performed when the app starts
 
-  initialAction() async {
+  void initialAction() async {
     // Check if the refresh token exist in memory.
     final storedRefreshToken = await secureStorage.read(key: 'refresh_token');
-
     // If refresh token doesn't exist end the action.
     if (storedRefreshToken == null) {
-      return null;
+      setState(() {
+        _isBusy = false;
+        _isLoggedIn = false;
+      });
     } else {
       setState(() {
-        _isBusy = true;
+        // debugPrint("Keys: " + storedRefreshToken.toString());
+        _isBusy = false;
+        _isLoggedIn = true;
       });
-
+      /*
       try {
         // request token, or verify the token.
         final response = await appAuth.token(
@@ -337,7 +343,14 @@ class _AuthStateState extends State<AuthState> {
         // print('error on refresh token: $e - stack: $s');
         logoutAction();
       }
+      */
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initialAction();
   }
 
   @override
@@ -349,8 +362,8 @@ class _AuthStateState extends State<AuthState> {
             : _isLoggedIn
                 ? const Homepage()
                 : LoginPage(
-                    loginCallback: login(),
-                  ),
+                    // loginCallback: login(),
+                    ),
       ),
     );
   }
