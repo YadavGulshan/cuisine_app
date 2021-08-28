@@ -8,7 +8,6 @@ Future<dynamic> bottomSheet(BuildContext context, double height) {
       isScrollControlled: true,
       builder: (BuildContext context) {
         return Container(
-          // color: Colors.red,
           height: height * 0.7,
           // child: TextButton(
           //   child: const Text("WORK IN PROGRESS"),

@@ -53,7 +53,6 @@ class SearchPage extends StatelessWidget {
             ),
           ),
         ),
-        Container(),
       ],
     ));
   }
