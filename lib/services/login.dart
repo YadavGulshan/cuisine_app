@@ -309,6 +309,8 @@ class _AuthStateState extends State<AuthState> {
         _isBusy = false;
         _isLoggedIn = true;
       });
+
+      // Verify the refresh token section.
       /*
       try {
         // request token, or verify the token.
