@@ -1,7 +1,7 @@
 // ignore_for_file: implementation_imports
 
 import 'package:cuisine_app/constants.dart';
-import 'package:cuisine_app/screens/search_page.dart';
+import 'package:cuisine_app/screens/user/search_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/widgets/bottomsheet.dart';
 import 'package:cuisine_app/widgets/categories_scroller.dart';
