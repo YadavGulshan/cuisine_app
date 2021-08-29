@@ -3,6 +3,7 @@ import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:http/http.dart' as http;
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthState extends ChangeNotifier {
   bool _isBusy = false;
@@ -40,7 +41,7 @@ class AuthState extends ChangeNotifier {
 
   // Perform the login action
   Future<void> login() async {
-    debugPrint("############## I'm being executed###########");
+    debugPrint("############## Login Action being executed###########");
     _isBusy = true;
     errorMessage = '';
     notifyListeners();
@@ -65,6 +66,10 @@ class AuthState extends ChangeNotifier {
       await secureStorage.write(
           key: 'refresh_token', value: result.refreshToken);
       // debugPrint("id token: " + idToken.toString());
+      debugPrint("##################################");
+      final storedRefreshToken = await secureStorage.read(key: 'refresh_token');
+      debugPrint("SecureStorage: " + storedRefreshToken.toString());
+      debugPrint("##################################");
 
       // Update the user's profile and change the state
       debugPrint(profile.toString());
@@ -73,6 +78,34 @@ class AuthState extends ChangeNotifier {
       name = idToken['name'];
       picture = profile['picture'];
       email = profile['email'];
+      // Set the vars in device memory.
+      final mem = await SharedPreferences.getInstance();
+      debugPrint("##################################");
+      if (mem.getString("email") == null) {
+        mem.setString("email", email);
+        mem.setString("name", name);
+        mem.setString("picture", picture);
+      } else {
+        // remove the stored content.
+
+        // Name
+        mem.setString("name", "");
+        mem.setString("name", name);
+
+        // Picture
+        mem.setString("picture", "");
+        mem.setString("picture", picture);
+
+        // Email
+        mem.setString("email", "");
+        mem.setString("email", email);
+      }
+
+      debugPrint(mem.getString("email"));
+      debugPrint("##################################");
+
+      // If the String in memory of key memory is null then add email.
+      // mem.getString("email") ?? mem.setString("email", email);
 
       // Notify the listeners
       notifyListeners();
@@ -91,9 +124,20 @@ class AuthState extends ChangeNotifier {
 
   // Perform the logout action
   void logoutAction() async {
+    debugPrint("#################Logout Action executed##################");
     // Delete the refresh token from local storage
     await secureStorage.delete(key: 'refresh_token');
 
+    // Access the shared preferences.
+    final mem = await SharedPreferences.getInstance();
+
+    // remove the stored content.
+    mem.setString("name", "");
+    mem.setString("picture", "");
+    mem.setString("email", "");
+    mem.setString("name", name);
+    mem.setString("picture", picture);
+    mem.setString("email", email);
     // Update the state
     _isLoggedIn = false;
     _isBusy = false;
@@ -104,9 +148,10 @@ class AuthState extends ChangeNotifier {
   // Initial action to be performed when the app starts
 
   initialAction() async {
+    debugPrint("############## Initial Action being executed###########");
     // Check if the refresh token exist in memory.
     final storedRefreshToken = await secureStorage.read(key: 'refresh_token');
-
+    debugPrint("storedRefreshToken: " + storedRefreshToken.toString());
     // If refresh token doesn't exist end the action.
     if (storedRefreshToken == null) {
       _isBusy = false;
@@ -116,7 +161,7 @@ class AuthState extends ChangeNotifier {
       _isBusy = false;
       _isLoggedIn = true;
       notifyListeners();
-      try {
+      /*try {
         // request token, or verify the token.
         final response = await appAuth.token(
           TokenRequest(
@@ -147,8 +192,9 @@ class AuthState extends ChangeNotifier {
         logs.add("=====");
         // print('error on refresh token: $e - stack: $s');
         logoutAction();
-      }
+      }*/
     }
+    debugPrint("############## Initial Action Ended  ###########");
   }
 
   // Getters.
