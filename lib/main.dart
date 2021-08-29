@@ -1,3 +1,4 @@
+import 'package:cuisine_app/authstream.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/services/login.dart';
@@ -21,6 +22,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: User(),
+        ),
+        ChangeNotifierProvider.value(
+          value: AuthState(),
         )
       ],
       child: MaterialApp(
@@ -44,7 +48,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
         // home: const Homepage(),
-        home: const AuthState(),
+        // home: const AuthState(),
+        home: const AuthCheck(),
       ),
     );
   }

@@ -17,7 +17,10 @@ import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class MainPage extends StatefulWidget {
+  final logoutCallback;
+
   const MainPage({
+    this.logoutCallback,
     Key? key,
   }) : super(key: key);
   @override
@@ -29,7 +32,7 @@ class _MainPageState extends State<MainPage> {
   bool closeTopContainer = false;
   double topContainer = 0;
   List<Widget> itemsData = [];
-
+  String address = "";
   void _fetchLocation() async {
     Provider.of<CurrentLocation>(context, listen: false).getCurrenLocation();
   }
@@ -52,12 +55,10 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     // Get the location from the provider.
-    CurrentLocation provider = Provider.of<CurrentLocation>(context);
-
     // Screen size.
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
-
+    CurrentLocation provider = Provider.of<CurrentLocation>(context);
     // Using slivers for better User experience.
     return CustomScrollView(
       physics: const BouncingScrollPhysics(
@@ -100,7 +101,7 @@ class _MainPageState extends State<MainPage> {
                               height: 20,
                               width: screenWidth * 0.65,
                               child: Text(
-                                provider.address,
+                                provider.addressStatus,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.lato(
                                   fontSize: 17,
@@ -120,9 +121,8 @@ class _MainPageState extends State<MainPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(
                             onPressed: () {
-                              // pushNewScreen(context, screen: MyCustomDrawer());
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => MyCustomDrawer()));
+                              pushNewScreen(context,
+                                  screen: const MyCustomDrawer());
                             },
                             icon: Theme(
                               data: Theme.of(context).copyWith(),

@@ -97,7 +97,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                   icon: Icons.logout,
                   title: "Log out",
                   ontap: () {
-                    AuthState.of().logout();
+                    // AuthState.of().logout();
                   },
                 ),
                 TitleWidget(

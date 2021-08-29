@@ -7,10 +7,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 
 class LoginPage extends StatelessWidget {
-  // var loginCallback;
+  final loginCallback;
   // final String loginError;
   const LoginPage({
-    // required this.loginCallback,
+    this.loginCallback,
     Key? key,
     // required this.loginError,
   }) : super(key: key);
@@ -48,9 +48,8 @@ class LoginPage extends StatelessWidget {
                     ),
                     InkWell(
                         onTap: () {
-                          // loginCallback();
+                          loginCallback();
                           debugPrint("I'm being Executed");
-                          AuthState.of().login(); // does not work
                         },
                         child: button(screen, "LOGIN")),
                     button(screen, "SIGN UP"),
