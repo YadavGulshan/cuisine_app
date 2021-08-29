@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
                         onTap: () {
                           // loginCallback();
                           debugPrint("I'm being Executed");
-                          AuthState.of().login();
+                          AuthState.of().login(); // does not work
                         },
                         child: button(screen, "LOGIN")),
                     button(screen, "SIGN UP"),

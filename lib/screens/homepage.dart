@@ -1,6 +1,7 @@
 // ignore_for_file: implementation_imports
 
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/screens/user/custom_drawer.dart';
 import 'package:cuisine_app/screens/user/search_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/screens/user/bottomsheet.dart';
@@ -119,7 +120,9 @@ class _MainPageState extends State<MainPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: IconButton(
                             onPressed: () {
-                              bottomSheet(context, screenHeight / 1.2);
+                              // pushNewScreen(context, screen: MyCustomDrawer());
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => MyCustomDrawer()));
                             },
                             icon: Theme(
                               data: Theme.of(context).copyWith(),
