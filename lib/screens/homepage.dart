@@ -1,6 +1,7 @@
 // ignore_for_file: implementation_imports
-
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/models/restaurant.dart';
+import 'package:cuisine_app/models/service/fetch_data.dart';
 import 'package:cuisine_app/screens/user/custom_drawer.dart';
 import 'package:cuisine_app/screens/user/search_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
@@ -59,6 +60,9 @@ class _MainPageState extends State<MainPage> {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     CurrentLocation provider = Provider.of<CurrentLocation>(context);
+
+    // Network service for fetching data.
+    // final NetworkService restaurantData = NetworkService();
     // Using slivers for better User experience.
     return CustomScrollView(
       physics: const BouncingScrollPhysics(
@@ -216,10 +220,34 @@ class _MainPageState extends State<MainPage> {
         ),
 
         // Products here...
-        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
-        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
-        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
-        Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
+        SliverList(
+            delegate: SliverChildListDelegate([
+          FutureBuilder(
+            future: fetchData(),
+            builder: (context, AsyncSnapshot<List<RestaurantModel>> snapshot) {
+              if (snapshot.hasData) {
+                return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      var currentRestaurant = snapshot.data![index];
+                      return Restaurant(
+                        title: currentRestaurant.name,
+                        category: currentRestaurant.category,
+                        imageUrl: currentRestaurant.photo,
+                        key: Key(
+                          currentRestaurant.id.toString(), // Key for later use.
+                        ),
+                        // TODO: Implement the is banned and remaining stuff too.
+                      );
+                    });
+              } else if (snapshot.hasError) {
+                return const FlutterLogo(); // TODO: Add a error page.
+              }
+              return const CircularProgressIndicator(); // Loaded screen.
+              // TODO: Add shimmer animation.
+            },
+          )
+        ]))
       ],
     );
   }
