@@ -1,7 +1,5 @@
 // ignore_for_file: implementation_imports
 import 'package:cuisine_app/constants.dart';
-import 'package:cuisine_app/models/restaurant.dart';
-import 'package:cuisine_app/models/service/fetch_data.dart';
 import 'package:cuisine_app/screens/user/custom_drawer.dart';
 import 'package:cuisine_app/screens/user/search_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
@@ -34,6 +32,13 @@ class _MainPageState extends State<MainPage> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   String address = "";
+
+  // Category section
+  bool _isExpanded = false;
+// Our category section
+  String _categorySubtitile = "Show more";
+  Icon _expansionIcon = const Icon(Icons.expand_more_outlined);
+  double _categoryHeight = 240;
 
   void _fetchLocation() async {
     Provider.of<CurrentLocation>(context, listen: false).getCurrenLocation();
@@ -242,13 +247,13 @@ class _MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.fromLTRB(8, 10, 8, 0),
                 child: AnimatedContainer(
                   duration: const Duration(microseconds: 5000),
-                  curve: Curves.bounceInOut,
+                  curve: Curves.easeInBack,
                   // height: screenHeight * 0.55, // expanded height
-                  height: categoryHeight,
+                  height: _categoryHeight,
                   width: screenWidth,
                   decoration: const BoxDecoration(
-                    color: Colors.transparent,
-                  ),
+                      // color: Colors.transparent,
+                      ),
                   child: Wrap(
                     children: [
                       categoryButton("Category", testUrl),
@@ -268,24 +273,26 @@ class _MainPageState extends State<MainPage> {
                 padding: const EdgeInsets.fromLTRB(8, 4, 8, 20),
                 child: InkWell(
                   onTap: () {
-                    if (isExpanded == false) {
+                    if (_isExpanded == false) {
                       setState(() {
-                        isExpanded = true;
-                        categoryHeight = 340;
-                        categorySubtitile = "show less";
-                        expansionIcon = const Icon(Icons.expand_less_outlined);
+                        _isExpanded = true;
+                        _categoryHeight = 340;
+                        _categorySubtitile = "show less";
+                        _expansionIcon = const Icon(
+                          Icons.expand_less_outlined,
+                        );
                       });
                       debugPrint(
-                          "#############isExpanded: $isExpanded ###############");
+                          "#############_isExpanded: $_isExpanded ###############");
                     } else {
                       setState(() {
-                        isExpanded = false;
-                        categoryHeight = 240;
-                        categorySubtitile = "show more";
-                        expansionIcon = const Icon(Icons.expand_more_outlined);
+                        _isExpanded = false;
+                        _categoryHeight = 240;
+                        _categorySubtitile = "show more";
+                        _expansionIcon = const Icon(Icons.expand_more_outlined);
                       });
                       debugPrint(
-                          "#############isExpanded: $isExpanded ###############");
+                          "#############_isExpanded: $_isExpanded ###############");
                     }
                   },
                   child: AnimatedContainer(
@@ -308,12 +315,12 @@ class _MainPageState extends State<MainPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            categorySubtitile,
+                            _categorySubtitile,
                             style: GoogleFonts.lato(
                               fontSize: 14,
                             ),
                           ),
-                          expansionIcon,
+                          _expansionIcon,
                         ],
                       ),
                     ),
