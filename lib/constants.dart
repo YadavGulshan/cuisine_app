@@ -1,16 +1,31 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 // const Color topBarColor = Color(0xFF6002ee);
 const Color primaryColor = Color(0xFF2563EB);
 const Color primaryLightColor = Color(0xFFEFF6FF);
+const Color myprimarylightColor = Color(0xffc7dfff);
+
 Brightness appTheme = Brightness.light;
 const String appName = "Food Delivery App";
+
+// Category section
+bool isExpanded = false;
+// Our category section
+String categorySubtitile = "Show more";
+Icon expansionIcon = const Icon(Icons.expand_more_outlined);
+double categoryHeight = 240;
+
+// Some urls for testing
 String testUrl =
     "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?crop=entropy&cs=srgb&dl=pexels-pixabay-315755.jpg&fit=crop&fm=jpg&h=960&w=640";
+
+String bannerImageUrl =
+    "https://www.pexels.com/photo/5635113/download/?search_query=ghost&tracking_id=zd4udgyvnsg";
 
 // Auth0 part
 final FlutterAppAuth appAuth = FlutterAppAuth();

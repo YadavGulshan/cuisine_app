@@ -34,6 +34,7 @@ class _MainPageState extends State<MainPage> {
   double topContainer = 0;
   List<Widget> itemsData = [];
   String address = "";
+
   void _fetchLocation() async {
     Provider.of<CurrentLocation>(context, listen: false).getCurrenLocation();
   }
@@ -80,8 +81,10 @@ class _MainPageState extends State<MainPage> {
             collapseMode: CollapseMode.pin,
             background: SafeArea(
               child: Container(
-                decoration: const BoxDecoration(
-                  color: primaryLightColor,
+                decoration: BoxDecoration(
+                  color: (appTheme == Brightness.light)
+                      ? primaryLightColor
+                      : Colors.grey[850],
                 ),
                 child: Column(
                   children: [
@@ -113,16 +116,16 @@ class _MainPageState extends State<MainPage> {
                                   fontWeight: FontWeight.w600,
                                   decorationStyle: TextDecorationStyle.dotted,
                                   decoration: TextDecoration.underline,
-                                  color: (appTheme == Brightness.light)
-                                      ? Colors.black
-                                      : Colors.white,
+                                  // color: (appTheme == Brightness.light)
+                                  //     ? Colors.black
+                                  //     : Colors.white,
                                 ),
                               ),
                             ),
                           ],
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(8.0),
+                          padding: const EdgeInsets.all(14.0),
                           child: IconButton(
                             onPressed: () {
                               pushNewScreen(context,
@@ -156,13 +159,17 @@ class _MainPageState extends State<MainPage> {
                   ),
 
                   // box shadow
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
-                      color: Colors.grey,
+                      color: (appTheme == Brightness.light)
+                          ? Colors.grey
+                          : Colors.transparent,
                       blurRadius: 4.0,
                     ),
                   ],
-                  color: primaryLightColor,
+                  color: (appTheme == Brightness.light)
+                      ? primaryLightColor
+                      : Colors.grey[850],
                 ),
                 height: screenHeight * 0.055,
                 width: screenWidth * 0.9,
@@ -189,12 +196,33 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
 
+        // Some banner.
+
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(14, 20, 14, 14),
+            child: Container(
+              height: screenHeight * 0.15,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                // color: Colors.amber,
+                image: DecorationImage(
+                  image: NetworkImage(
+                    bannerImageUrl,
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+          ),
+        ),
+
         /// Head Section.
         SliverToBoxAdapter(
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
+                padding: const EdgeInsets.fromLTRB(14, 0, 0, 0),
                 child: Align(
                   alignment: Alignment.topLeft,
                   child: Text(
@@ -210,44 +238,142 @@ class _MainPageState extends State<MainPage> {
 
               // Category section
               // TODO: Changed it to a expandable box using animated container.
-              const AnimatedOpacity(
-                duration: Duration(milliseconds: 200),
-                opacity: 1.0,
-                child: CategoriesScroller(),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 10, 8, 0),
+                child: AnimatedContainer(
+                  duration: const Duration(microseconds: 5000),
+                  curve: Curves.bounceInOut,
+                  // height: screenHeight * 0.55, // expanded height
+                  height: categoryHeight,
+                  width: screenWidth,
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: Wrap(
+                    children: [
+                      categoryButton("Category", testUrl),
+                      categoryButton("Category", testUrl),
+                      categoryButton("Category", testUrl),
+                      categoryButton("Category", testUrl),
+                      categoryButton("Category", testUrl),
+                      categoryButton("Category", testUrl),
+                      categoryButton("Category", testUrl),
+                      categoryButton("Category", testUrl),
+                    ],
+                  ),
+                ),
+              ),
+              // Our button
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 4, 8, 20),
+                child: InkWell(
+                  onTap: () {
+                    if (isExpanded == false) {
+                      setState(() {
+                        isExpanded = true;
+                        categoryHeight = 340;
+                        categorySubtitile = "show less";
+                        expansionIcon = const Icon(Icons.expand_less_outlined);
+                      });
+                      debugPrint(
+                          "#############isExpanded: $isExpanded ###############");
+                    } else {
+                      setState(() {
+                        isExpanded = false;
+                        categoryHeight = 240;
+                        categorySubtitile = "show more";
+                        expansionIcon = const Icon(Icons.expand_more_outlined);
+                      });
+                      debugPrint(
+                          "#############isExpanded: $isExpanded ###############");
+                    }
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(microseconds: 2000),
+                    decoration: BoxDecoration(
+                      // color: Colors.blue,
+                      borderRadius: BorderRadius.circular(5),
+                      border: Border.all(
+                        color: (appTheme == Brightness.light)
+                            ? myprimarylightColor
+                            : Colors.grey,
+                        width: 1,
+                      ),
+                    ),
+                    curve: Curves.bounceInOut,
+                    height: screenHeight * 0.03,
+                    child: Center(
+                      // TODO: Add a logic that will be used when container is expaned and collapsed
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            categorySubtitile,
+                            style: GoogleFonts.lato(
+                              fontSize: 14,
+                            ),
+                          ),
+                          expansionIcon,
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ),
             ],
           ),
         ),
+        Restaurant(
+            title: "Pizzzza",
+            imageUrl: testUrl,
+            category: "Eat this Third Class pizza"),
+        Restaurant(
+            title: "Pizzzza",
+            imageUrl: testUrl,
+            category: "Eat this Third Class pizza"),
+        Restaurant(
+            title: "Pizzzza",
+            imageUrl: testUrl,
+            category: "Eat this Third Class pizza"),
 
         // Products here...
-        SliverList(
-            delegate: SliverChildListDelegate([
-          FutureBuilder(
-            future: fetchData(),
-            builder: (context, AsyncSnapshot<List<RestaurantModel>> snapshot) {
-              if (snapshot.hasData) {
-                return ListView.builder(
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      var currentRestaurant = snapshot.data![index];
-                      return Restaurant(
-                        title: currentRestaurant.name,
-                        category: currentRestaurant.category,
-                        imageUrl: currentRestaurant.photo,
-                        key: Key(
-                          currentRestaurant.id.toString(), // Key for later use.
-                        ),
-                        // TODO: Implement the is banned and remaining stuff too.
-                      );
-                    });
-              } else if (snapshot.hasError) {
-                return const FlutterLogo(); // TODO: Add a error page.
-              }
-              return const CircularProgressIndicator(); // Loaded screen.
-              // TODO: Add shimmer animation.
-            },
-          )
-        ]))
+        // SliverList(
+        //   delegate: SliverChildListDelegate(
+        //     [
+        //       FutureBuilder(
+        //         future: fetchData(),
+        //         builder:
+        //             (context, AsyncSnapshot<List<RestaurantModel>> snapshot) {
+        //           debugPrint("############Fetching##################");
+        //           if (snapshot.hasData) {
+        //             return ListView.builder(
+        //                 itemCount: snapshot.data!.length,
+        //                 itemBuilder: (BuildContext context, int index) {
+        //                   var currentRestaurant = snapshot.data![index];
+        //                   debugPrint(currentRestaurant.toString());
+        //                   return Restaurant(
+        //                     title: currentRestaurant.name,
+        //                     category: currentRestaurant.category,
+        //                     imageUrl: currentRestaurant.photo,
+        //                     key: Key(
+        //                       currentRestaurant.id
+        //                           .toString(), // Key for later use.
+        //                     ),
+        //                     // TODO: Implement the is banned and remaining stuff too.
+        //                   );
+        //                 });
+        //           }
+        //           // } else if (snapshot.hasError) {
+        //           //   return const FlutterLogo(); // TODO: Add a error page.
+        //           // }
+        //           return const Center(
+        //               child: CircularProgressIndicator()); // Loaded screen.
+        //         },
+        //         // TODO: Add shimmer animation.
+        //       )
+        //     ],
+        //   ),
+        // )
       ],
     );
   }

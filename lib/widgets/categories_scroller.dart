@@ -32,14 +32,18 @@ Widget categoryButton(
   String imageUrl,
 ) {
   return Padding(
-    padding: const EdgeInsets.all(8.0),
+    padding: const EdgeInsets.fromLTRB(8, 14, 8, 0),
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         CircleAvatar(
           backgroundImage: NetworkImage(imageUrl),
-          radius: 40,
+          radius: 35,
         ),
-        Text(name)
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+          child: Text(name),
+        )
       ],
     ),
   );
