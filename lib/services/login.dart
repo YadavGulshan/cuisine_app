@@ -1,16 +1,9 @@
-import 'dart:convert';
 import 'package:cuisine_app/authstream.dart';
-import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/auth/login_page.dart';
 import 'package:cuisine_app/testpage.dart';
-import 'package:cuisine_app/user.dart';
-import 'package:cuisine_app/screens/homepage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_appauth/flutter_appauth.dart';
-import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // // class AuthState extends ChangeNotifier {
 // //   bool _isBusy = false;
