@@ -3,18 +3,21 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Cuisine extends StatelessWidget {
-  const Cuisine({
-    Key? key,
-    required this.screenHeight,
-    required this.screenWidth,
-  }) : super(key: key);
-
-  final double screenHeight;
-  final double screenWidth;
+class Restaurant extends StatelessWidget {
+  const Restaurant(
+      {Key? key,
+      required this.title,
+      required this.imageUrl,
+      required this.category})
+      : super(key: key);
+  final String title;
+  final String imageUrl;
+  final String category;
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(20, 25, 20, 2),
@@ -36,16 +39,13 @@ class Cuisine extends StatelessWidget {
                 // Image goes here.
                 Container(
                   height: screenHeight * 0.23,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
                         // topLeft: Radius.circular(12),
                         // topRight: Radius.circular(12),
                         ),
                     image: DecorationImage(
-                        image: NetworkImage(
-                          "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg?crop=entropy&cs=srgb&dl=pexels-daria-shevtsova-704569.jpg&fit=crop&fm=jpg&h=853&w=640",
-                        ),
-                        fit: BoxFit.cover),
+                        image: NetworkImage(imageUrl), fit: BoxFit.cover),
                   ),
                 ),
 
@@ -56,6 +56,7 @@ class Cuisine extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
+                          // Title of restaurant
                           Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: SizedBox(
@@ -63,7 +64,7 @@ class Cuisine extends StatelessWidget {
                               width: screenWidth * 0.5,
                               // color: Colors.red,
                               child: Text(
-                                "Pasta shcoeo",
+                                title,
                                 overflow: TextOverflow.ellipsis,
                                 style: GoogleFonts.lato(
                                   fontWeight: FontWeight.bold,
@@ -72,11 +73,12 @@ class Cuisine extends StatelessWidget {
                               ),
                             ),
                           ),
+                          // SHort description
                           SizedBox(
                             height: 40,
                             width: screenWidth * 0.5,
-                            child: const Text(
-                              "This restaurant sucks, don't go there. gq gigiqgeh dsxogoh",
+                            child: Text(
+                              category,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                             ),
@@ -100,7 +102,7 @@ class Cuisine extends StatelessWidget {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    "4.5",
+                                    "4.5", // rating. // TODO: Implement rating later.
                                     overflow: TextOverflow.ellipsis,
                                     style: GoogleFonts.lato(
                                       // fontWeight: FontWeight.bold,
@@ -118,10 +120,10 @@ class Cuisine extends StatelessWidget {
                             ),
                           ),
                           // Price section.
-                          Text("₹200 for one",
-                              style: GoogleFonts.lato(
-                                color: Colors.grey,
-                              ))
+                          // Text("₹200 for one",
+                          //     style: GoogleFonts.lato(
+                          //       color: Colors.grey,
+                          //     ))
                         ],
                       ),
                     ),
