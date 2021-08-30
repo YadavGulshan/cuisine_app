@@ -140,6 +140,8 @@ class _MainPageState extends State<MainPage> {
               ),
             ),
           ),
+
+          // Seatch button here.
           bottom: PreferredSize(
             child: Container(
                 decoration: BoxDecoration(
@@ -161,7 +163,7 @@ class _MainPageState extends State<MainPage> {
                 height: screenHeight * 0.055,
                 width: screenWidth * 0.9,
 
-                // Search bar button.
+                // When search bar is clicked, it will route search page.
                 child: InkWell(
                   onTap: () {
                     pushNewScreen(context, screen: const SearchPage());
@@ -183,6 +185,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
 
+        /// Head Section.
         SliverToBoxAdapter(
           child: Column(
             children: [
@@ -200,6 +203,9 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
               ),
+
+              // Category section
+              // TODO: Changed it to a expandable box using animated container.
               const AnimatedOpacity(
                 duration: Duration(milliseconds: 200),
                 opacity: 1.0,
@@ -209,7 +215,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ),
 
-        // List of products
+        // Products here...
         Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
         Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
         Cuisine(screenHeight: screenHeight, screenWidth: screenWidth),
