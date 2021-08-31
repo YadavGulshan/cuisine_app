@@ -6,17 +6,24 @@ class SearchBar extends StatelessWidget {
   bool searchIcon;
   double iconSize;
   String hinttext;
+  bool autofocus;
+  EdgeInsetsGeometry edgeInsetsGeometry;
+  double blurRadius;
   SearchBar({
     Key? key,
     this.searchIcon = false,
     this.iconSize = 20,
+    this.autofocus = true,
+    this.blurRadius = 0.4,
+    this.edgeInsetsGeometry = const EdgeInsets.all(18.0),
     required this.hinttext,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height * 0.062;
     return Padding(
-      padding: const EdgeInsets.all(18.0),
+      padding: edgeInsetsGeometry,
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
@@ -24,8 +31,8 @@ class SearchBar extends StatelessWidget {
             color: (appTheme == Brightness.light)
                 ? Colors.white
                 : Colors.grey[800],
-            boxShadow: const [BoxShadow(blurRadius: 0.4)]),
-        height: MediaQuery.of(context).size.height * 0.062,
+            boxShadow: [BoxShadow(blurRadius: blurRadius)]),
+        height: height,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -52,7 +59,7 @@ class SearchBar extends StatelessWidget {
               fit: FlexFit.tight,
               child: TextFormField(
                 enabled: true,
-                autofocus: true,
+                autofocus: autofocus,
                 // cursorHeight: 25,
                 style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(

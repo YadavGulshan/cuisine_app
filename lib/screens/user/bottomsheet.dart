@@ -33,6 +33,9 @@ Future<dynamic> bottomSheet(BuildContext context, double height) {
               SearchBar(
                 hinttext: "Search for your location",
                 searchIcon: true,
+                autofocus: false,
+                edgeInsetsGeometry: const EdgeInsets.fromLTRB(14, 8, 14, 8),
+                blurRadius: 0.8,
               )
             ],
           ),
