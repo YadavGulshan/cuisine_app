@@ -155,49 +155,52 @@ class _MainPageState extends State<MainPage> {
 
           // Seatch button here.
           bottom: PreferredSize(
-            child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: primaryColor,
-                    width: 1,
-                  ),
-
-                  // box shadow
-                  boxShadow: [
-                    BoxShadow(
-                      color: (appTheme == Brightness.light)
-                          ? Colors.grey
-                          : Colors.transparent,
-                      blurRadius: 4.0,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+              child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(
+                      color: primaryColor,
+                      width: 1,
                     ),
-                  ],
-                  color: (appTheme == Brightness.light)
-                      ? primaryLightColor
-                      : Colors.grey[850],
-                ),
-                height: screenHeight * 0.055,
-                width: screenWidth * 0.9,
 
-                // When search bar is clicked, it will route search page.
-                child: InkWell(
-                  onTap: () {
-                    pushNewScreen(context, screen: const SearchPage());
-                  },
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Icon(
-                          Icons.search_outlined,
-                        ),
-                        Text("Restaurant name, cuisine and more"),
-                      ],
-                    ),
+                    // box shadow
+                    boxShadow: [
+                      BoxShadow(
+                        color: (appTheme == Brightness.light)
+                            ? Colors.grey
+                            : Colors.transparent,
+                        blurRadius: 4.0,
+                      ),
+                    ],
+                    color: (appTheme == Brightness.light)
+                        ? primaryLightColor
+                        : Colors.grey[850],
                   ),
-                )),
-            preferredSize: const Size.fromHeight(0),
+                  height: screenHeight * 0.055,
+                  width: screenWidth * 0.9,
+
+                  // When search bar is clicked, it will route search page.
+                  child: InkWell(
+                    onTap: () {
+                      pushNewScreen(context, screen: const SearchPage());
+                    },
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                          Icon(
+                            Icons.search_outlined,
+                          ),
+                          Text("Restaurant name, cuisine and more"),
+                        ],
+                      ),
+                    ),
+                  )),
+            ),
+            preferredSize: const Size.fromHeight(8),
           ),
         ),
 
@@ -205,7 +208,7 @@ class _MainPageState extends State<MainPage> {
 
         SliverToBoxAdapter(
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(14, 20, 14, 14),
+            padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),
             child: Container(
               height: screenHeight * 0.15,
               decoration: BoxDecoration(
@@ -388,8 +391,8 @@ class _MainPageState extends State<MainPage> {
 
 // An app bar having title and search field
 
-class SearchBar implements SliverPersistentHeaderDelegate {
-  SearchBar({required this.minExtent, required this.maxExtent});
+class HomeSearchBar implements SliverPersistentHeaderDelegate {
+  HomeSearchBar({required this.minExtent, required this.maxExtent});
   @override
   final double minExtent;
   @override

@@ -1,20 +1,41 @@
+import 'package:cuisine_app/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 Future<dynamic> bottomSheet(BuildContext context, double height) {
   return showModalBottomSheet(
       // backgroundColor: Colors.red,
       context: context,
+      shape: RoundedRectangleBorder(
+        //the rounded corner is created here
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       useRootNavigator: true,
       isScrollControlled: true,
       builder: (BuildContext context) {
         return Container(
           height: height * 0.7,
-          // child: TextButton(
-          //   child: const Text("WORK IN PROGRESS"),
-          //   onPressed: () {
-          //     Navigator.pop(context);
-          //   },
-          // ),
+          decoration: BoxDecoration(),
+          child: Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(14, 14, 0, 4),
+                child: Text(
+                  "Search location",
+                  style: GoogleFonts.lato(
+                    fontSize: 26,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              SearchBar(
+                hinttext: "Search for your location",
+                searchIcon: true,
+              )
+            ],
+          ),
         );
       });
 }
