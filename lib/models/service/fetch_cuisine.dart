@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:cuisine_app/constants.dart';
 
+import '../cuisine.dart';
+
 fetchCuisine(double restaurantId) async {
   http.Response response =
       await http.get(Uri.parse("$baseUrl/restaurant/$restaurantId"));
