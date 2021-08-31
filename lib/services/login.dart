@@ -1,5 +1,7 @@
 import 'package:cuisine_app/authstream.dart';
+import 'package:cuisine_app/screens/auth/login_page.dart';
 import 'package:cuisine_app/screens/homepage.dart';
+import 'package:cuisine_app/screens/user/custom_drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -385,17 +387,17 @@ class _AuthCheckState extends State<AuthCheck> {
   @override
   Widget build(BuildContext context) {
     AuthState provider = Provider.of<AuthState>(context);
-    return Scaffold(body: MainPage()
-        //     body: Center(
-        //   child: (provider.isbusy)
-        //       ? const CircularProgressIndicator()
-        //       : (provider.isLoggedIn)
-        //           // ? const TestPage()
-        //           ? const MainPage()
-        //           : LoginPage(
-        //               loginCallback: provider.login,
-        //             ),
-        // ),
-        );
+    return Scaffold(
+      body: Center(
+        child: (provider.isbusy)
+            ? const CircularProgressIndicator()
+            : (provider.isLoggedIn)
+                // ? const TestPage()
+                ? const MainPage()
+                : LoginPage(
+                    loginCallback: provider.login,
+                  ),
+      ),
+    );
   }
 }

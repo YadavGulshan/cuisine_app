@@ -161,6 +161,12 @@ class AuthState extends ChangeNotifier {
       _isBusy = false;
       _isLoggedIn = true;
       notifyListeners();
+      // Setting the profile url and other stuff.
+      final mem = await SharedPreferences.getInstance();
+      name = mem.getString("name").toString();
+      email = mem.getString("email").toString();
+      picture = mem.getString("picture").toString();
+      notifyListeners();
       /*try {
         // request token, or verify the token.
         final response = await appAuth.token(
