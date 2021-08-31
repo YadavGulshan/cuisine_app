@@ -1,11 +1,11 @@
 import 'dart:convert';
 
+import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/models/restaurant.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<RestaurantModel>> fetchData() async {
-  http.Response response =
-      await http.get(Uri.parse("http://127.0.0.1:8000/api/restaurants"));
+  http.Response response = await http.get(Uri.parse("$baseUrl/restaurants"));
   if (response.statusCode == 200) {
     Map restaurantData = jsonDecode(response.body);
     List<dynamic> restaurant = restaurantData["data"];
