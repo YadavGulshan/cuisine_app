@@ -1,6 +1,7 @@
 import 'package:cuisine_app/authstream.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/homepage.dart';
+import 'package:cuisine_app/screens/restaurant_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/services/login.dart';
 import 'package:cuisine_app/user.dart';
@@ -48,7 +49,16 @@ class MyApp extends StatelessWidget {
             bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
           ),
         ),
-        home: Scaffold(body: const MainPage()),
+        home: Scaffold(
+            body: RestaurantPage(
+          title: 'Gulshan\'s Restaurant',
+          address: 'Patlipada, Thane West 400607',
+          rating: 4.5,
+          restaurantId: 2,
+          category: "Churan, pan-masala",
+          imageUrl:
+              "https://www.pexels.com/photo/4450334/download/?search_query=restaurant&tracking_id=zd4udgyvnsg",
+        )),
         // home: const AuthState(),
         // home: const AuthCheck(),
       ),
