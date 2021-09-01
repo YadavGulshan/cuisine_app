@@ -1,4 +1,4 @@
-import 'package:cuisine_app/authstream.dart';
+import 'package:cuisine_app/provider/authstream.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';

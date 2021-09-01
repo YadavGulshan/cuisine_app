@@ -1,4 +1,4 @@
-import 'package:cuisine_app/authstream.dart';
+import 'package:cuisine_app/provider/authstream.dart';
 import 'package:cuisine_app/screens/auth/login_page.dart';
 import 'package:cuisine_app/screens/homepage.dart';
 import 'package:cuisine_app/screens/user/custom_drawer.dart';

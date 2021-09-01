@@ -1,4 +1,4 @@
-import 'package:cuisine_app/authstream.dart';
+import 'package:cuisine_app/provider/authstream.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/widgets/toolbar_tiles.dart';
 import 'package:flutter/cupertino.dart';

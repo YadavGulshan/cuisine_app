@@ -1,4 +1,4 @@
-import 'package:cuisine_app/authstream.dart';
+import 'package:cuisine_app/provider/authstream.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/homepage.dart';
 import 'package:cuisine_app/screens/restaurant_page.dart';
