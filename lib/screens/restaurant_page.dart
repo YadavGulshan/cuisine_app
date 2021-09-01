@@ -148,6 +148,8 @@ class _RestaurantPageState extends State<RestaurantPage>
                   top: 10,
                 ),
                 child: TabBar(
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
                   tabs: const [
                     Tab(
                       text: "Delivery",

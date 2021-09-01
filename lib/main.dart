@@ -52,10 +52,10 @@ class MyApp extends StatelessWidget {
         home: Scaffold(
             body: RestaurantPage(
           title: 'Gulshan\'s Restaurant',
-          address: 'Patlipada, Thane West 400607',
+          address: 'Thane West 400607',
           rating: 4.5,
           restaurantId: 2,
-          category: "Churan, pan-masala",
+          category: "Spicy, Sweet and mouth-Watering",
           imageUrl:
               "https://www.pexels.com/photo/4450334/download/?search_query=restaurant&tracking_id=zd4udgyvnsg",
         )),
