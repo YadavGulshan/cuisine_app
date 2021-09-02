@@ -26,6 +26,11 @@ class DeliveryPage extends StatelessWidget {
               menu(screen, true, "Burger", 200),
               menu(screen, true, "French Fries", 50),
               menu(screen, true, "Grilled Pan", 50),
+              menu(screen, true, "Grilled Pan", 50),
+              menu(screen, true, "Grilled Pan", 50),
+              menu(screen, true, "Grilled Pan", 50),
+              menu(screen, true, "Grilled Pan", 50),
+              menu(screen, true, "Grilled Pan", 50),
             ],
           ),
         )
@@ -77,7 +82,9 @@ Widget menu(Size screen, bool isVeg, String title, int price) {
                   borderRadius: const BorderRadius.all(
                     Radius.circular(10),
                   ),
-                  color: primaryLightColor,
+                  color: (appTheme == Brightness.light)
+                      ? primaryLightColor
+                      : Colors.blue,
                 ),
                 height: screen.height * 0.04,
                 width: screen.width * 0.2,
