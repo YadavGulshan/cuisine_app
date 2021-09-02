@@ -51,6 +51,24 @@ class ReviewPage extends StatelessWidget {
               ],
             ),
           ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.only(
+              bottom: 40,
+            ),
+            child: Center(
+              child: Text(
+                "You Reached the end!",
+                style: GoogleFonts.lato(
+                  fontSize: 24,
+                  color: (appTheme == Brightness.light)
+                      ? Colors.grey[600]
+                      : Colors.white,
+                ),
+              ),
+            ),
+          ),
         )
       ],
     );

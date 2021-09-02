@@ -73,13 +73,13 @@ class _RestaurantPageState extends State<RestaurantPage>
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: SliverAppBar(
                   pinned: true,
-                  elevation: 0.2,
+                  elevation: 10,
                   expandedHeight: screen.height * 0.3,
                   floating: false,
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.pin,
                     background: Container(
-                      color: myprimarylightColor,
+                      color: primaryLightColor,
                       child: Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
