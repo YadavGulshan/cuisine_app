@@ -11,13 +11,24 @@ class DeliveryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        menu(screen, true, "Pan Cake", 60),
-        menu(screen, true, "Pizza", 0),
-        menu(screen, true, "Burger", 200),
-        menu(screen, true, "French Fries", 50),
-        menu(screen, true, "Grilled Pan", 50),
+    return CustomScrollView(
+      slivers: [
+        SliverOverlapInjector(
+          // This is the flip side of the SliverOverlapAbsorber
+          // above.
+          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+        ),
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              menu(screen, true, "Pan Cake", 60),
+              menu(screen, true, "Pizza", 0),
+              menu(screen, true, "Burger", 200),
+              menu(screen, true, "French Fries", 50),
+              menu(screen, true, "Grilled Pan", 50),
+            ],
+          ),
+        )
       ],
     );
   }
