@@ -1,8 +1,6 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'delivery_page.dart';
-
 class ReviewPage extends StatelessWidget {
   const ReviewPage({Key? key}) : super(key: key);
 

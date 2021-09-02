@@ -6,6 +6,7 @@ import 'package:cuisine_app/screens/restaurant/review_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:palette_generator/palette_generator.dart';
 
 class RestaurantPage extends StatefulWidget {
   final String title;
@@ -31,6 +32,15 @@ class RestaurantPage extends StatefulWidget {
 class _RestaurantPageState extends State<RestaurantPage>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
+  // Generate palette from the image.
+  Future<PaletteGenerator> _updatePaletteGenerator() async {
+    var paletteGenerator = await PaletteGenerator.fromImageProvider(
+      Image.network(widget.imageUrl).image,
+    );
+    debugPrint(paletteGenerator.colors.toString());
+    return paletteGenerator;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -68,7 +78,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                       child: Container(
                         decoration: BoxDecoration(
                             image: DecorationImage(
-                          image: NetworkImage(testUrl),
+                          image: NetworkImage(widget.imageUrl),
                           fit: BoxFit.cover,
                         )),
                         child: BackdropFilter(
@@ -84,12 +94,6 @@ class _RestaurantPageState extends State<RestaurantPage>
                                   },
                                   icon: const Icon(
                                       Icons.arrow_back_ios_new_outlined),
-                                ),
-                                const Spacer(
-                                  flex: 3,
-                                ),
-                                const Spacer(
-                                  flex: 2,
                                 ),
                               ],
                             ),
@@ -212,12 +216,27 @@ class _RestaurantPageState extends State<RestaurantPage>
           },
           body: TabBarView(
             controller: _controller,
-            children: const [
-              DeliveryPage(),
+            children: [
+              // Test(pallete: paletteColor.colors.first.toString()),
+              // DeliveryPage(),
               ReviewPage(),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class Test extends StatelessWidget {
+  String pallete;
+  Test({Key? key, required this.pallete}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Container(
+        child: Text(pallete),
       ),
     );
   }
