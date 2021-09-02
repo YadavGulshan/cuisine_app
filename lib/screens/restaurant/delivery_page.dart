@@ -25,7 +25,7 @@ class DeliveryPage extends StatelessWidget {
 
 Widget menu(Size screen, bool isVeg, String title, int price) {
   return Padding(
-    padding: const EdgeInsets.only(left: 10, right: 10, top: 8, bottom: 8),
+    padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
     child: Container(
         decoration: const BoxDecoration(
             border: Border(bottom: BorderSide(width: 0.08))),
@@ -39,14 +39,14 @@ Widget menu(Size screen, bool isVeg, String title, int price) {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 1),
-                  child: SvgPicture.asset(
-                    "assets/category.svg",
-                    color: (isVeg) ? Colors.greenAccent : Colors.red,
-                    height: screen.height * 0.026,
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(bottom: 1),
+                //   child: SvgPicture.asset(
+                //     "assets/category.svg",
+                //     color: (isVeg) ? Colors.greenAccent : Colors.red,
+                //     height: screen.height * 0.026,
+                //   ),
+                // ),
                 Text(
                   title,
                   style: GoogleFonts.lato(fontSize: 20),
@@ -70,19 +70,11 @@ Widget menu(Size screen, bool isVeg, String title, int price) {
                 ),
                 height: screen.height * 0.04,
                 width: screen.width * 0.2,
-                child: Center(
+                child: const Center(
                   // child: Icon(Icons.add),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text("ADD"),
-                      ),
-                      Column(
-                        children: const [Icon(Icons.add, size: 16), Spacer()],
-                      ),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text("ADD"),
                   ),
                 ),
               ),

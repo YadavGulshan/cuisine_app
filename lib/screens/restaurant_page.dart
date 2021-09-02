@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/restaurant/delivery_page.dart';
 import 'package:cuisine_app/screens/restaurant/review_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -56,86 +59,106 @@ class _RestaurantPageState extends State<RestaurantPage>
               collapseMode: CollapseMode.pin,
               background: Container(
                 color: myprimarylightColor,
-                child: SafeArea(
-                  child: Container(
-                    decoration: BoxDecoration(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // Icon section.
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: const Icon(Icons.arrow_back_ios_new_outlined),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Title section
-                            Padding(
-                              padding: const EdgeInsets.only(left: 14),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      bottom: 4,
-                                    ),
-                                    child: Text(widget.title,
-                                        style: GoogleFonts.varelaRound(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.w500)),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      bottom: 2,
-                                    ),
-                                    child: Text(widget.category,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .subtitle2),
-                                  ),
-                                  Text(widget.address,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .subtitle1),
-                                ],
-                              ),
-                            ),
-                            // rating
-                            Container(
-                              height: screen.height * 0.05,
-                              width: screen.width * 0.15,
-                              decoration: const BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10),
-                                  bottomLeft: Radius.circular(10),
-                                ),
-                              ),
-                              child: Center(
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Container(
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                    image: NetworkImage(testUrl),
+                    fit: BoxFit.cover,
+                  )),
+                  child: BackdropFilter(
+                    // blendMode: BlendMode.darken,
+                    filter: ImageFilter.blur(sigmaX: 3.5, sigmaY: 3.0),
+                    child: SafeArea(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        // Icon section.
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // Title section
+                              Padding(
+                                padding: const EdgeInsets.only(left: 14),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text(
-                                      widget.rating.toString(),
-                                      style: const TextStyle(
-                                        color: Colors.white,
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 4,
                                       ),
-                                      // textAlign: TextAlign.center,
+                                      child: Text(
+                                        widget.title,
+                                        style: GoogleFonts.varelaRound(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black,
+                                        ),
+                                      ),
                                     ),
-                                    const Icon(Icons.star,
-                                        color: Colors.white, size: 18)
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                        bottom: 2,
+                                      ),
+                                      child: Text(
+                                        widget.category,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14,
+                                        ),
+                                      ),
+                                    ),
+                                    Text(
+                                      widget.address,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 14,
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ],
+                              // rating
+                              Container(
+                                height: screen.height * 0.05,
+                                width: screen.width * 0.15,
+                                decoration: const BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10),
+                                    bottomLeft: Radius.circular(10),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        widget.rating.toString(),
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                        // textAlign: TextAlign.center,
+                                      ),
+                                      const Icon(Icons.star,
+                                          color: Colors.white, size: 18)
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
@@ -148,9 +171,10 @@ class _RestaurantPageState extends State<RestaurantPage>
                   top: 10,
                 ),
                 child: TabBar(
+                  labelColor: Colors.white,
                   physics: const BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
-                  tabs: const [
+                  tabs: [
                     Tab(
                       text: "Delivery",
                     ),
