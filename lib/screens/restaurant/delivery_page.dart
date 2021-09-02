@@ -6,7 +6,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class DeliveryPage extends StatelessWidget {
-  const DeliveryPage({Key? key}) : super(key: key);
+  const DeliveryPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

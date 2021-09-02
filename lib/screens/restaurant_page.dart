@@ -33,18 +33,23 @@ class _RestaurantPageState extends State<RestaurantPage>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
   // Generate palette from the image.
-  Future<PaletteGenerator> _updatePaletteGenerator() async {
+  Color? headColor =
+      (appTheme == Brightness.light) ? Colors.white : Colors.grey[800];
+  void _updatePaletteGenerator() async {
     var paletteGenerator = await PaletteGenerator.fromImageProvider(
       Image.network(widget.imageUrl).image,
     );
     debugPrint(paletteGenerator.colors.toString());
-    return paletteGenerator;
+    setState(() {
+      headColor = paletteGenerator.dominantColor as Color?;
+    });
   }
 
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
+    // _updatePaletteGenerator();
   }
 
   @override
@@ -81,21 +86,15 @@ class _RestaurantPageState extends State<RestaurantPage>
                           image: NetworkImage(widget.imageUrl),
                           fit: BoxFit.cover,
                         )),
-                        child: BackdropFilter(
-                          filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                          child: SafeArea(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              // Icon section.
-                              children: [
-                                IconButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  icon: const Icon(
-                                      Icons.arrow_back_ios_new_outlined),
-                                ),
-                              ],
+                        child: SafeArea(
+                          child: Align(
+                            alignment: Alignment.topLeft,
+                            child: IconButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              icon:
+                                  const Icon(Icons.arrow_back_ios_new_outlined),
                             ),
                           ),
                         ),
@@ -104,111 +103,34 @@ class _RestaurantPageState extends State<RestaurantPage>
                   ),
                   bottom: PreferredSize(
                     preferredSize: const Size.fromHeight(70),
-                    child: Container(
-                      // color: Colors.black.withOpacity(0),
-                      color: (appTheme == Brightness.light)
-                          ? Colors.white24
-                          : Colors.black26,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          top: 10,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                // Title section
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 14),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: 4,
-                                        ),
-                                        child: Text(
-                                          widget.title,
-                                          style: GoogleFonts.lato(
-                                            fontSize: 24,
-                                            fontWeight: FontWeight.bold,
-                                            // color: Colors.black,
-                                            color:
-                                                (appTheme == Brightness.light)
-                                                    ? Colors.black
-                                                    : Colors.white,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                          bottom: 2,
-                                        ),
-                                        child: Text(
-                                          widget.category,
-                                          style: textStyle,
-                                        ),
-                                      ),
-                                      Text(
-                                        widget.address,
-                                        style: textStyle,
-                                      )
-                                    ],
-                                  ),
-                                ),
-                                // rating
-                                Container(
-                                  height: screen.height * 0.05,
-                                  width: screen.width * 0.15,
-                                  decoration: const BoxDecoration(
-                                    color: Colors.green,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(10),
-                                      bottomLeft: Radius.circular(10),
-                                    ),
-                                  ),
-                                  child: Center(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(widget.rating.toString(),
-                                            style:
-                                                TextStyle(color: Colors.white)
-                                            // textAlign: TextAlign.center,
-                                            ),
-                                        const Icon(Icons.star,
-                                            color: Colors.white, size: 18)
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            TabBar(
-                              labelColor: (appTheme == Brightness.light)
-                                  ? Colors.black
-                                  : Colors.white,
-                              physics: const BouncingScrollPhysics(
-                                  parent: AlwaysScrollableScrollPhysics()),
-                              tabs: const [
-                                Tab(
-                                  text: "Delivery",
-                                ),
-                                Tab(
-                                  text: "Reviews",
-                                )
-                              ],
-                              controller: _controller,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // child: FutureBuilder<PaletteGenerator>(
+                    //   future: _updatePaletteGenerator(),
+                    //   builder: (BuildContext context,
+                    //       AsyncSnapshot<PaletteGenerator> snapshot) {
+                    //     switch (snapshot.connectionState) {
+                    //       case ConnectionState.waiting:
+                    //         return headSection(
+                    //             (appTheme == Brightness.light)
+                    //                 ? Colors.white24
+                    //                 : Colors.black26,
+                    //             textStyle,
+                    //             screen);
+                    //       default:
+                    //         if (snapshot.hasError) {
+                    //           return headSection(
+                    //               (appTheme == Brightness.light)
+                    //                   ? Colors.white24
+                    //                   : Colors.black26,
+                    //               textStyle,
+                    //               screen);
+                    //         } else {
+                    //           var face = snapshot.data?.dominantColor?.color;
+                    //           return headSection(face, textStyle, screen);
+                    //         }
+                    //     }
+                    //   },
+                    // ),
+                    child: headSection(headColor, textStyle, screen),
                   ),
                 ),
               )
@@ -216,9 +138,31 @@ class _RestaurantPageState extends State<RestaurantPage>
           },
           body: TabBarView(
             controller: _controller,
-            children: [
-              // Test(pallete: paletteColor.colors.first.toString()),
+            children: const [
               // DeliveryPage(),
+              // FutureBuilder<PaletteGenerator>(
+              //     future: _updatePaletteGenerator(), // async work
+              //     builder: (BuildContext context,
+              //         AsyncSnapshot<PaletteGenerator> snapshot) {
+              //       switch (snapshot.connectionState) {
+              //         case ConnectionState.waiting:
+              //           return const Center(child: CircularProgressIndicator());
+              //         default:
+              //           if (snapshot.hasError) {
+              //             return Text('Error: ${snapshot.error}');
+              //           } else {
+              //             // Color color=new Color(snapshot.data.dominantColor.color);
+              //             var face = snapshot.data?.dominantColor?.color;
+              //             return Center(
+              //               child: Container(
+              //                   color: face,
+              //                   height: 20,
+              //                   child: Text('color: ${face.toString()}')),
+              //             );
+              //           }
+              //       }
+              //     }),
+              DeliveryPage(),
               ReviewPage(),
             ],
           ),
@@ -226,17 +170,103 @@ class _RestaurantPageState extends State<RestaurantPage>
       ),
     );
   }
-}
 
-class Test extends StatelessWidget {
-  String pallete;
-  Test({Key? key, required this.pallete}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        child: Text(pallete),
+  Container headSection(Color? face, TextStyle textStyle, Size screen) {
+    return Container(
+      decoration: BoxDecoration(
+        color: face?.withOpacity(0.8),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: 10,
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                // Title section
+                Padding(
+                  padding: const EdgeInsets.only(left: 14),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 4,
+                        ),
+                        child: Text(
+                          widget.title,
+                          style: GoogleFonts.lato(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            // color: Colors.black,
+                            color: (appTheme == Brightness.light)
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          bottom: 2,
+                        ),
+                        child: Text(
+                          widget.category,
+                          style: textStyle,
+                        ),
+                      ),
+                      Text(
+                        widget.address,
+                        style: textStyle,
+                      )
+                    ],
+                  ),
+                ),
+                // rating
+                Container(
+                  height: screen.height * 0.05,
+                  width: screen.width * 0.15,
+                  decoration: const BoxDecoration(
+                    color: Colors.green,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      bottomLeft: Radius.circular(10),
+                    ),
+                  ),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(widget.rating.toString(),
+                            style: const TextStyle(color: Colors.white)
+                            // textAlign: TextAlign.center,
+                            ),
+                        const Icon(Icons.star, color: Colors.white, size: 18)
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            TabBar(
+              labelColor:
+                  (appTheme == Brightness.light) ? Colors.black : Colors.white,
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              tabs: const [
+                Tab(
+                  text: "Delivery",
+                ),
+                Tab(
+                  text: "Reviews",
+                )
+              ],
+              controller: _controller,
+            ),
+          ],
+        ),
       ),
     );
   }
