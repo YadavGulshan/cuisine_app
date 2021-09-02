@@ -14,6 +14,8 @@ Brightness appTheme = Brightness.light;
 const String appName = "Food Delivery App";
 const String baseUrl = "https://api.domain.com";
 // Some urls for testing
+String randomImage = "https://source.unsplash.com/user/erondu";
+String randomImage2 = "https://picsum.photos/800/400";
 String testUrl =
     "https://images.pexels.com/photos/315755/pexels-photo-315755.jpeg?crop=entropy&cs=srgb&dl=pexels-pixabay-315755.jpg&fit=crop&fm=jpg&h=960&w=640";
 
