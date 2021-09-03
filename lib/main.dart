@@ -1,5 +1,6 @@
 import 'package:cuisine_app/provider/authstream.dart';
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/homepage.dart';
 import 'package:cuisine_app/screens/restaurant_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider.value(
           value: AuthState(),
+        ),
+        ChangeNotifierProvider.value(
+          value: CartModel(),
         )
       ],
       child: MaterialApp(

@@ -1,9 +1,11 @@
 import 'dart:ui';
 
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class DeliveryPage extends StatelessWidget {
   const DeliveryPage({
@@ -23,16 +25,86 @@ class DeliveryPage extends StatelessWidget {
         SliverToBoxAdapter(
           child: Column(
             children: [
-              menu(screen, true, "Pan Cake", 60),
-              menu(screen, true, "Pizza", 0),
-              menu(screen, true, "Burger", 200),
-              menu(screen, true, "French Fries", 50),
-              menu(screen, true, "Grilled Pan", 50),
-              menu(screen, true, "Grilled Pan", 50),
-              menu(screen, true, "Grilled Pan", 50),
-              menu(screen, true, "Grilled Pan", 50),
-              menu(screen, true, "Grilled Pan", 50),
-              menu(screen, true, "Grilled Pan", 50),
+              menu(
+                screen,
+                1,
+                true,
+                "Pan Cake",
+                60,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "Pizza",
+                0,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "Burger",
+                200,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "French Fries",
+                50,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "Grilled Pan",
+                50,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "Grilled Pan",
+                50,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "Grilled Pan",
+                50,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "Grilled Pan",
+                50,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "Grilled Pan",
+                50,
+                context,
+              ),
+              menu(
+                screen,
+                1,
+                true,
+                "Grilled Pan",
+                50,
+                context,
+              ),
             ],
           ),
         )
@@ -41,7 +113,8 @@ class DeliveryPage extends StatelessWidget {
   }
 }
 
-Widget menu(Size screen, bool isVeg, String title, int price) {
+Widget menu(Size screen, int id, bool isVeg, String title, int price,
+    BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
     child: Container(
@@ -76,7 +149,22 @@ Widget menu(Size screen, bool isVeg, String title, int price) {
             ),
             const Spacer(),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                CartItem cartItem = CartItem(
+                    id: 1, title: title, price: price.toDouble(), quantity: 1);
+
+                // Add the item to the cart
+                Provider.of<CartModel>(context, listen: false)
+                    .addItem(cartItem);
+
+                // Print the cart
+                debugPrint(
+                  "############### Item added to cart##############\nPrice: " +
+                      Provider.of<CartModel>(context, listen: false)
+                          .totalPrice
+                          .toString(),
+                );
+              },
               child: Container(
                 decoration: BoxDecoration(
                   border: Border.all(
