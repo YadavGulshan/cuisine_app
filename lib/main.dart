@@ -56,8 +56,9 @@ class MyApp extends StatelessWidget {
           rating: 4.5,
           restaurantId: 2,
           category: "Spicy, Sweet and mouth-Watering",
-          imageUrl:
-              "https://www.pexels.com/photo/4450334/download/?search_query=restaurant&tracking_id=zd4udgyvnsg",
+          imageUrl: randomImage,
+          // imageUrl:
+          //     "https://www.pexels.com/photo/4450334/download/?search_query=restaurant&tracking_id=zd4udgyvnsg",
         )),
         // home: const AuthState(),
         // home: const AuthCheck(),
