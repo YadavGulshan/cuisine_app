@@ -74,31 +74,28 @@ class _RestaurantPageState extends State<RestaurantPage>
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: SliverAppBar(
-                  pinned: true,
+                  // pinned: true,
                   elevation: 10,
                   expandedHeight: screen.height * 0.4,
                   floating: false,
                   flexibleSpace: FlexibleSpaceBar(
                     // collapseMode: CollapseMode.pin,
                     background: Container(
-                      color: primaryLightColor,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: NetworkImage(widget.imageUrl),
-                            fit: BoxFit.cover,
-                          ),
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        image: DecorationImage(
+                          image: NetworkImage(widget.imageUrl),
+                          fit: BoxFit.cover,
                         ),
-                        child: SafeArea(
-                          child: Align(
-                            alignment: Alignment.topLeft,
-                            child: IconButton(
-                              onPressed: () {
-                                Navigator.pop(context);
-                              },
-                              icon:
-                                  const Icon(Icons.arrow_back_ios_new_outlined),
-                            ),
+                      ),
+                      child: SafeArea(
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(Icons.arrow_back_ios_new_outlined),
                           ),
                         ),
                       ),
