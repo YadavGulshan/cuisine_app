@@ -22,9 +22,10 @@ class DeliveryPage extends StatelessWidget {
           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
         ),
         SliverToBoxAdapter(
-          child: Column(
+          child: Wrap(
+            alignment: WrapAlignment.center,
             children: [
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -33,7 +34,7 @@ class DeliveryPage extends StatelessWidget {
                 60,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -42,7 +43,7 @@ class DeliveryPage extends StatelessWidget {
                 0,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -51,7 +52,7 @@ class DeliveryPage extends StatelessWidget {
                 200,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -60,7 +61,7 @@ class DeliveryPage extends StatelessWidget {
                 50,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -69,7 +70,7 @@ class DeliveryPage extends StatelessWidget {
                 50,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -78,7 +79,7 @@ class DeliveryPage extends StatelessWidget {
                 50,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -87,7 +88,7 @@ class DeliveryPage extends StatelessWidget {
                 50,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -96,7 +97,7 @@ class DeliveryPage extends StatelessWidget {
                 50,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -105,7 +106,7 @@ class DeliveryPage extends StatelessWidget {
                 50,
                 context,
               ),
-              menu(
+              menu2(
                 screen,
                 isSnackBarOpen,
                 1,
@@ -122,13 +123,103 @@ class DeliveryPage extends StatelessWidget {
   }
 }
 
+Widget menu2(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
+    int price, BuildContext context) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Container(
+      height: screen.height * 0.274,
+      width: screen.width * 0.45,
+      decoration: BoxDecoration(
+        color: (appTheme == Brightness.light)
+            ? primaryLightColor
+            : Colors.grey[600],
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(width: 0.08),
+      ),
+      child: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            height: screen.height * 0.18,
+            decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              image: DecorationImage(
+                image: NetworkImage(randomImage),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(
+              left: screen.width * 0.04,
+            ),
+            child: Text(
+              title,
+              style: GoogleFonts.poppins(
+                fontSize: screen.height * 0.025,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.left,
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: screen.height * 0.01),
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: screen.width * 0.04,
+                  ),
+                  child: Text(
+                    "₹ " + price.toString(),
+                    style: GoogleFonts.lato(
+                      fontSize: screen.height * 0.02,
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+                const Spacer(),
+                Padding(
+                  padding: EdgeInsets.only(
+                    right: screen.width * 0.04,
+                  ),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Icon(
+                      Icons.add,
+                      size: screen.height * 0.04,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
+}
+
+// Not using this one for now
 Widget menu(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
     int price, BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
     child: Container(
         decoration: const BoxDecoration(
-            border: Border(bottom: BorderSide(width: 0.08))),
+          border: Border(
+            bottom: BorderSide(width: 0.08),
+          ),
+        ),
         // color: Colors.green,
         height: screen.height * 0.1,
         width: screen.width * 0.99,
