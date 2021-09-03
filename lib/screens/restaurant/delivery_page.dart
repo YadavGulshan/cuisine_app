@@ -15,6 +15,9 @@ class DeliveryPage extends StatelessWidget {
     bool isSnackBarOpen = false;
     Size screen = MediaQuery.of(context).size;
     return CustomScrollView(
+      physics: const BouncingScrollPhysics(
+        parent: AlwaysScrollableScrollPhysics(),
+      ),
       slivers: [
         SliverOverlapInjector(
           // This is the flip side of the SliverOverlapAbsorber
@@ -191,7 +194,7 @@ Widget menu2(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
                   ),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: Colors.black,
+                      color: Color(0xFF78e6fa),
                       borderRadius: BorderRadius.circular(10),
                     ),
                     child: Icon(

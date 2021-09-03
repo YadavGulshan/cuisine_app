@@ -54,12 +54,19 @@ class _RestaurantPageState extends State<RestaurantPage>
 
   @override
   Widget build(BuildContext context) {
+    //
     final List<String> _tabs = <String>['Delivery', 'Reviews'];
     Size screen = MediaQuery.of(context).size;
     return DefaultTabController(
       length: _tabs.length,
       child: Scaffold(
         body: NestedScrollView(
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
+          // physics: const ClampingScrollPhysics(
+          //   parent: AlwaysScrollableScrollPhysics(),
+          // ),
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             var textStyle = TextStyle(
               color:
@@ -77,15 +84,16 @@ class _RestaurantPageState extends State<RestaurantPage>
                   expandedHeight: screen.height * 0.4,
                   floating: false,
                   flexibleSpace: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.pin,
+                    // collapseMode: CollapseMode.pin,
                     background: Container(
                       color: primaryLightColor,
                       child: Container(
                         decoration: BoxDecoration(
-                            image: DecorationImage(
-                          image: NetworkImage(widget.imageUrl),
-                          fit: BoxFit.cover,
-                        )),
+                          image: DecorationImage(
+                            image: NetworkImage(widget.imageUrl),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
                         child: SafeArea(
                           child: Align(
                             alignment: Alignment.topLeft,
@@ -137,6 +145,9 @@ class _RestaurantPageState extends State<RestaurantPage>
             ];
           },
           body: TabBarView(
+            physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics(),
+            ),
             controller: _controller,
             children: const [
               // DeliveryPage(),
