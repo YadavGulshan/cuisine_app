@@ -192,14 +192,56 @@ Widget menu2(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
                   padding: EdgeInsets.only(
                     right: screen.width * 0.04,
                   ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(0xFF78e6fa),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(
-                      Icons.add,
-                      size: screen.height * 0.04,
+                  // Button that adds the item to the cart
+                  child: InkWell(
+                    onTap: () {
+                      CartModel provider =
+                          Provider.of<CartModel>(context, listen: false);
+                      CartItem cartItem = CartItem(
+                          id: 1,
+                          title: title,
+                          price: price.toDouble(),
+                          quantity: 1);
+
+                      // Add the item to the cart
+                      Provider.of<CartModel>(context, listen: false)
+                          .addItem(cartItem);
+
+                      // Print the cart
+                      debugPrint(
+                        "############### Item added to cart##############\nPrice: " +
+                            provider.totalPrice.toString(),
+                      );
+
+                      debugPrint(
+                          "%%%%%%%%%%%%%%%%%%%%%%%%hi%%%%%%%%%%%%%%%%%%%%%%%");
+                      final snackBar = SnackBar(
+                        duration: const Duration(seconds: 2),
+                        content: Text(provider.totalQuantity.toString()),
+                        action: SnackBarAction(
+                          label: 'Undo',
+                          onPressed: () {
+                            // Some code to undo the change.
+                          },
+                        ),
+                      );
+
+                      // Find the ScaffoldMessenger in the widget tree
+                      // and use it to show a SnackBar.
+                      (provider.totalQuantity == 0)
+                          ? debugPrint("&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                          : ScaffoldMessenger.of(context)
+                              .showSnackBar(snackBar);
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF78e6fa),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(
+                        Icons.add,
+                        size: screen.height * 0.04,
+                      ),
                     ),
                   ),
                 ),
