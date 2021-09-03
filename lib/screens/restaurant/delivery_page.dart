@@ -1,9 +1,7 @@
 import 'dart:ui';
-
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +12,7 @@ class DeliveryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isSnackBarOpen = false;
     Size screen = MediaQuery.of(context).size;
     return CustomScrollView(
       slivers: [
@@ -27,6 +26,7 @@ class DeliveryPage extends StatelessWidget {
             children: [
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Pan Cake",
@@ -35,6 +35,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Pizza",
@@ -43,6 +44,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Burger",
@@ -51,6 +53,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "French Fries",
@@ -59,6 +62,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Grilled Pan",
@@ -67,6 +71,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Grilled Pan",
@@ -75,6 +80,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Grilled Pan",
@@ -83,6 +89,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Grilled Pan",
@@ -91,6 +98,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Grilled Pan",
@@ -99,6 +107,7 @@ class DeliveryPage extends StatelessWidget {
               ),
               menu(
                 screen,
+                isSnackBarOpen,
                 1,
                 true,
                 "Grilled Pan",
@@ -107,14 +116,14 @@ class DeliveryPage extends StatelessWidget {
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
 }
 
-Widget menu(Size screen, int id, bool isVeg, String title, int price,
-    BuildContext context) {
+Widget menu(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
+    int price, BuildContext context) {
   return Padding(
     padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
     child: Container(
@@ -150,6 +159,8 @@ Widget menu(Size screen, int id, bool isVeg, String title, int price,
             const Spacer(),
             InkWell(
               onTap: () {
+                CartModel provider =
+                    Provider.of<CartModel>(context, listen: false);
                 CartItem cartItem = CartItem(
                     id: 1, title: title, price: price.toDouble(), quantity: 1);
 
@@ -160,10 +171,26 @@ Widget menu(Size screen, int id, bool isVeg, String title, int price,
                 // Print the cart
                 debugPrint(
                   "############### Item added to cart##############\nPrice: " +
-                      Provider.of<CartModel>(context, listen: false)
-                          .totalPrice
-                          .toString(),
+                      provider.totalPrice.toString(),
                 );
+
+                debugPrint("%%%%%%%%%%%%%%%%%%%%%%%%hi%%%%%%%%%%%%%%%%%%%%%%%");
+                final snackBar = SnackBar(
+                  duration: const Duration(seconds: 2),
+                  content: Text(provider.totalQuantity.toString()),
+                  action: SnackBarAction(
+                    label: 'Undo',
+                    onPressed: () {
+                      // Some code to undo the change.
+                    },
+                  ),
+                );
+
+                // Find the ScaffoldMessenger in the widget tree
+                // and use it to show a SnackBar.
+                (provider.totalQuantity == 0)
+                    ? debugPrint("&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                    : ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
               child: Container(
                 decoration: BoxDecoration(

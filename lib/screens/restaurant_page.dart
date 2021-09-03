@@ -74,7 +74,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                 sliver: SliverAppBar(
                   pinned: true,
                   elevation: 10,
-                  expandedHeight: screen.height * 0.3,
+                  expandedHeight: screen.height * 0.4,
                   floating: false,
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.pin,
