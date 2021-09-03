@@ -17,59 +17,97 @@ class ReviewPage extends StatelessWidget {
           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
         ),
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(14.0),
-            child: Column(
-              children: [
-                ReviewHandler(
-                  name: "Gulshan yadav",
-                  profileUrl: testUrl,
-                  stars: 5,
-                  review:
-                      "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
-                  reviewImage: testUrl,
-                  screen: screen,
-                ),
-                ReviewHandler(
-                  name: "Gulshan yadav",
-                  profileUrl: randomImage2,
-                  stars: 5,
-                  review:
-                      "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
-                  reviewImage: randomImage,
-                  screen: screen,
-                ),
-                ReviewHandler(
-                  name: "Gulshan yadav",
-                  profileUrl: randomImage2,
-                  stars: 5,
-                  review:
-                      "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
-                  reviewImage: randomImage,
-                  screen: screen,
-                ),
-              ],
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              bottom: 40,
-            ),
-            child: Center(
-              child: Text(
-                "You Reached the end!",
-                style: GoogleFonts.lato(
-                  fontSize: 24,
-                  color: (appTheme == Brightness.light)
-                      ? Colors.grey[600]
-                      : Colors.white,
+          child: Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(14.0),
+                child: Column(
+                  children: [
+                    // Review about the restaurant.
+
+                    // TODO: Use bottom sheet to ask the review from the user.
+                    Container(
+                      height: screen.height * 0.068,
+                      width: screen.width,
+                      decoration: BoxDecoration(
+                        color: primaryLightColor,
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
+                        border: Border.all(
+                          color: primaryColor,
+                          width: 1,
+                        ),
+                      ),
+                      child: TextFormField(
+                        cursorHeight: 30,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          contentPadding: const EdgeInsets.only(
+                              bottom: 10, top: 10, left: 0, right: 0),
+                          icon: Padding(
+                              padding: const EdgeInsets.only(
+                                left: 2,
+                                right: 0,
+                              ),
+                              child: IconButton(
+                                icon: const Icon(Icons.attachment),
+                                onPressed: () {},
+                              )),
+                          // hintText:,
+                          suffixIcon: Padding(
+                            padding: const EdgeInsets.only(
+                              bottom: 8,
+                              top: 8,
+                              right: 8,
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: ElevatedButton(
+                                child: const Text("Comment"),
+                                onPressed: () {},
+                              ),
+                            ),
+                          ),
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+
+                    // Reviews goes here..
+                    ReviewHandler(
+                      name: "Gulshan yadav",
+                      profileUrl: testUrl,
+                      stars: 5,
+                      review:
+                          "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
+                      reviewImage: testUrl,
+                      screen: screen,
+                    ),
+                    ReviewHandler(
+                      name: "Gulshan yadav",
+                      profileUrl: randomImage2,
+                      stars: 5,
+                      review:
+                          "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
+                      reviewImage: randomImage,
+                      screen: screen,
+                    ),
+                    ReviewHandler(
+                      name: "Gulshan yadav",
+                      profileUrl: randomImage2,
+                      stars: 5,
+                      review:
+                          "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
+                      reviewImage: randomImage,
+                      screen: screen,
+                    ),
+                  ],
                 ),
               ),
-            ),
+            ],
           ),
-        )
+        ),
       ],
     );
   }
