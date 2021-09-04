@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/restaurant/delivery_page.dart';
 import 'package:cuisine_app/screens/restaurant/review_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:provider/provider.dart';
+import 'package:badges/badges.dart';
 
 class RestaurantPage extends StatefulWidget {
   final String title;
@@ -177,6 +180,24 @@ class _RestaurantPageState extends State<RestaurantPage>
             ),
           ),
         ),
+        floatingActionButton:
+            (Provider.of<CartModel>(context, listen: true).totalQuantity != 0)
+                ? FloatingActionButton(
+                    backgroundColor: primaryColor,
+                    onPressed: () {},
+                    child: Badge(
+                      badgeColor: Colors.white,
+                      animationType: BadgeAnimationType.fade,
+                      badgeContent: Text(
+                          Provider.of<CartModel>(context, listen: true)
+                              .totalQuantity
+                              .toString()),
+                      child: const Icon(
+                        Icons.shopping_cart_outlined,
+                        color: primaryLightColor,
+                      ),
+                    ))
+                : null,
       ),
     );
   }
