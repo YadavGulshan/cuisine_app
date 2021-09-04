@@ -86,10 +86,10 @@ class DeliveryPage extends StatelessWidget {
   }
 }
 
-class Menu extends StatefulWidget {
+class Menu extends StatelessWidget {
   int id;
   String title;
-  int price;
+  double price;
   Menu({
     Key? key,
     required this.id,
@@ -97,11 +97,6 @@ class Menu extends StatefulWidget {
     required this.price,
   }) : super(key: key);
 
-  @override
-  _MenuState createState() => _MenuState();
-}
-
-class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
@@ -139,7 +134,7 @@ class _MenuState extends State<Menu> {
                 left: screen.width * 0.04,
               ),
               child: Text(
-                widget.title,
+                title,
                 style: GoogleFonts.poppins(
                   fontSize: screen.height * 0.025,
                   fontWeight: FontWeight.w500,
@@ -157,7 +152,7 @@ class _MenuState extends State<Menu> {
                       left: screen.width * 0.04,
                     ),
                     child: Text(
-                      "₹ " + widget.price.toString(),
+                      "₹ " + price.toString(),
                       style: GoogleFonts.lato(
                         fontSize: screen.height * 0.02,
                       ),
@@ -176,8 +171,8 @@ class _MenuState extends State<Menu> {
                             Provider.of<CartModel>(context, listen: false);
                         CartItem cartItem = CartItem(
                             id: 1,
-                            title: widget.title,
-                            price: widget.price.toDouble(),
+                            title: title,
+                            price: price.toDouble(),
                             quantity: 1);
 
                         // Add the item to the cart
@@ -191,6 +186,7 @@ class _MenuState extends State<Menu> {
                               provider.totalPrice.toString(),
                         );
 
+                        // TODO: Remove this section, if not using
                         debugPrint(
                             "%%%%%%%%%%%%%%%%%%%%%%%%hi%%%%%%%%%%%%%%%%%%%%%%%");
                         final snackBar = SnackBar(
