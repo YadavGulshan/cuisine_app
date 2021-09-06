@@ -1,3 +1,4 @@
+import 'package:cuisine_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 
 class CartModel extends ChangeNotifier {
@@ -45,16 +46,28 @@ class CartModel extends ChangeNotifier {
   }
 }
 
-class CartItem {
+class CartItem extends ChangeNotifier {
   final int id;
   final String title;
-  final int quantity;
+  int quantity;
   final double price;
+  final String imageUrl;
 
   CartItem({
     required this.id,
     required this.title,
     required this.quantity,
     required this.price,
+    required this.imageUrl,
   });
+
+  void addCuisine() {
+    quantity += 1;
+    notifyListeners();
+  }
+
+  void subCuisine() {
+    quantity -= 1;
+    notifyListeners();
+  }
 }

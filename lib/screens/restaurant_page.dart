@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
+import 'package:cuisine_app/screens/order/cart.dart';
+import 'package:cuisine_app/screens/order/cart_bottomscreen.dart';
 import 'package:cuisine_app/screens/restaurant/delivery_page.dart';
 import 'package:cuisine_app/screens/restaurant/review_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:palette_generator/palette_generator.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart';
 
@@ -184,7 +187,9 @@ class _RestaurantPageState extends State<RestaurantPage>
             (Provider.of<CartModel>(context, listen: true).totalQuantity != 0)
                 ? FloatingActionButton(
                     backgroundColor: primaryColor,
-                    onPressed: () {},
+                    onPressed: () {
+                      pushNewScreen(context, screen: CartPage());
+                    },
                     child: Badge(
                       badgeColor: Colors.white,
                       animationType: BadgeAnimationType.fade,

@@ -173,7 +173,9 @@ class Menu extends StatelessWidget {
                             id: 1,
                             title: title,
                             price: price.toDouble(),
-                            quantity: 1);
+                            quantity: 1,
+                            // TODO: Keep note of this.
+                            imageUrl: randomImage);
 
                         // Add the item to the cart
 
@@ -249,7 +251,7 @@ class Menu extends StatelessWidget {
 
 // Not using this one for now
 Widget menu(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
-    int price, BuildContext context) {
+    int price, BuildContext context, String imageUrl) {
   return Padding(
     padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
     child: Container(
@@ -291,7 +293,12 @@ Widget menu(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
                 CartModel provider =
                     Provider.of<CartModel>(context, listen: false);
                 CartItem cartItem = CartItem(
-                    id: 1, title: title, price: price.toDouble(), quantity: 1);
+                  id: 1,
+                  title: title,
+                  price: price.toDouble(),
+                  quantity: 1,
+                  imageUrl: imageUrl,
+                );
 
                 // Add the item to the cart
                 Provider.of<CartModel>(context, listen: false)
