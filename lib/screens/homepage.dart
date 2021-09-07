@@ -205,33 +205,12 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
 
-          // Some banner.
-
-          // SliverToBoxAdapter(
-          //   child: Padding(
-          //     padding: const EdgeInsets.fromLTRB(14, 10, 14, 14),
-          //     child: Container(
-          //       height: screenHeight * 0.15,
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(10),
-          //         // color: Colors.amber,
-          //         image: DecorationImage(
-          //           image: NetworkImage(
-          //             bannerImageUrl,
-          //           ),
-          //           fit: BoxFit.cover,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
           /// Head Section.
           SliverToBoxAdapter(
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(14, 0, 0, 0),
+                  padding: const EdgeInsets.fromLTRB(14, 0, 0, 20),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
@@ -245,93 +224,66 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
 
-                // Category section
-                // TODO: Changed it to a expandable box using animated container.
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 10, 8, 0),
-                  child: AnimatedContainer(
-                    duration: const Duration(microseconds: 5000),
-                    curve: Curves.easeInBack,
-                    // height: screenHeight * 0.55, // expanded height
-                    height: _categoryHeight,
-                    width: screenWidth,
-                    decoration: const BoxDecoration(
-                        // color: Colors.transparent,
-                        ),
-                    child: Wrap(
-                      children: [
-                        categoryButton("Category", testUrl),
-                        categoryButton("Category", testUrl),
-                        categoryButton("Category", testUrl),
-                        categoryButton("Category", testUrl),
-                        categoryButton("Category", testUrl),
-                        categoryButton("Category", testUrl),
-                        categoryButton("Category", testUrl),
-                        categoryButton("Category", testUrl),
-                      ],
-                    ),
-                  ),
-                ),
                 // Our button
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 4, 8, 20),
-                  child: InkWell(
-                    onTap: () {
-                      if (_isExpanded == false) {
-                        setState(() {
-                          _isExpanded = true;
-                          _categoryHeight = 340;
-                          _categorySubtitile = "show less";
-                          _expansionIcon = const Icon(
-                            Icons.expand_less_outlined,
-                          );
-                        });
-                        debugPrint(
-                            "#############_isExpanded: $_isExpanded ###############");
-                      } else {
-                        setState(() {
-                          _isExpanded = false;
-                          _categoryHeight = 240;
-                          _categorySubtitile = "show more";
-                          _expansionIcon =
-                              const Icon(Icons.expand_more_outlined);
-                        });
-                        debugPrint(
-                            "#############_isExpanded: $_isExpanded ###############");
-                      }
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(microseconds: 2000),
-                      decoration: BoxDecoration(
-                        // color: Colors.blue,
-                        borderRadius: BorderRadius.circular(5),
-                        border: Border.all(
-                          color: (appTheme == Brightness.light)
-                              ? myprimarylightColor
-                              : Colors.grey,
-                          width: 1,
-                        ),
-                      ),
-                      curve: Curves.bounceInOut,
-                      height: screenHeight * 0.03,
-                      child: Center(
-                        // TODO: Add a logic that will be used when container is expaned and collapsed
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              _categorySubtitile,
-                              style: GoogleFonts.lato(
-                                fontSize: 14,
-                              ),
-                            ),
-                            _expansionIcon,
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.fromLTRB(8, 4, 8, 20),
+                //   child: InkWell(
+                //     onTap: () {
+                //       if (_isExpanded == false) {
+                //         setState(() {
+                //           _isExpanded = true;
+                //           _categoryHeight = 340;
+                //           _categorySubtitile = "show less";
+                //           _expansionIcon = const Icon(
+                //             Icons.expand_less_outlined,
+                //           );
+                //         });
+                //         debugPrint(
+                //             "#############_isExpanded: $_isExpanded ###############");
+                //       } else {
+                //         setState(() {
+                //           _isExpanded = false;
+                //           _categoryHeight = 240;
+                //           _categorySubtitile = "show more";
+                //           _expansionIcon =
+                //               const Icon(Icons.expand_more_outlined);
+                //         });
+                //         debugPrint(
+                //             "#############_isExpanded: $_isExpanded ###############");
+                //       }
+                //     },
+                //     child: AnimatedContainer(
+                //       duration: const Duration(microseconds: 2000),
+                //       decoration: BoxDecoration(
+                //         // color: Colors.blue,
+                //         borderRadius: BorderRadius.circular(5),
+                //         border: Border.all(
+                //           color: (appTheme == Brightness.light)
+                //               ? myprimarylightColor
+                //               : Colors.grey,
+                //           width: 1,
+                //         ),
+                //       ),
+                //       curve: Curves.bounceInOut,
+                //       height: screenHeight * 0.03,
+                //       child: Center(
+                //         // TODO: Add a logic that will be used when container is expaned and collapsed
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.center,
+                //           children: [
+                //             Text(
+                //               _categorySubtitile,
+                //               style: GoogleFonts.lato(
+                //                 fontSize: 14,
+                //               ),
+                //             ),
+                //             _expansionIcon,
+                //           ],
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
@@ -386,6 +338,22 @@ class _MainPageState extends State<MainPage> {
           //     ],
           //   ),
           // )
+          // Category section
+          // TODO: Changed it to a expandable box using animated container.
+          SliverGrid(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 120,
+              mainAxisSpacing: 5.0,
+              crossAxisSpacing: 1.0,
+              childAspectRatio: 0.9,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return categoryButton("name", testUrl);
+              },
+              childCount: 4,
+            ),
+          ),
         ],
       ),
     );

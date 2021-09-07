@@ -1,7 +1,7 @@
 import 'dart:ui';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
-import 'package:cuisine_app/services/test_cuisines.dart';
+import 'package:cuisine_app/services/testing/test_cuisines.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';

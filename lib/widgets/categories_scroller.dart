@@ -1,5 +1,6 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoriesScroller extends StatelessWidget {
   const CategoriesScroller({Key? key}) : super(key: key);
@@ -31,20 +32,20 @@ Widget categoryButton(
   String name,
   String imageUrl,
 ) {
-  return Padding(
-    padding: const EdgeInsets.fromLTRB(8, 14, 8, 0),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        CircleAvatar(
-          backgroundImage: NetworkImage(imageUrl),
-          radius: 35,
+  return Column(
+    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    children: [
+      CircleAvatar(
+        backgroundImage: NetworkImage(imageUrl),
+        radius: 45,
+      ),
+      Padding(
+        padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
+        child: Text(
+          name,
+          style: GoogleFonts.lato(fontSize: 18),
         ),
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
-          child: Text(name),
-        )
-      ],
-    ),
+      )
+    ],
   );
 }

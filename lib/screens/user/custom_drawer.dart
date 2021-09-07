@@ -19,7 +19,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
   @override
   Widget build(BuildContext context) {
     AuthState provider = Provider.of<AuthState>(context);
-    double screenHeight = MediaQuery.of(context).size.height;
+    Size screen = MediaQuery.of(context).size;
     // double screenWidth = MediaQuery.of(context).size.width;
     var color =
         (appTheme == Brightness.light) ? Colors.white : Colors.grey[850];
@@ -33,7 +33,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
               Container(
                 // color: const Color(0xFFE3E3E3),
                 color: color,
-                height: screenHeight * 0.22,
+                height: screen.height * 0.22,
                 // color: const Color(0xFF1D1E20),
                 child: SafeArea(
                   child: Container(
@@ -72,22 +72,30 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      provider.username,
-                                      style: GoogleFonts.lato(
-                                        fontSize: 22,
-                                        color: (appTheme == Brightness.light)
-                                            ? Colors.black
-                                            : Colors.white,
+                                    SizedBox(
+                                      width: screen.width * 0.7,
+                                      child: Text(
+                                        provider.username,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: GoogleFonts.lato(
+                                          fontSize: 22,
+                                          color: (appTheme == Brightness.light)
+                                              ? Colors.black
+                                              : Colors.white,
+                                        ),
                                       ),
                                     ),
-                                    Text(
-                                      provider.emailAddr,
-                                      style: GoogleFonts.lato(
-                                        fontSize: 14,
-                                        color: (appTheme == Brightness.light)
-                                            ? Colors.black
-                                            : Colors.white,
+                                    Container(
+                                      width: screen.width * 0.6,
+                                      child: Text(
+                                        provider.emailAddr,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: GoogleFonts.lato(
+                                          fontSize: 14,
+                                          color: (appTheme == Brightness.light)
+                                              ? Colors.black
+                                              : Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],

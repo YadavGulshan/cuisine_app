@@ -53,19 +53,19 @@ class MyApp extends StatelessWidget {
             bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
           ),
         ),
-        home: Scaffold(
-            body: RestaurantPage(
-          title: 'Gulshan\'s Restaurant',
-          address: 'Thane West 400607',
-          rating: 4.5,
-          restaurantId: 2,
-          category: "Spicy, Sweet and mouth-Watering",
-          imageUrl: randomImage,
-          // imageUrl:
-          //     "https://www.pexels.com/photo/4450334/download/?search_query=restaurant&tracking_id=zd4udgyvnsg",
-        )),
+        // home: Scaffold(
+        //     body: RestaurantPage(
+        //   title: 'Gulshan\'s Restaurant',
+        //   address: 'Thane West 400607',
+        //   rating: 4.5,
+        //   restaurantId: 2,
+        //   category: "Spicy, Sweet and mouth-Watering",
+        //   imageUrl: randomImage,
+        //   // imageUrl:
+        //   //     "https://www.pexels.com/photo/4450334/download/?search_query=restaurant&tracking_id=zd4udgyvnsg",
+        // )),
         // home: const AuthState(),
-        // home: const AuthCheck(),
+        home: const AuthCheck(),
       ),
     );
   }
