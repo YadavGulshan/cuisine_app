@@ -30,7 +30,7 @@ class DeliveryPage extends StatelessWidget {
             maxCrossAxisExtent: 200.0,
             mainAxisSpacing: 10.0,
             crossAxisSpacing: 2.0,
-            childAspectRatio: 1.0,
+            childAspectRatio: 0.75,
           ),
           delegate: SliverChildBuilderDelegate(
             (BuildContext context, int index) {
@@ -69,21 +69,21 @@ class Menu extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: screen.height * 0.274,
+        height: screen.height * 0.35,
         width: screen.width * 0.45,
         decoration: BoxDecoration(
           // color: (appTheme == Brightness.light)
           //     ? primaryLightColor
           //     : Colors.grey[600],
           borderRadius: BorderRadius.circular(10),
-          border: Border.all(width: 0.5, color: primaryColor),
+          border: Border.all(width: 0.1, color: primaryColor),
         ),
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: screen.height * 0.1,
+              height: screen.height * 0.17,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),

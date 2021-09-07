@@ -152,15 +152,13 @@ class CartContent extends StatelessWidget {
                 )),
           ),
           Padding(
-            padding: const EdgeInsets.all(14.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                    bottom: 8,
-                  ),
+                  padding: const EdgeInsets.all(2.0),
                   child: Text(
                     Provider.of<CartModel>(context, listen: false)
                         .items[index]
@@ -169,39 +167,49 @@ class CartContent extends StatelessWidget {
                     style: GoogleFonts.lato(fontSize: 20),
                   ),
                 ),
-                Text(
-                  "₹ " +
-                      Provider.of<CartModel>(context, listen: false)
-                          .items[index]
-                          .price
-                          .toString(),
-                  style: GoogleFonts.lato(fontSize: 14),
-                  textAlign: TextAlign.left,
+                Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Text(
+                    "₹ " +
+                        Provider.of<CartModel>(context, listen: false)
+                            .items[index]
+                            .price
+                            .toString(),
+                    style: GoogleFonts.lato(fontSize: 14),
+                    textAlign: TextAlign.left,
+                  ),
                 ),
 
                 // Quantity section.
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    IconButton(
-                        onPressed: () {
-                          Provider.of<CartModel>(context, listen: false)
-                              .items[index]
-                              .subCuisine();
-                        },
-                        icon: const Icon(Icons.remove)), // remove
-                    Text(Provider.of<CartModel>(context, listen: true)
-                        .getItemQuantity(index.toString())
-                        .toString()), // Quantity
-                    IconButton(
-                        onPressed: () {
-                          Provider.of<CartModel>(context, listen: false)
-                              .items[index]
-                              .addCuisine();
-                        },
-                        icon: const Icon(Icons.add)), // Add
-                  ],
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: primaryLightColor,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Provider.of<CartModel>(context, listen: false)
+                                .items[index]
+                                .subCuisine();
+                          },
+                          icon: const Icon(Icons.remove)), // remove
+                      Text(Provider.of<CartModel>(context, listen: true)
+                          .getItemQuantity(index.toString())
+                          .toString()), // Quantity
+                      IconButton(
+                          padding: const EdgeInsets.all(0),
+                          onPressed: () {
+                            Provider.of<CartModel>(context, listen: false)
+                                .items[index]
+                                .addCuisine();
+                          },
+                          icon: const Icon(Icons.add)),
+                    ],
+                  ),
                 )
               ],
             ),

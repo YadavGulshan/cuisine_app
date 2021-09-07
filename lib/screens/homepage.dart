@@ -4,8 +4,9 @@ import 'package:cuisine_app/screens/user/custom_drawer.dart';
 import 'package:cuisine_app/screens/user/search_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/screens/user/bottomsheet.dart';
+import 'package:cuisine_app/services/testing/test_cuisines.dart';
 import 'package:cuisine_app/widgets/categories_scroller.dart';
-import 'package:cuisine_app/widgets/homepage_cuisines.dart';
+import 'package:cuisine_app/widgets/restaurant.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -349,11 +350,27 @@ class _MainPageState extends State<MainPage> {
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return categoryButton("name", testUrl);
+                return categoryButton(TestCategory[index]["title"],
+                    TestCategory[index]["imageUrl"]);
               },
-              childCount: 4,
+              childCount: TestCategory.length,
             ),
           ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return RestaurantWidget(
+                  title: Testrestaurants[index]["title"],
+                  imageUrl: Testrestaurants[index]["imageUrl"],
+                  category: Testrestaurants[index]["category"].toString(),
+                  rating: Testrestaurants[index]["rating"].toString(),
+                  address: Testrestaurants[index]["address"].toString(),
+                  id: Testrestaurants[index]["restaurant_id"].toString(),
+                );
+              },
+              childCount: Testrestaurants.length,
+            ),
+          )
         ],
       ),
     );

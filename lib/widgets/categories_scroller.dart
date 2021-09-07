@@ -37,7 +37,7 @@ Widget categoryButton(
     children: [
       CircleAvatar(
         backgroundImage: NetworkImage(imageUrl),
-        radius: 45,
+        radius: 47,
       ),
       Padding(
         padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),

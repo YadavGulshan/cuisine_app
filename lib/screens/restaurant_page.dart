@@ -18,8 +18,8 @@ import 'package:badges/badges.dart';
 class RestaurantPage extends StatefulWidget {
   final String title;
   String address;
-  double rating;
-  int restaurantId;
+  String rating;
+  String restaurantId;
   String category;
   String imageUrl;
   RestaurantPage(
@@ -277,7 +277,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(widget.rating.toString(),
+                      Text(widget.rating,
                           style: const TextStyle(color: Colors.white)
                           // textAlign: TextAlign.center,
                           ),

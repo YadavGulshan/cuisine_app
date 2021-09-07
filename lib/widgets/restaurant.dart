@@ -1,24 +1,43 @@
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/screens/restaurant_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-class Restaurant extends StatelessWidget {
-  const Restaurant(
+class RestaurantWidget extends StatelessWidget {
+  const RestaurantWidget(
       {Key? key,
       required this.title,
       required this.imageUrl,
-      required this.category})
+      required this.category,
+      required this.rating,
+      required this.address,
+      required this.id})
       : super(key: key);
   final String title;
   final String imageUrl;
   final String category;
+  final String rating;
+  final String address;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
-    return SliverToBoxAdapter(
+    return InkWell(
+      onTap: () {
+        pushNewScreen(context,
+            screen: RestaurantPage(
+              restaurantId: id,
+              imageUrl: imageUrl,
+              title: title,
+              address: address,
+              rating: rating,
+              category: category,
+            ));
+      },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(14, 18, 14, 2),
 
@@ -107,7 +126,7 @@ class Restaurant extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  "4.5", // rating. // TODO: Implement rating later.
+                                  rating, // rating. // TODO: Implement rating later.
                                   overflow: TextOverflow.ellipsis,
                                   style: GoogleFonts.lato(
                                     // fontWeight: FontWeight.bold,

@@ -1,5 +1,7 @@
 // Test cuisines with id, title, and price
 
+import 'package:flutter/foundation.dart';
+
 List CuisinesList = [
   {
     "id": 1,
@@ -63,5 +65,75 @@ List CuisinesList = [
     "price": 10,
     "imageUrl":
         "https://images.pexels.com/photos/1508659/pexels-photo-1508659.jpeg?cs=srgb&dl=pexels-daria-shevtsova-1508659.jpg&fm=jpg"
+  },
+];
+
+// title, imageUrl, category
+List Testrestaurants = [
+  {
+    "title": "Cafe Coffee Day",
+    "imageUrl":
+        "https://www.retail4growth.com/public/uploads/editor/2020-07-21/1595307922.jpg",
+    "category": "Cafe",
+    "rating": 5,
+    "address": "Naupada",
+  },
+  {
+    "title": "Munni ka kotha",
+    "imageUrl":
+        "https://images.newindianexpress.com/uploads/user/imagelibrary/2021/4/11/w1200X800/Post_tests-.jpg",
+    "category": "beer shop",
+    "rating": 69,
+    "address": "Badlapur",
+  },
+  {
+    "title": "Pizza Hut",
+    "imageUrl":
+        "https://content3.jdmagicbox.com/comp/thane/s1/022pxx22.xx22.160817150702.x7s1/catalogue/pizza-hut-castle-mill-thane-west-thane-pizza-outlets-us0kvehqqt-250.jpg",
+    "category": "pizza shop",
+    "rating": 2.2,
+    "address": "Hiranandani Estate",
+  },
+  {
+    "title": "domino's pizza",
+    "imageUrl":
+        "https://resize.indiatvnews.com/en/resize/newbucket/1200_-/2019/10/domino-s-pizza-1571307449.jpg",
+    "Category": "Pizza",
+    "rating": 5,
+    "address": "Hiranandani Estate",
+  }
+];
+
+// Name and imageUrl
+List TestCategory = [
+  {
+    "title": "Noodles",
+    "imageUrl":
+        "https://www.pexels.com/photo/1279330/download/?search_query=Food&tracking_id=zd4udgyvnsg",
+  },
+  {
+    "title": "French Fries",
+    "imageUrl":
+        "https://www.pexels.com/photo/1583884/download/?search_query=Food&tracking_id=zd4udgyvnsg",
+  },
+  {
+    "title": "Salad",
+    "imageUrl":
+        "https://www.pexels.com/photo/406152/download/?search_query=Food&tracking_id=zd4udgyvnsg",
+  },
+  {
+    "title": "Coffie",
+    "imageUrl":
+        "https://www.pexels.com/photo/302899/download/?search_query=Food&tracking_id=zd4udgyvnsg",
+  },
+  {
+    "title": "Egg",
+    "imageUrl":
+        "https://www.pexels.com/photo/3789885/download/?search_query=Food&tracking_id=zd4udgyvnsg",
+  },
+  {
+    "title": "Pizza",
+    "imageUrl":
+        "https://www.pexels.com/photo/2147491/download/?search_query=Food&tracking_id=zd4udgyvnsg",
   },
 ];
