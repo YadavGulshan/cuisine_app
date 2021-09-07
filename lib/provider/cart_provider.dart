@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -44,13 +46,24 @@ class CartModel extends ChangeNotifier {
     }
     return total;
   }
+
+  // Get the quantity of a specific item
+  int getItemQuantity(String id) {
+    int quantity = 0;
+    for (var item in _items) {
+      if (item.id == id) {
+        quantity = item.quantity;
+      }
+    }
+    return quantity;
+  }
 }
 
 class CartItem extends ChangeNotifier {
-  final int id;
+  final String id;
   final String title;
   int quantity;
-  final double price;
+  final int price;
   final String imageUrl;
 
   CartItem({

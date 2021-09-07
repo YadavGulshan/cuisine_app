@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
+import 'package:cuisine_app/services/test_cuisines.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -24,61 +25,23 @@ class DeliveryPage extends StatelessWidget {
           // above.
           handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
         ),
-        SliverToBoxAdapter(
-          child: Wrap(
-            alignment: WrapAlignment.center,
-            children: [
-              Menu(
-                id: 1,
-                title: "Pan Cake",
-                price: 60,
-              ),
-              Menu(
-                id: 1,
-                title: "Pizza",
-                price: 0,
-              ),
-              Menu(
-                id: 1,
-                title: "Burger",
-                price: 00,
-              ),
-              Menu(
-                id: 1,
-                title: "French Fries",
-                price: 50,
-              ),
-              Menu(
-                id: 1,
-                title: "Grilled Pan",
-                price: 50,
-              ),
-              Menu(
-                id: 1,
-                title: "Grilled Pan",
-                price: 50,
-              ),
-              Menu(
-                id: 1,
-                title: "Grilled Pan",
-                price: 50,
-              ),
-              Menu(
-                id: 1,
-                title: "Grilled Pan",
-                price: 50,
-              ),
-              Menu(
-                id: 1,
-                title: "Grilled Pan",
-                price: 50,
-              ),
-              Menu(
-                id: 1,
-                title: "Grilled Pan",
-                price: 50,
-              ),
-            ],
+        SliverGrid(
+          gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: 200.0,
+            mainAxisSpacing: 10.0,
+            crossAxisSpacing: 2.0,
+            childAspectRatio: 1.0,
+          ),
+          delegate: SliverChildBuilderDelegate(
+            (BuildContext context, int index) {
+              return Menu(
+                id: CuisinesList[index]["id"].toString(),
+                title: CuisinesList[index]["title"],
+                price: CuisinesList[index]["price"],
+                imageUrl: CuisinesList[index]["imageUrl"],
+              );
+            },
+            childCount: CuisinesList.length,
           ),
         ),
       ],
@@ -87,15 +50,18 @@ class DeliveryPage extends StatelessWidget {
 }
 
 class Menu extends StatelessWidget {
-  int id;
+  String id;
   String title;
-  double price;
-  Menu({
-    Key? key,
-    required this.id,
-    required this.title,
-    required this.price,
-  }) : super(key: key);
+  int price;
+  String imageUrl;
+  Menu(
+      {Key? key,
+      required this.id,
+      required this.title,
+      required this.price,
+      this.imageUrl =
+          "https://www.pexels.com/photo/1670977/download/?search_query=pixels&tracking_id=zd4udgyvnsg"})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -117,14 +83,14 @@ class Menu extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: screen.height * 0.18,
+              height: screen.height * 0.1,
               decoration: BoxDecoration(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
                 image: DecorationImage(
-                  image: NetworkImage(randomImage),
+                  image: NetworkImage(imageUrl),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -170,12 +136,13 @@ class Menu extends StatelessWidget {
                         CartModel provider =
                             Provider.of<CartModel>(context, listen: false);
                         CartItem cartItem = CartItem(
-                            id: 1,
-                            title: title,
-                            price: price.toDouble(),
-                            quantity: 1,
-                            // TODO: Keep note of this.
-                            imageUrl: randomImage);
+                          id: id,
+                          title: title,
+                          price: price,
+                          quantity: 1,
+                          // TODO: Keep note of this.
+                          imageUrl: imageUrl,
+                        );
 
                         // Add the item to the cart
 
@@ -249,108 +216,108 @@ class Menu extends StatelessWidget {
   }
 }
 
-// Not using this one for now
-Widget menu(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
-    int price, BuildContext context, String imageUrl) {
-  return Padding(
-    padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
-    child: Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(width: 0.08),
-          ),
-        ),
-        // color: Colors.green,
-        height: screen.height * 0.1,
-        width: screen.width * 0.99,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Padding(
-                //   padding: const EdgeInsets.only(bottom: 1),
-                //   child: SvgPicture.asset(
-                //     "assets/category.svg",
-                //     color: (isVeg) ? Colors.greenAccent : Colors.red,
-                //     height: screen.height * 0.026,
-                //   ),
-                // ),
-                Text(
-                  title,
-                  style: GoogleFonts.lato(fontSize: 20),
-                ),
-                Text(
-                  "₹" + price.toString(),
-                )
-              ],
-            ),
-            const Spacer(),
-            InkWell(
-              onTap: () {
-                CartModel provider =
-                    Provider.of<CartModel>(context, listen: false);
-                CartItem cartItem = CartItem(
-                  id: 1,
-                  title: title,
-                  price: price.toDouble(),
-                  quantity: 1,
-                  imageUrl: imageUrl,
-                );
+// // Not using this one for now
+// Widget menu(Size screen, bool isSnackbarOpen, int id, bool isVeg, String title,
+//     int price, BuildContext context, String imageUrl) {
+//   return Padding(
+//     padding: const EdgeInsets.only(left: 12, right: 12, top: 8, bottom: 8),
+//     child: Container(
+//         decoration: const BoxDecoration(
+//           border: Border(
+//             bottom: BorderSide(width: 0.08),
+//           ),
+//         ),
+//         // color: Colors.green,
+//         height: screen.height * 0.1,
+//         width: screen.width * 0.99,
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//           children: [
+//             Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//               children: [
+//                 // Padding(
+//                 //   padding: const EdgeInsets.only(bottom: 1),
+//                 //   child: SvgPicture.asset(
+//                 //     "assets/category.svg",
+//                 //     color: (isVeg) ? Colors.greenAccent : Colors.red,
+//                 //     height: screen.height * 0.026,
+//                 //   ),
+//                 // ),
+//                 Text(
+//                   title,
+//                   style: GoogleFonts.lato(fontSize: 20),
+//                 ),
+//                 Text(
+//                   "₹" + price.toString(),
+//                 )
+//               ],
+//             ),
+//             const Spacer(),
+//             InkWell(
+//               onTap: () {
+//                 CartModel provider =
+//                     Provider.of<CartModel>(context, listen: false);
+//                 CartItem cartItem = CartItem(
+//                   id: id.toString(),
+//                   title: title,
+//                   price: price.toDouble(),
+//                   quantity: 1,
+//                   imageUrl: imageUrl,
+//                 );
 
-                // Add the item to the cart
-                Provider.of<CartModel>(context, listen: false)
-                    .addItem(cartItem);
+//                 // Add the item to the cart
+//                 Provider.of<CartModel>(context, listen: false)
+//                     .addItem(cartItem);
 
-                // Print the cart
-                debugPrint(
-                  "############### Item added to cart##############\nPrice: " +
-                      provider.totalPrice.toString(),
-                );
+//                 // Print the cart
+//                 debugPrint(
+//                   "############### Item added to cart##############\nPrice: " +
+//                       provider.totalPrice.toString(),
+//                 );
 
-                debugPrint("%%%%%%%%%%%%%%%%%%%%%%%%hi%%%%%%%%%%%%%%%%%%%%%%%");
-                final snackBar = SnackBar(
-                  duration: const Duration(seconds: 2),
-                  content: Text(provider.totalQuantity.toString()),
-                  action: SnackBarAction(
-                    label: 'Undo',
-                    onPressed: () {
-                      // Some code to undo the change.
-                    },
-                  ),
-                );
+//                 debugPrint("%%%%%%%%%%%%%%%%%%%%%%%%hi%%%%%%%%%%%%%%%%%%%%%%%");
+//                 final snackBar = SnackBar(
+//                   duration: const Duration(seconds: 2),
+//                   content: Text(provider.totalQuantity.toString()),
+//                   action: SnackBarAction(
+//                     label: 'Undo',
+//                     onPressed: () {
+//                       // Some code to undo the change.
+//                     },
+//                   ),
+//                 );
 
-                // Find the ScaffoldMessenger in the widget tree
-                // and use it to show a SnackBar.
-                (provider.totalQuantity == 0)
-                    ? debugPrint("&&&&&&&&&&&&&&&&&&&&&&&&&&")
-                    : ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                      color: primaryColor, width: 1, style: BorderStyle.solid),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10),
-                  ),
-                  color: (appTheme == Brightness.light)
-                      ? primaryLightColor
-                      : Colors.blue,
-                ),
-                height: screen.height * 0.04,
-                width: screen.width * 0.2,
-                child: const Center(
-                  // child: Icon(Icons.add),
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: Text("ADD"),
-                  ),
-                ),
-              ),
-            )
-          ],
-        )),
-  );
-}
+//                 // Find the ScaffoldMessenger in the widget tree
+//                 // and use it to show a SnackBar.
+//                 (provider.totalQuantity == 0)
+//                     ? debugPrint("&&&&&&&&&&&&&&&&&&&&&&&&&&")
+//                     : ScaffoldMessenger.of(context).showSnackBar(snackBar);
+//               },
+//               child: Container(
+//                 decoration: BoxDecoration(
+//                   border: Border.all(
+//                       color: primaryColor, width: 1, style: BorderStyle.solid),
+//                   borderRadius: const BorderRadius.all(
+//                     Radius.circular(10),
+//                   ),
+//                   color: (appTheme == Brightness.light)
+//                       ? primaryLightColor
+//                       : Colors.blue,
+//                 ),
+//                 height: screen.height * 0.04,
+//                 width: screen.width * 0.2,
+//                 child: const Center(
+//                   // child: Icon(Icons.add),
+//                   child: Padding(
+//                     padding: EdgeInsets.all(8.0),
+//                     child: Text("ADD"),
+//                   ),
+//                 ),
+//               ),
+//             )
+//           ],
+//         )),
+//   );
+// }
