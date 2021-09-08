@@ -14,6 +14,7 @@ MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provi
 MERGED from [:permission_handler] /home/Gulshan/Projects/cuisine_app/build/permission_handler/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_secure_storage] /home/Gulshan/Projects/cuisine_app/build/flutter_secure_storage/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [:android_intent] /home/Gulshan/Projects/cuisine_app/build/android_intent/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-7:12
+MERGED from [:flutter_image_compress] /home/Gulshan/Projects/cuisine_app/build/flutter_image_compress/intermediates/library_manifest/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/340206bb4856bf61e48bd10632b21882/jetified-play-services-location-17.0.0/AndroidManifest.xml:2:1-9:12
 MERGED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:15:1-46:12
 MERGED from [com.google.android.gms:play-services-base:17.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/7c879cb157fab2c9a5d74c3d70fd64e3/jetified-play-services-base-17.0.0/AndroidManifest.xml:17:1-29:12
@@ -34,6 +35,8 @@ MERGED from [androidx.customview:customview:1.0.0] /home/Gulshan/.gradle/caches/
 MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/bb361c9951ec30a475ef40f80e89b874/swiperefreshlayout-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/57910a85af155c3103487e39ce23f678/asynclayoutinflater-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.core:core:1.1.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/AndroidManifest.xml:17:1-26:12
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/699f67f2d72ad9902250b3e1c41f0647/exifinterface-1.3.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.heifwriter:heifwriter:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/741a3a255ab1514a7bba7d497116ac52/heifwriter-1.0.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/ca6b214160bd0909b103aa12202ef51c/lifecycle-runtime-2.2.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.savedstate:savedstate:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/2271d874344878e62b9a8e309af0c39d/jetified-savedstate-1.0.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/fb333fb43575d8a3b51161295454427f/lifecycle-livedata-2.0.0/AndroidManifest.xml:17:1-22:12
@@ -165,6 +168,8 @@ MERGED from [:flutter_secure_storage] /home/Gulshan/Projects/cuisine_app/build/f
 MERGED from [:flutter_secure_storage] /home/Gulshan/Projects/cuisine_app/build/flutter_secure_storage/intermediates/library_manifest/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:android_intent] /home/Gulshan/Projects/cuisine_app/build/android_intent/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
 MERGED from [:android_intent] /home/Gulshan/Projects/cuisine_app/build/android_intent/intermediates/library_manifest/debug/AndroidManifest.xml:5:5-44
+MERGED from [:flutter_image_compress] /home/Gulshan/Projects/cuisine_app/build/flutter_image_compress/intermediates/library_manifest/debug/AndroidManifest.xml:6:5-9:55
+MERGED from [:flutter_image_compress] /home/Gulshan/Projects/cuisine_app/build/flutter_image_compress/intermediates/library_manifest/debug/AndroidManifest.xml:6:5-9:55
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/340206bb4856bf61e48bd10632b21882/jetified-play-services-location-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/340206bb4856bf61e48bd10632b21882/jetified-play-services-location-17.0.0/AndroidManifest.xml:5:5-44
 MERGED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/403a8c62040515d6075b48d078338108/jetified-appauth-0.7.1/AndroidManifest.xml:20:5-22:41
@@ -205,6 +210,10 @@ MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/Gulsh
 MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/57910a85af155c3103487e39ce23f678/asynclayoutinflater-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.1.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core:1.1.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/699f67f2d72ad9902250b3e1c41f0647/exifinterface-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.exifinterface:exifinterface:1.3.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/699f67f2d72ad9902250b3e1c41f0647/exifinterface-1.3.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.heifwriter:heifwriter:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/741a3a255ab1514a7bba7d497116ac52/heifwriter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.heifwriter:heifwriter:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/741a3a255ab1514a7bba7d497116ac52/heifwriter-1.0.0/AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/ca6b214160bd0909b103aa12202ef51c/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.lifecycle:lifecycle-runtime:2.2.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/ca6b214160bd0909b103aa12202ef51c/lifecycle-runtime-2.2.0/AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.savedstate:savedstate:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/2271d874344878e62b9a8e309af0c39d/jetified-savedstate-1.0.0/AndroidManifest.xml:20:5-22:41
@@ -231,6 +240,8 @@ MERGED from [androidx.print:print:1.0.0] /home/Gulshan/.gradle/caches/transforms
 MERGED from [androidx.print:print:1.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/f15d67ff15ac844b69200ea1a0376a7a/print-1.0.0/AndroidManifest.xml:20:5-44
 INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/debug/AndroidManifest.xml
 INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/debug/AndroidManifest.xml
+	tools:overrideLibrary
+		ADDED from [:flutter_image_compress] /home/Gulshan/Projects/cuisine_app/build/flutter_image_compress/intermediates/library_manifest/debug/AndroidManifest.xml:9:9-52
 	android:targetSdkVersion
 		INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/debug/AndroidManifest.xml

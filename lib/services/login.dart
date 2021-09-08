@@ -1,5 +1,5 @@
 import 'package:cuisine_app/provider/authstream.dart';
-import 'package:cuisine_app/screens/auth/login_page.dart';
+import 'package:cuisine_app/screens/auth/auth_page.dart';
 import 'package:cuisine_app/screens/homepage.dart';
 import 'package:cuisine_app/screens/user/custom_drawer.dart';
 import 'package:flutter/cupertino.dart';
