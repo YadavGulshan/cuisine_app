@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shimmer/shimmer.dart';
 
 class CategoriesScroller extends StatelessWidget {
   const CategoriesScroller({Key? key}) : super(key: key);
@@ -35,9 +37,24 @@ Widget categoryButton(
   return Column(
     // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
-      CircleAvatar(
-        backgroundImage: NetworkImage(imageUrl),
-        radius: 47,
+      CachedNetworkImage(
+        imageUrl: imageUrl,
+        imageBuilder: (context, imageProvider) => Container(
+          width: 80.0,
+          height: 80.0,
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
+          ),
+        ),
+        placeholder: (context, url) => Shimmer.fromColors(
+            child: const SizedBox(
+              height: 80,
+              width: 80,
+            ),
+            baseColor: primaryColor,
+            highlightColor: primaryLightColor),
+        errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
       Padding(
         padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),

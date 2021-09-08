@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/cart.dart';
@@ -14,6 +15,7 @@ import 'package:palette_generator/palette_generator.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart';
+import 'package:shimmer/shimmer.dart';
 
 class RestaurantPage extends StatefulWidget {
   final String title;
@@ -86,26 +88,51 @@ class _RestaurantPageState extends State<RestaurantPage>
                   floating: false,
                   flexibleSpace: FlexibleSpaceBar(
                     // collapseMode: CollapseMode.pin,
-                    background: Container(
-                      decoration: BoxDecoration(
-                        color: primaryColor,
-                        image: DecorationImage(
-                          image: NetworkImage(widget.imageUrl),
-                          fit: BoxFit.cover,
-                        ),
+                    // background: Container(
+                    //   decoration: BoxDecoration(
+                    //     color: primaryColor,
+                    //     image: DecorationImage(
+                    //       image: NetworkImage(widget.imageUrl),
+                    //       fit: BoxFit.cover,
+                    //     ),
+                    //   ),
+                    background: CachedNetworkImage(
+                      imageUrl: widget.imageUrl,
+                      imageBuilder: (context, imageProvider) => Container(
+                        decoration: BoxDecoration(
+                            color: primaryColor,
+                            image: DecorationImage(
+                              image: imageProvider,
+                              fit: BoxFit.cover,
+                            )),
                       ),
-                      child: SafeArea(
-                        child: Align(
-                          alignment: Alignment.topLeft,
-                          child: IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        child: Container(
+                          height: screen.height * 0.17,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
                           ),
                         ),
+                        baseColor: primaryColor,
+                        highlightColor: primaryLightColor,
                       ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
+                    // child: SafeArea(
+                    //   child: Align(
+                    //     alignment: Alignment.topLeft,
+                    //     child: IconButton(
+                    //       onPressed: () {
+                    //         Navigator.pop(context);
+                    //       },
+                    //       icon: const Icon(Icons.arrow_back_ios_new_outlined),
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                   bottom: PreferredSize(
                     preferredSize: const Size.fromHeight(72),

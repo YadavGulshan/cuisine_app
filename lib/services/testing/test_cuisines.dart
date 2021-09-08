@@ -79,7 +79,7 @@ List Testrestaurants = [
     "address": "Naupada",
   },
   {
-    "title": "Munni ka kotha",
+    "title": "Gulshan's Restaurant",
     "imageUrl":
         "https://images.newindianexpress.com/uploads/user/imagelibrary/2021/4/11/w1200X800/Post_tests-.jpg",
     "category": "beer shop",

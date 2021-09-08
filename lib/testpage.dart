@@ -41,6 +41,7 @@ class TestPageState extends State<TestPage> {
             CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage(picture),
+              // backgroundImage:
             ),
             Text(name),
             Text("Email:" + email),

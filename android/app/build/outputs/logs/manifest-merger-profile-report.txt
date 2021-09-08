@@ -9,6 +9,7 @@ MERGED from [:geolocator_android] /home/Gulshan/Projects/cuisine_app/build/geolo
 MERGED from [:flutter_appauth] /home/Gulshan/Projects/cuisine_app/build/flutter_appauth/intermediates/library_manifest/profile/AndroidManifest.xml:2:1-7:12
 MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/shared_preferences/intermediates/library_manifest/profile/AndroidManifest.xml:2:1-7:12
 MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/profile/AndroidManifest.xml:2:1-7:12
+MERGED from [:sqflite] /home/Gulshan/Projects/cuisine_app/build/sqflite/intermediates/library_manifest/profile/AndroidManifest.xml:2:1-7:12
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/profile/AndroidManifest.xml:2:1-7:12
 MERGED from [:permission_handler] /home/Gulshan/Projects/cuisine_app/build/permission_handler/intermediates/library_manifest/profile/AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_secure_storage] /home/Gulshan/Projects/cuisine_app/build/flutter_secure_storage/intermediates/library_manifest/profile/AndroidManifest.xml:2:1-11:12
@@ -154,6 +155,8 @@ MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/share
 MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/shared_preferences/intermediates/library_manifest/profile/AndroidManifest.xml:5:5-44
 MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/profile/AndroidManifest.xml:5:5-44
 MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/profile/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /home/Gulshan/Projects/cuisine_app/build/sqflite/intermediates/library_manifest/profile/AndroidManifest.xml:5:5-44
+MERGED from [:sqflite] /home/Gulshan/Projects/cuisine_app/build/sqflite/intermediates/library_manifest/profile/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/profile/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/profile/AndroidManifest.xml:5:5-44
 MERGED from [:permission_handler] /home/Gulshan/Projects/cuisine_app/build/permission_handler/intermediates/library_manifest/profile/AndroidManifest.xml:5:5-44

@@ -1,9 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/restaurant_page.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:shimmer/shimmer.dart';
 
 class RestaurantWidget extends StatelessWidget {
   const RestaurantWidget(
@@ -61,16 +63,37 @@ class RestaurantWidget extends StatelessWidget {
           child: Column(
             children: [
               // Image goes here.
-              Container(
-                height: screenHeight * 0.23,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(12),
-                    topRight: Radius.circular(12),
+              // Container(
+              //   height: screenHeight * 0.23,
+              //   decoration: BoxDecoration(
+              //     borderRadius: const BorderRadius.only(
+              //       topLeft: Radius.circular(12),
+              //       topRight: Radius.circular(12),
+              //     ),
+              //     image: DecorationImage(
+              //         image: NetworkImage(imageUrl), fit: BoxFit.cover),
+              //   ),
+              // ),
+              CachedNetworkImage(
+                imageUrl: imageUrl,
+                imageBuilder: (context, imageProvider) => Container(
+                  height: screenHeight * 0.23,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: imageProvider, fit: BoxFit.cover),
                   ),
-                  image: DecorationImage(
-                      image: NetworkImage(imageUrl), fit: BoxFit.cover),
                 ),
+                // placeholder: (context, url) => Container(
+                //   decoration: const BoxDecoration(
+                //     color: Colors.grey,
+                //   ),
+                // ),
+                placeholder: (context, url) => Shimmer.fromColors(
+                  baseColor: Colors.grey,
+                  highlightColor: Colors.white,
+                  child: Container(height: screenHeight * 0.23),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
 
               // Name Description and price.

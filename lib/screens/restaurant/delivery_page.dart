@@ -1,10 +1,12 @@
 import 'dart:ui';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/services/testing/test_cuisines.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 
 class DeliveryPage extends StatelessWidget {
   const DeliveryPage({
@@ -82,18 +84,48 @@ class Menu extends StatelessWidget {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: screen.height * 0.17,
-              decoration: BoxDecoration(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                image: DecorationImage(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
+            // Container(
+            //   height: screen.height * 0.17,
+            //   decoration: BoxDecoration(
+            // borderRadius: const BorderRadius.only(
+            //   topLeft: Radius.circular(10),
+            //   topRight: Radius.circular(10),
+            // ),
+            //     image: DecorationImage(
+            //       image: NetworkImage(imageUrl),
+            //       fit: BoxFit.cover,
+            //     ),
+            //   ),
+            // ),
+            CachedNetworkImage(
+              imageUrl: imageUrl,
+              imageBuilder: (context, imageProvider) => Container(
+                height: screen.height * 0.17,
+                decoration: BoxDecoration(
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  image: DecorationImage(
+                    image: imageProvider,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
+              placeholder: (context, url) => Shimmer.fromColors(
+                child: Container(
+                  height: screen.height * 0.17,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(10),
+                    ),
+                  ),
+                ),
+                baseColor: primaryColor,
+                highlightColor: primaryLightColor,
+              ),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
             Padding(
               padding: EdgeInsets.only(
