@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/screens/auth/login.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class GetStartedPage extends StatelessWidget {
   final loginCallback;
@@ -59,7 +61,11 @@ class GetStartedPage extends StatelessWidget {
                                 ))
                           ]),
                     ),
-                    InkWell(onTap: () {}, child: button(screen, "Get Started")),
+                    InkWell(
+                        onTap: () {
+                          pushNewScreen(context, screen: LoginPage());
+                        },
+                        child: button(screen, "Get Started")),
                   ],
                 ),
               )
