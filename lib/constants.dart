@@ -11,7 +11,7 @@ const Color primaryLightColor = Color(0xFFEFF6FF);
 const Color myprimarylightColor = Color(0xffc7dfff);
 
 Brightness appTheme = Brightness.light;
-const String appName = "Food Delivery App";
+const String appName = "Atica";
 const String baseUrl = "https://api.domain.com";
 // Some urls for testing
 String randomImage = "https://source.unsplash.com/user/erondu";

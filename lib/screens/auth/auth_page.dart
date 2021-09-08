@@ -24,8 +24,13 @@ class GetStartedPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Image.asset(
-                "assets/transparent_login.gif",
+              SizedBox(
+                height: screen.height * 0.5,
+                // color: Colors.black,
+                child: Image.asset(
+                  "assets/get_started_page.gif",
+                  fit: BoxFit.cover,
+                ),
               ),
               // Lottie.asset("assets/GetStartedPage_animation.json"),
               Container(
@@ -39,13 +44,20 @@ class GetStartedPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      appName,
-                      textAlign: TextAlign.left,
-                      style: GoogleFonts.eczar(
-                        color: Colors.white,
-                        fontSize: 32,
-                      ),
+                    RichText(
+                      text: TextSpan(
+                          text: "Welcome to\n",
+                          style: GoogleFonts.bubblegumSans(
+                            fontSize: 38,
+                          ),
+                          children: [
+                            TextSpan(
+                                text: appName,
+                                style: GoogleFonts.lato(
+                                  fontSize: 42,
+                                  color: Colors.lightGreenAccent,
+                                ))
+                          ]),
                     ),
                     InkWell(onTap: () {}, child: button(screen, "Get Started")),
                   ],
@@ -63,15 +75,15 @@ class GetStartedPage extends StatelessWidget {
 Widget button(Size screen, String title) {
   return Container(
     height: screen.height * 0.065,
-    width: screen.width * 0.3,
+    width: screen.width * 0.4,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
-      color: Colors.black,
+      color: Colors.blue[300],
     ),
     child: Center(
       child: Text(
         title,
-        style: GoogleFonts.lato(
+        style: GoogleFonts.bubblegumSans(
           color: Colors.white,
           fontSize: 19,
         ),
