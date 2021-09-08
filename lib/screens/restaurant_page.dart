@@ -42,15 +42,15 @@ class _RestaurantPageState extends State<RestaurantPage>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
   // Generate palette from the image.
-  Color? headColor =
-      (appTheme == Brightness.light) ? Colors.white : Colors.grey[800];
+  // Color? headColor =
+  //     (appTheme == Brightness.light) ? Colors.white : Colors.grey[800];
   void _updatePaletteGenerator() async {
     var paletteGenerator = await PaletteGenerator.fromImageProvider(
       Image.network(widget.imageUrl).image,
     );
     debugPrint(paletteGenerator.colors.toString());
     setState(() {
-      headColor = paletteGenerator.dominantColor as Color?;
+      // headColor = paletteGenerator.dominantColor as Color?;
     });
   }
 

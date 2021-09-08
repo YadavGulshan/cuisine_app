@@ -25,7 +25,10 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Lottie.asset("assets/loginpage_animation.json"),
+              Image.asset(
+                "assets/transparent_login.gif",
+              ),
+              // Lottie.asset("assets/loginpage_animation.json"),
               Container(
                 height: screen.height * 0.27,
                 width: screen.width * 0.85,

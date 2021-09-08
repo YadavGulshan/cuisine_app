@@ -28,9 +28,9 @@ class SearchBar extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: primaryColor),
-            color: (appTheme == Brightness.light)
-                ? Colors.white
-                : Colors.grey[800],
+            // color: (appTheme == Brightness.light)
+            //     ? Colors.white
+            //     : Colors.grey[800],
             boxShadow: [BoxShadow(blurRadius: blurRadius)]),
         height: height,
         child: Row(

@@ -49,14 +49,15 @@ class RestaurantWidget extends StatelessWidget {
           // height: 250,
           // width: screenWidth * 0.9,
           decoration: BoxDecoration(
-            color: (appTheme == Brightness.light)
-                ? primaryLightColor
-                : Colors.grey[800],
+            // color: (appTheme == Brightness.light)
+            //     ? primaryLightColor
+            //     : Colors.grey[800],
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: (appTheme == Brightness.light)
-                  ? primaryLightColor
-                  : Colors.transparent,
+              // color: (appTheme == Brightness.light)
+              //     ? primaryLightColor
+              //     : Colors.transparent,
+              color: primaryLightColor,
               width: 2,
             ),
           ),

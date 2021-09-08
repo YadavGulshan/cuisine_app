@@ -198,10 +198,10 @@ class Menu extends StatelessWidget {
                                   .totalPrice
                                   .toString(),
                               style: GoogleFonts.lato(
-                                color: (appTheme == Brightness.light)
-                                    ? Colors.black
-                                    : Colors.white,
-                              )),
+                                  // color: (appTheme == Brightness.light)
+                                  //     ? Colors.black
+                                  //     : Colors.white,
+                                  )),
                           action: SnackBarAction(
                             label: 'checkout',
                             onPressed: () {
@@ -212,9 +212,9 @@ class Menu extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          backgroundColor: (appTheme == Brightness.light)
-                              ? primaryLightColor
-                              : Colors.grey[600],
+                          // backgroundColor: (appTheme == Brightness.light)
+                          //     ? primaryLightColor
+                          //     : Colors.grey[600],
                         );
 
                         // Find the ScaffoldMessenger in the widget tree

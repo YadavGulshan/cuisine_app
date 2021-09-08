@@ -21,25 +21,25 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
     AuthState provider = Provider.of<AuthState>(context);
     Size screen = MediaQuery.of(context).size;
     // double screenWidth = MediaQuery.of(context).size.width;
-    var color =
-        (appTheme == Brightness.light) ? Colors.white : Colors.grey[850];
+    // var color =
+    //     (appTheme == Brightness.light) ? Colors.white : Colors.grey[850];
 
     return MaterialApp(
       home: Scaffold(
         body: Container(
-          color: color,
+          // color: color,
           child: Column(
             children: [
               Container(
                 // color: const Color(0xFFE3E3E3),
-                color: color,
+                // color: color,
                 height: screen.height * 0.22,
                 // color: const Color(0xFF1D1E20),
                 child: SafeArea(
                   child: Container(
-                    color: (appTheme == Brightness.light)
-                        ? primaryLightColor
-                        : Colors.grey[850],
+                    // color: (appTheme == Brightness.light)
+                    //     ? primaryLightColor
+                    //     : Colors.grey[850],
                     child: Column(
                       children: [
                         Align(
@@ -79,9 +79,9 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                                         overflow: TextOverflow.ellipsis,
                                         style: GoogleFonts.lato(
                                           fontSize: 22,
-                                          color: (appTheme == Brightness.light)
-                                              ? Colors.black
-                                              : Colors.white,
+                                          // color: (appTheme == Brightness.light)
+                                          //     ? Colors.black
+                                          //     : Colors.white,
                                         ),
                                       ),
                                     ),
@@ -92,9 +92,9 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                                         overflow: TextOverflow.ellipsis,
                                         style: GoogleFonts.lato(
                                           fontSize: 14,
-                                          color: (appTheme == Brightness.light)
-                                              ? Colors.black
-                                              : Colors.white,
+                                          // color: (appTheme == Brightness.light)
+                                          //     ? Colors.black
+                                          //     : Colors.white,
                                         ),
                                       ),
                                     ),
@@ -190,7 +190,7 @@ class TitleWidget extends StatelessWidget {
           title,
           style: GoogleFonts.lato(
             fontSize: fontSize,
-            color: (appTheme == Brightness.light) ? Colors.black : Colors.white,
+            // color: (appTheme == Brightness.light) ? Colors.black : Colors.white,
           ),
         ),
       ),

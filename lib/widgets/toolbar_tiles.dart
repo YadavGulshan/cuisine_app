@@ -17,20 +17,18 @@ class ToolBarTile extends StatelessWidget {
   final VoidCallback ontap;
   @override
   Widget build(BuildContext context) {
-    Color color = (appTheme == Brightness.light) ? Colors.black : Colors.white;
+    // Color color = (appTheme == Brightness.light) ? Colors.black : Colors.white;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListTile(
         onTap: ontap,
-        leading: Theme(
-            data: Theme.of(context).copyWith(),
-            child: Icon(icon, color: color)),
+        leading: Theme(data: Theme.of(context).copyWith(), child: Icon(icon)),
         title: Text(
           title,
           style: GoogleFonts.lato(
             // color: const Color(0xFFB2B1B6),
             fontSize: 18,
-            color: color,
+            // color: color,
           ),
         ),
       ),
