@@ -104,7 +104,7 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0] /home/Gulsh
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.1.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/AndroidManifest.xml:24:18-86
 	android:label
-		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:8:9-36
+		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:8:9-30
 	android:icon
 		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:9:9-43
 activity#com.auth0.cuisine.MainActivity

@@ -70,9 +70,9 @@ class _RestaurantPageState extends State<RestaurantPage>
       length: _tabs.length,
       child: Scaffold(
         body: NestedScrollView(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
+          // physics: const BouncingScrollPhysics(
+          //   parent: AlwaysScrollableScrollPhysics(),
+          // ),
           // physics: const ClampingScrollPhysics(
           //   parent: AlwaysScrollableScrollPhysics(),
           // ),
@@ -175,9 +175,9 @@ class _RestaurantPageState extends State<RestaurantPage>
                 .copyWith(statusBarColor: Colors.white10),
             child: SafeArea(
               child: TabBarView(
-                physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics(),
-                ),
+                // physics: const BouncingScrollPhysics(
+                //   parent: AlwaysScrollableScrollPhysics(),
+                // ),
                 controller: _controller,
                 children: const [
                   // DeliveryPage(),
@@ -321,8 +321,8 @@ class _RestaurantPageState extends State<RestaurantPage>
             labelColor: Colors.white,
             // labelColor:
             //     (appTheme == Brightness.light) ? Colors.black : Colors.white,
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
+            // physics: const BouncingScrollPhysics(
+            //     parent: AlwaysScrollableScrollPhysics()),
             tabs: [
               Tab(
                 child: Text(

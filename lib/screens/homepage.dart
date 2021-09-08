@@ -73,9 +73,9 @@ class _MainPageState extends State<MainPage> {
     // Using slivers for better User experience.
     return Scaffold(
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(
-          parent: AlwaysScrollableScrollPhysics(),
-        ),
+        // physics: const BouncingScrollPhysics(
+        //   parent: AlwaysScrollableScrollPhysics(),
+        // ),
         shrinkWrap: true,
         slivers: [
           SliverAppBar(
@@ -86,70 +86,63 @@ class _MainPageState extends State<MainPage> {
             floating: false,
             flexibleSpace: FlexibleSpaceBar(
               collapseMode: CollapseMode.pin,
-              background: Container(
-                color: (appTheme == Brightness.light)
-                    ? primaryLightColor
-                    : Colors.grey[850],
-                child: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                // Location icon button. It will open the bottom sheet.
-                                IconButton(
-                                  icon: Theme(
-                                    data: Theme.of(context).copyWith(),
-                                    child:
-                                        const Icon(Icons.location_on_outlined),
-                                  ),
-                                  onPressed: () {
-                                    bottomSheet(context, screenHeight);
-                                  },
+              background: SafeArea(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              // Location icon button. It will open the bottom sheet.
+                              IconButton(
+                                icon: Theme(
+                                  data: Theme.of(context).copyWith(),
+                                  child: const Icon(Icons.location_on_outlined),
                                 ),
-                                SizedBox(
-                                  height: 20,
-                                  width: screenWidth * 0.65,
-                                  child: Text(
-                                    provider.addressStatus,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: GoogleFonts.lato(
-                                      fontSize: 17,
-                                      fontStyle: FontStyle.normal,
-                                      fontWeight: FontWeight.w600,
-                                      decorationStyle:
-                                          TextDecorationStyle.dotted,
-                                      decoration: TextDecoration.underline,
-                                      // color: (appTheme == Brightness.light)
-                                      //     ? Colors.black
-                                      //     : Colors.white,
-                                    ),
+                                onPressed: () {
+                                  bottomSheet(context, screenHeight);
+                                },
+                              ),
+                              SizedBox(
+                                height: 20,
+                                width: screenWidth * 0.65,
+                                child: Text(
+                                  provider.addressStatus,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: GoogleFonts.lato(
+                                    fontSize: 17,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.w600,
+                                    decorationStyle: TextDecorationStyle.dotted,
+                                    decoration: TextDecoration.underline,
+                                    // color: (appTheme == Brightness.light)
+                                    //     ? Colors.black
+                                    //     : Colors.white,
                                   ),
-                                ),
-                              ],
-                            ),
-                            IconButton(
-                              onPressed: () {
-                                pushNewScreen(context,
-                                    screen: const MyCustomDrawer());
-                              },
-                              icon: Theme(
-                                data: Theme.of(context).copyWith(),
-                                child: const Icon(
-                                  Icons.menu_outlined,
-                                  // color: topBarColor,
                                 ),
                               ),
+                            ],
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              pushNewScreen(context,
+                                  screen: const MyCustomDrawer());
+                            },
+                            icon: Theme(
+                              data: Theme.of(context).copyWith(),
+                              child: const Icon(
+                                Icons.menu_outlined,
+                                // color: topBarColor,
+                              ),
                             ),
-                          ],
-                        ),
-                      ],
-                    ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -168,17 +161,13 @@ class _MainPageState extends State<MainPage> {
                       ),
 
                       // box shadow
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
-                          color: (appTheme == Brightness.light)
-                              ? Colors.grey
-                              : Colors.transparent,
+                          color: Colors.grey,
                           blurRadius: 4.0,
                         ),
                       ],
-                      color: (appTheme == Brightness.light)
-                          ? primaryLightColor
-                          : Colors.grey[850],
+                      color: primaryLightColor,
                     ),
                     height: screenHeight * 0.055,
                     width: screenWidth * 0.9,

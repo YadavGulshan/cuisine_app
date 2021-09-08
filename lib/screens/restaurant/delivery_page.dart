@@ -18,9 +18,9 @@ class DeliveryPage extends StatelessWidget {
     bool isSnackBarOpen = false;
     Size screen = MediaQuery.of(context).size;
     return CustomScrollView(
-      physics: const BouncingScrollPhysics(
-        parent: AlwaysScrollableScrollPhysics(),
-      ),
+      // physics: const BouncingScrollPhysics(
+      //   parent: AlwaysScrollableScrollPhysics(),
+      // ),
       slivers: [
         SliverOverlapInjector(
           // This is the flip side of the SliverOverlapAbsorber

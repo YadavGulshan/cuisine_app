@@ -37,8 +37,8 @@ class CartPage extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
-                  physics: const BouncingScrollPhysics(
-                      parent: BouncingScrollPhysics()),
+                  // physics: const BouncingScrollPhysics(
+                  //     parent: BouncingScrollPhysics()),
                   shrinkWrap: true,
                   itemCount: Provider.of<CartModel>(context).totalQuantity,
                   itemBuilder: (context, index) {

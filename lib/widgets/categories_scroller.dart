@@ -11,7 +11,7 @@ class CategoriesScroller extends StatelessWidget {
   Widget build(BuildContext context) {
     // final double categoryHeight = MediaQuery.of(context).size.height * 0.2;
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
+      // physics: const BouncingScrollPhysics(),
       scrollDirection: Axis.horizontal,
       child: Padding(
         padding: const EdgeInsets.all(14.0),

@@ -66,10 +66,10 @@ class RestaurantWidget extends StatelessWidget {
               // Container(
               //   height: screenHeight * 0.23,
               //   decoration: BoxDecoration(
-              //     borderRadius: const BorderRadius.only(
-              //       topLeft: Radius.circular(12),
-              //       topRight: Radius.circular(12),
-              //     ),
+              // borderRadius: const BorderRadius.only(
+              //   topLeft: Radius.circular(12),
+              //   topRight: Radius.circular(12),
+              // ),
               //     image: DecorationImage(
               //         image: NetworkImage(imageUrl), fit: BoxFit.cover),
               //   ),
@@ -79,8 +79,14 @@ class RestaurantWidget extends StatelessWidget {
                 imageBuilder: (context, imageProvider) => Container(
                   height: screenHeight * 0.23,
                   decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(12),
+                      topRight: Radius.circular(12),
+                    ),
                     image: DecorationImage(
-                        image: imageProvider, fit: BoxFit.cover),
+                      image: imageProvider,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 // placeholder: (context, url) => Container(
