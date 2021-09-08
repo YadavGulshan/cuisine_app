@@ -394,7 +394,7 @@ class _AuthCheckState extends State<AuthCheck> {
             : (provider.isLoggedIn)
                 // ? const TestPage()
                 ? const MainPage()
-                : LoginPage(
+                : GetStartedPage(
                     loginCallback: provider.login,
                   ),
       ),

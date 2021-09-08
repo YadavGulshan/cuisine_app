@@ -4,10 +4,10 @@ import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginPage extends StatelessWidget {
+class GetStartedPage extends StatelessWidget {
   final loginCallback;
   // final String loginError;
-  const LoginPage({
+  const GetStartedPage({
     this.loginCallback,
     Key? key,
     // required this.loginError,
@@ -27,7 +27,7 @@ class LoginPage extends StatelessWidget {
               Image.asset(
                 "assets/transparent_login.gif",
               ),
-              // Lottie.asset("assets/loginpage_animation.json"),
+              // Lottie.asset("assets/GetStartedPage_animation.json"),
               Container(
                 height: screen.height * 0.27,
                 width: screen.width * 0.85,
@@ -47,20 +47,14 @@ class LoginPage extends StatelessWidget {
                         fontSize: 32,
                       ),
                     ),
-                    InkWell(
-                        onTap: () {
-                          loginCallback();
-                          debugPrint("I'm being Executed");
-                        },
-                        child: button(screen, "LOGIN")),
-                    button(screen, "SIGN UP"),
+                    InkWell(onTap: () {}, child: button(screen, "Get Started")),
                   ],
                 ),
               )
             ],
           ),
         ),
-        // Lottie.asset("assets/loginpage_animation.json", fit: BoxFit.fill),
+        // Lottie.asset("assets/GetStartedPage_animation.json", fit: BoxFit.fill),
       ),
     );
   }

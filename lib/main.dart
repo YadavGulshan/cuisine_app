@@ -1,10 +1,11 @@
 import 'package:cuisine_app/provider/authstream.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
+import 'package:cuisine_app/screens/auth/auth_page.dart';
 import 'package:cuisine_app/screens/homepage.dart';
 import 'package:cuisine_app/screens/restaurant_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
-import 'package:cuisine_app/services/login.dart';
+import 'package:cuisine_app/services/auth_check.dart';
 import 'package:cuisine_app/user.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -65,7 +66,8 @@ class MyApp extends StatelessWidget {
         //   //     "https://www.pexels.com/photo/4450334/download/?search_query=restaurant&tracking_id=zd4udgyvnsg",
         // )),
         // home: const AuthState(),
-        home: const AuthCheck(),
+        // home: const AuthCheck(),
+        home: const GetStartedPage(),
       ),
     );
   }
