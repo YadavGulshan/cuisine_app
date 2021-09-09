@@ -235,7 +235,7 @@ class _RestaurantPageState extends State<RestaurantPage>
   }
 
   Widget headSection(Color? face, Size screen) {
-    var textStyle = GoogleFonts.lato(
+    var textStyle = TextStyle(
       color: Colors.white,
       // color: (appTheme == Brightness.light) ? Colors.black : Colors.white,
       fontWeight: FontWeight.w400,
@@ -263,7 +263,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                       ),
                       child: Text(
                         widget.title,
-                        style: GoogleFonts.lato(
+                        style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,

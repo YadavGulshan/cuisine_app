@@ -24,7 +24,7 @@ Future<dynamic> bottomSheet(BuildContext context, double height) {
                 padding: const EdgeInsets.fromLTRB(14, 14, 0, 4),
                 child: Text(
                   "Search location",
-                  style: GoogleFonts.lato(
+                  style: TextStyle(
                     fontSize: 26,
                   ),
                   textAlign: TextAlign.start,

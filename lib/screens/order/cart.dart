@@ -14,7 +14,7 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CartModel provider = Provider.of<CartModel>(context, listen: true);
-    TextStyle titlStyle = GoogleFonts.lato(
+    TextStyle titlStyle = TextStyle(
       fontWeight: FontWeight.w400,
       fontSize: 14,
     );
@@ -25,7 +25,7 @@ class CartPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Cart",
-          style: GoogleFonts.lato(fontSize: 24),
+          style: TextStyle(fontSize: 24),
         ),
         backgroundColor: primaryColor,
       ),
@@ -75,11 +75,11 @@ class CartPage extends StatelessWidget {
 
                   // TODO: #issue: value is not being updated in realtime
                   amount: provider.totalPrice + 69, // Fix this tooo. 69*
-                  titleStyle: GoogleFonts.lato(
+                  titleStyle: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
-                  amountStyle: GoogleFonts.lato(),
+                  amountStyle: TextStyle(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -104,7 +104,7 @@ class CartPage extends StatelessWidget {
                         },
                         child: Text(
                           "Checkout",
-                          style: GoogleFonts.lato(
+                          style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
@@ -164,7 +164,7 @@ class CartContent extends StatelessWidget {
                         .items[index]
                         .title
                         .toString(),
-                    style: GoogleFonts.lato(fontSize: 20),
+                    style: TextStyle(fontSize: 20),
                   ),
                 ),
                 Padding(
@@ -175,7 +175,7 @@ class CartContent extends StatelessWidget {
                             .items[index]
                             .price
                             .toString(),
-                    style: GoogleFonts.lato(fontSize: 14),
+                    style: TextStyle(fontSize: 14),
                     textAlign: TextAlign.left,
                   ),
                 ),

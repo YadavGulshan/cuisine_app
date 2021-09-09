@@ -113,7 +113,7 @@ class _MainPageState extends State<MainPage> {
                                 child: Text(
                                   provider.addressStatus,
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.lato(
+                                  style: const TextStyle(
                                     fontSize: 17,
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.w600,
@@ -198,14 +198,14 @@ class _MainPageState extends State<MainPage> {
           /// Head Section.
           SliverToBoxAdapter(
             child: Column(
-              children: [
+              children: const [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(14, 0, 0, 20),
+                  padding: EdgeInsets.fromLTRB(14, 0, 0, 20),
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
                       "Eat what makes you happy",
-                      style: GoogleFonts.lato(
+                      style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                         wordSpacing: 0.6,
@@ -263,7 +263,7 @@ class _MainPageState extends State<MainPage> {
                 //           children: [
                 //             Text(
                 //               _categorySubtitile,
-                //               style: GoogleFonts.lato(
+                //               style: TextStyle(
                 //                 fontSize: 14,
                 //               ),
                 //             ),
@@ -395,7 +395,7 @@ class HomeSearchBar implements SliverPersistentHeaderDelegate {
                   children: [
                     Text(
                       "Search for a Cuisine",
-                      style: GoogleFonts.lato(
+                      style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
                         color: (appTheme == Brightness.light)

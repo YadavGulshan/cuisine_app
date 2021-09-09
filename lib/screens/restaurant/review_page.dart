@@ -148,7 +148,7 @@ class ReviewHandler extends StatelessWidget {
                 children: [
                   Text(
                     name,
-                    style: GoogleFonts.lato(
+                    style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),

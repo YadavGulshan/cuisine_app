@@ -49,14 +49,12 @@ class GetStartedPage extends StatelessWidget {
                     RichText(
                       text: TextSpan(
                           text: "Welcome to\n",
-                          style: GoogleFonts.bubblegumSans(
-                            fontSize: 38,
-                          ),
-                          children: [
+                          style: Theme.of(context).textTheme.headline1,
+                          children: const [
                             TextSpan(
                                 text: appName,
-                                style: GoogleFonts.lato(
-                                  fontSize: 42,
+                                style: TextStyle(
+                                  fontSize: 32,
                                   color: Colors.lightGreenAccent,
                                 ))
                           ]),
@@ -89,7 +87,7 @@ Widget button(Size screen, String title) {
     child: Center(
       child: Text(
         title,
-        style: GoogleFonts.bubblegumSans(
+        style: const TextStyle(
           color: Colors.white,
           fontSize: 19,
         ),

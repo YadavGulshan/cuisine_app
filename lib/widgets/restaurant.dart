@@ -120,7 +120,7 @@ class RestaurantWidget extends StatelessWidget {
                             child: Text(
                               title,
                               overflow: TextOverflow.ellipsis,
-                              style: GoogleFonts.lato(
+                              style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 18,
                               ),
@@ -158,7 +158,7 @@ class RestaurantWidget extends StatelessWidget {
                                 Text(
                                   rating, // rating. // TODO: Implement rating later.
                                   overflow: TextOverflow.ellipsis,
-                                  style: GoogleFonts.lato(
+                                  style: TextStyle(
                                     // fontWeight: FontWeight.bold,
                                     // fontSize: 18,
                                     color: Colors.white,
@@ -175,7 +175,7 @@ class RestaurantWidget extends StatelessWidget {
                         ),
                         // Price section.
                         // Text("₹200 for one",
-                        //     style: GoogleFonts.lato(
+                        //     style: TextStyle(
                         //       color: Colors.grey,
                         //     ))
                       ],

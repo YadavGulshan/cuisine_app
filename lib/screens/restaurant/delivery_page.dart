@@ -133,7 +133,7 @@ class Menu extends StatelessWidget {
               ),
               child: Text(
                 title,
-                style: GoogleFonts.poppins(
+                style: TextStyle(
                   fontSize: screen.height * 0.025,
                   fontWeight: FontWeight.w500,
                 ),
@@ -151,7 +151,7 @@ class Menu extends StatelessWidget {
                     ),
                     child: Text(
                       "₹ " + price.toString(),
-                      style: GoogleFonts.lato(
+                      style: TextStyle(
                         fontSize: screen.height * 0.02,
                       ),
                       textAlign: TextAlign.left,
@@ -197,7 +197,7 @@ class Menu extends StatelessWidget {
                               Provider.of<CartModel>(context, listen: false)
                                   .totalPrice
                                   .toString(),
-                              style: GoogleFonts.lato(
+                              style: TextStyle(
                                   // color: (appTheme == Brightness.light)
                                   //     ? Colors.black
                                   //     : Colors.white,
@@ -279,7 +279,7 @@ class Menu extends StatelessWidget {
 //                 // ),
 //                 Text(
 //                   title,
-//                   style: GoogleFonts.lato(fontSize: 20),
+//                   style: TextStyle(fontSize: 20),
 //                 ),
 //                 Text(
 //                   "₹" + price.toString(),

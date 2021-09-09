@@ -17,144 +17,146 @@ class LoginPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
-                height: screen.height * 0.45,
-                child: SafeArea(
-                  child: Image.asset(
-                    "assets/login.jpg",
-                    fit: BoxFit.cover,
+              // SizedBox(
+              //   height: screen.height * 0.45,
+              //   child: SafeArea(
+              //     child: Image.asset(
+              //       "assets/login.jpg",
+              //       fit: BoxFit.cover,
+              //     ),
+              //   ),
+              // ),
+              SafeArea(
+                child: Container(
+                  height: screen.height * 0.35,
+                  margin: const EdgeInsets.all(14),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(14),
+                    color: Colors.white,
                   ),
-                ),
-              ),
-              Container(
-                height: screen.height * 0.35,
-                margin: const EdgeInsets.all(14),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(14),
-                  color: Colors.white,
-                ),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(
-                            bottom: 14, left: 14, top: 4, right: 14),
-                        child: Text(
-                          "Login",
-                          style: GoogleFonts.bubblegumSans(fontSize: 42),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 14,
-                          right: 14,
-                          bottom: 20,
-                        ),
-                        child: TextFormField(
-                          // validator: (value) {
-                          //   if (value == null || value.isEmpty) {
-                          //     return 'Please enter your email!';
-                          //   }
-                          //   return null;
-                          // },
-                          // enabled: true,
-                          // autofocus: autofocus,
-                          // cursorHeight: 25,
-                          style: const TextStyle(fontSize: 20),
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(0),
-                            enabled: true,
-                            label: Text("Email"),
-                            // border: InputBorder.none,
-                            alignLabelWithHint: true,
-                            hintText: "Email",
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(
+                              bottom: 14, left: 14, top: 4, right: 14),
+                          child: Text(
+                            "Login",
+                            style: TextStyle(fontSize: 42),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 14,
-                          right: 14,
-                        ),
-                        child: TextFormField(
-                          // validator: (value) {
-                          //   if (value == null || value.isEmpty) {
-                          //     return 'Please enter your password';
-                          //   }
-                          //   return null;
-                          // },
-                          style: const TextStyle(fontSize: 20),
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(0),
-
-                            enabled: true,
-                            label: Text("Password"),
-
-                            // border: InputBorder.none,
-                            alignLabelWithHint: true,
-                            hintText: "Password",
+                        Padding(
+                          padding: const EdgeInsets.only(
+                            left: 14,
+                            right: 14,
+                            bottom: 20,
+                          ),
+                          child: TextFormField(
+                            // validator: (value) {
+                            //   if (value == null || value.isEmpty) {
+                            //     return 'Please enter your email!';
+                            //   }
+                            //   return null;
+                            // },
+                            // enabled: true,
+                            // autofocus: autofocus,
+                            // cursorHeight: 25,
+                            style: const TextStyle(fontSize: 20),
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(0),
+                              enabled: true,
+                              label: Text("Email"),
+                              // border: InputBorder.none,
+                              alignLabelWithHint: true,
+                              hintText: "Email",
+                            ),
                           ),
                         ),
-                      ),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Padding(
+                        Padding(
                           padding: const EdgeInsets.only(
                             left: 14,
                             right: 14,
                           ),
-                          child: TextButton(
-                              style: ButtonStyle(
-                                foregroundColor:
-                                    MaterialStateProperty.all(Colors.red[300]),
-                                padding: MaterialStateProperty.all(
-                                  const EdgeInsets.all(0),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: const Text("Forget password?")),
+                          child: TextFormField(
+                            // validator: (value) {
+                            //   if (value == null || value.isEmpty) {
+                            //     return 'Please enter your password';
+                            //   }
+                            //   return null;
+                            // },
+                            style: const TextStyle(fontSize: 20),
+                            obscureText: true,
+                            decoration: const InputDecoration(
+                              contentPadding: EdgeInsets.all(0),
+
+                              enabled: true,
+                              label: Text("Password"),
+
+                              // border: InputBorder.none,
+                              alignLabelWithHint: true,
+                              hintText: "Password",
+                            ),
+                          ),
                         ),
-                      ),
-                      Center(
-                        child: Padding(
-                          padding: const EdgeInsets.only(bottom: 4),
-                          child: InkWell(
-                            onTap: () {
-                              // Validate returns true if the form is valid, or false otherwise.
-                              if (_formKey.currentState!.validate()) {
-                                // If the form is valid, display a snackbar. In the real world,
-                                // you'd often call a server or save the information in a database.
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text('Processing Data')),
-                                );
-                              }
-                            },
-                            child: Container(
-                              height: screen.height * 0.055,
-                              width: screen.width * 0.35,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
-                                color: primaryColor,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "login",
-                                  style: GoogleFonts.bubblegumSans(
-                                    color: Colors.white,
-                                    fontSize: 19,
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                              left: 14,
+                              right: 14,
+                            ),
+                            child: TextButton(
+                                style: ButtonStyle(
+                                  foregroundColor: MaterialStateProperty.all(
+                                      Colors.red[300]),
+                                  padding: MaterialStateProperty.all(
+                                    const EdgeInsets.all(0),
+                                  ),
+                                ),
+                                onPressed: () {},
+                                child: const Text("Forget password?")),
+                          ),
+                        ),
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: InkWell(
+                              onTap: () {
+                                // Validate returns true if the form is valid, or false otherwise.
+                                if (_formKey.currentState!.validate()) {
+                                  // If the form is valid, display a snackbar. In the real world,
+                                  // you'd often call a server or save the information in a database.
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('Processing Data')),
+                                  );
+                                }
+                              },
+                              child: Container(
+                                height: screen.height * 0.055,
+                                width: screen.width * 0.35,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  color: primaryColor,
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    "login",
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 19,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -169,13 +171,13 @@ class LoginPage extends StatelessWidget {
                   children: [
                     Text(
                       "Don't have a account?",
-                      style: GoogleFonts.lato(color: Colors.white),
+                      style: TextStyle(color: Colors.white),
                     ),
                     TextButton(
                         onPressed: () {},
                         child: Text(
                           "Sign Up",
-                          style: GoogleFonts.lato(color: primaryLightColor),
+                          style: TextStyle(color: primaryLightColor),
                         ))
                   ],
                 ),

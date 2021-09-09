@@ -25,7 +25,7 @@ class ToolBarTile extends StatelessWidget {
         leading: Theme(data: Theme.of(context).copyWith(), child: Icon(icon)),
         title: Text(
           title,
-          style: GoogleFonts.lato(
+          style: TextStyle(
             // color: const Color(0xFFB2B1B6),
             fontSize: 18,
             // color: color,

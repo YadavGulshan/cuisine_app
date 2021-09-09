@@ -77,7 +77,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                                       child: Text(
                                         provider.username,
                                         overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.lato(
+                                        style: TextStyle(
                                           fontSize: 22,
                                           // color: (appTheme == Brightness.light)
                                           //     ? Colors.black
@@ -90,7 +90,7 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                                       child: Text(
                                         provider.emailAddr,
                                         overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.lato(
+                                        style: TextStyle(
                                           fontSize: 14,
                                           // color: (appTheme == Brightness.light)
                                           //     ? Colors.black
@@ -188,7 +188,7 @@ class TitleWidget extends StatelessWidget {
         alignment: Alignment.centerLeft,
         child: Text(
           title,
-          style: GoogleFonts.lato(
+          style: TextStyle(
             fontSize: fontSize,
             // color: (appTheme == Brightness.light) ? Colors.black : Colors.white,
           ),

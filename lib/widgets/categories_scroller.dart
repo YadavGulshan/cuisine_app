@@ -60,7 +60,7 @@ Widget categoryButton(
         padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
         child: Text(
           name,
-          style: GoogleFonts.lato(fontSize: 18),
+          style: TextStyle(fontSize: 18),
         ),
       )
     ],
