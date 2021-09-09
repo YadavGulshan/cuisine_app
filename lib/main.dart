@@ -42,11 +42,11 @@ class MyApp extends StatelessWidget {
           appBarTheme: (appTheme == Brightness.dark)
               ? AppBarTheme(color: Colors.grey[850])
               : const AppBarTheme(color: Colors.white),
-          fontFamily: 'rt_sans',
+          fontFamily: 'ribik',
           textTheme: const TextTheme(
-            headline1: TextStyle(fontSize: 42.0, fontWeight: FontWeight.w700),
+            headline1: TextStyle(fontSize: 42.0, fontWeight: FontWeight.normal),
             headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'lato'),
+            bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'rubik'),
           ),
         ),
         home: const GetStartedPage(),

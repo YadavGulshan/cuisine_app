@@ -1,6 +1,5 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -9,30 +8,40 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
-        height: screen.height,
-        color: primaryColor,
-        child: SingleChildScrollView(
+      body: Stack(children: [
+        Container(
+          height: screen.height,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/login_bg.png"),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // SizedBox(
-              //   height: screen.height * 0.45,
-              //   child: SafeArea(
-              //     child: Image.asset(
-              //       "assets/login.jpg",
-              //       fit: BoxFit.cover,
-              //     ),
+              // SafeArea(
+              //   child: Container(
+              //     height: screen.height * 0.35,
+              //     decoration: const BoxDecoration(
+              //         image: DecorationImage(
+              //             image: AssetImage("assets/burger.jpg"),
+              //             fit: BoxFit.cover)),
               //   ),
               // ),
               SafeArea(
                 child: Container(
-                  height: screen.height * 0.35,
-                  margin: const EdgeInsets.all(14),
+                  height: screen.height * 0.45,
+                  margin: const EdgeInsets.only(
+                    left: 14,
+                    right: 14,
+                    top: 14,
+                  ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(14),
-                    color: Colors.white,
+                    // color: Colors.white,
+                    // border: Border.all(width: 0.1)
                   ),
                   child: Form(
                     key: _formKey,
@@ -40,67 +49,19 @@ class LoginPage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Padding(
-                          padding: EdgeInsets.only(
-                              bottom: 14, left: 14, top: 4, right: 14),
-                          child: Text(
-                            "Login",
-                            style: TextStyle(fontSize: 42),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 14,
-                            right: 14,
-                            bottom: 20,
-                          ),
-                          child: TextFormField(
-                            // validator: (value) {
-                            //   if (value == null || value.isEmpty) {
-                            //     return 'Please enter your email!';
-                            //   }
-                            //   return null;
-                            // },
-                            // enabled: true,
-                            // autofocus: autofocus,
-                            // cursorHeight: 25,
-                            style: const TextStyle(fontSize: 20),
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.all(0),
-                              enabled: true,
-                              label: Text("Email"),
-                              // border: InputBorder.none,
-                              alignLabelWithHint: true,
-                              hintText: "Email",
+                        Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                bottom: 14, left: 14, top: 4, right: 14),
+                            child: Text(
+                              "Login",
+                              style: Theme.of(context).textTheme.headline1,
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                            left: 14,
-                            right: 14,
-                          ),
-                          child: TextFormField(
-                            // validator: (value) {
-                            //   if (value == null || value.isEmpty) {
-                            //     return 'Please enter your password';
-                            //   }
-                            //   return null;
-                            // },
-                            style: const TextStyle(fontSize: 20),
-                            obscureText: true,
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.all(0),
-
-                              enabled: true,
-                              label: Text("Password"),
-
-                              // border: InputBorder.none,
-                              alignLabelWithHint: true,
-                              hintText: "Password",
-                            ),
-                          ),
-                        ),
+                        textfield("Email", "Please enter your Email", "Email"),
+                        textfield("Password", "Please enter your password",
+                            "Password"),
                         Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
@@ -122,13 +83,10 @@ class LoginPage extends StatelessWidget {
                         ),
                         Center(
                           child: Padding(
-                            padding: const EdgeInsets.only(bottom: 4),
+                            padding: const EdgeInsets.only(bottom: 5),
                             child: InkWell(
                               onTap: () {
-                                // Validate returns true if the form is valid, or false otherwise.
                                 if (_formKey.currentState!.validate()) {
-                                  // If the form is valid, display a snackbar. In the real world,
-                                  // you'd often call a server or save the information in a database.
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                         content: Text('Processing Data')),
@@ -137,15 +95,16 @@ class LoginPage extends StatelessWidget {
                               },
                               child: Container(
                                 height: screen.height * 0.055,
-                                width: screen.width * 0.35,
+                                width: screen.width * 0.4,
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
                                   color: primaryColor,
+                                  // color: Color(0xFFefefef),
                                 ),
-                                child: Center(
+                                child: const Center(
                                   child: Text(
                                     "login",
-                                    style: const TextStyle(
+                                    style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 19,
                                     ),
@@ -160,31 +119,56 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(
-                  top: screen.height * 0.09,
-                  left: 20,
-                  right: 14,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      "Don't have a account?",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          "Sign Up",
-                          style: TextStyle(color: primaryLightColor),
-                        ))
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    "Don't have a account?",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Sign Up",
+                        style: TextStyle(color: Colors.blue),
+                      ))
+                ],
               ),
             ],
           ),
         ),
+      ]),
+    );
+  }
+
+  Padding textfield(String hint, String validatorString, String label) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 14,
+        right: 14,
+      ),
+      child: TextFormField(
+        style: const TextStyle(fontSize: 20),
+        obscureText: true,
+        decoration: InputDecoration(
+          contentPadding: const EdgeInsets.all(10),
+          enabled: true,
+          label: Text(label),
+          alignLabelWithHint: true,
+          hintText: hint,
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.greenAccent, width: 5.0),
+          ),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black, width: 1.0),
+          ),
+        ),
+        validator: (value) {
+          if (value == null || value.isEmpty) {
+            return validatorString;
+          }
+          return null;
+        },
       ),
     );
   }
