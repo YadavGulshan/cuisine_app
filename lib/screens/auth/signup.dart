@@ -12,6 +12,7 @@ class SignUpPage extends StatefulWidget {
 
 class _SignUpPageState extends State<SignUpPage> {
   final _signUpFormKey = GlobalKey<FormState>();
+  final _addressFormKey = GlobalKey<FormState>();
 
   int currentStep = 0;
   // Text controllers here,
@@ -55,7 +56,8 @@ class _SignUpPageState extends State<SignUpPage> {
                 onStepContinue: () {
                   if (currentStep == getStep().length - 1) {
                     // Validate everything first
-                    if (_signUpFormKey.currentState!.validate()) {
+                    if (_signUpFormKey.currentState!.validate() &&
+                        _addressFormKey.currentState!.validate()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Processing Data')),
                       );
@@ -211,27 +213,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     validator: (value) {
-                      if (_confirmPasswordController != _passwordController) {
+                      if (!(_confirmPasswordController !=
+                          _passwordController)) {
                         return "Confirm password is not same";
                       }
                       return null;
                     },
                   ),
                 ),
-                // MyTextField(
-                //   isobsecure: true,
-                //   label: "Password",
-                //   hint: "@#Password#@",
-                //   validatorText: "Password",
-                //   controller: _passwordController,
-                // ),
-                // MyTextField(
-                //   isobsecure: true,
-                //   label: "Confirm Password",
-                //   hint: "@#Password#@",
-                //   validatorText: "Password",
-                //   controller: _confirmPasswordController,
-                // ),
               ],
             ),
           ),
@@ -240,29 +229,32 @@ class _SignUpPageState extends State<SignUpPage> {
             isActive: currentStep >= 1,
             state: currentStep > 1 ? StepState.complete : StepState.indexed,
             title: const Text("Address"),
-            content: Column(
-              children: [
-                MyTextField(
-                    label: "Address",
-                    hint: "Address",
-                    validatorText: "address",
-                    controller: _addressController),
-                MyTextField(
-                    label: "city",
-                    hint: "city",
-                    validatorText: "City",
-                    controller: _cityController),
-                MyTextField(
-                    label: "Pincode",
-                    hint: "Pincode",
-                    validatorText: "pincode",
-                    controller: _zipCodeController),
-                MyTextField(
-                    label: "State",
-                    hint: "State",
-                    validatorText: "State",
-                    controller: _stateController),
-              ],
+            content: Form(
+              key: _addressFormKey,
+              child: Column(
+                children: [
+                  MyTextField(
+                      label: "Address",
+                      hint: "Address",
+                      validatorText: "address",
+                      controller: _addressController),
+                  MyTextField(
+                      label: "city",
+                      hint: "city",
+                      validatorText: "City",
+                      controller: _cityController),
+                  MyTextField(
+                      label: "Pincode",
+                      hint: "Pincode",
+                      validatorText: "pincode",
+                      controller: _zipCodeController),
+                  MyTextField(
+                      label: "State",
+                      hint: "State",
+                      validatorText: "State",
+                      controller: _stateController),
+                ],
+              ),
             )),
         Step(
             isActive: currentStep >= 2,
@@ -272,38 +264,49 @@ class _SignUpPageState extends State<SignUpPage> {
               children: [
                 // Show the filled details here.
                 // Text should have decent and style.
-                Text(
-                  "Name: ${_nameController.text}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "Email: ${_emailController.text}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "Phone: ${_phoneController.text}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                // Address
-                Text(
-                  "Address: ${_addressController.text}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "City: ${_cityController.text}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "Pincode: ${_zipCodeController.text}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-                Text(
-                  "State: ${_stateController.text}",
-                  style: const TextStyle(fontSize: 20),
-                ),
+                CompleteSection(title: "Name: ", content: _nameController.text),
+                CompleteSection(
+                    title: "Email: ", content: _emailController.text),
+                CompleteSection(
+                    title: "Phone: ", content: _phoneController.text),
+                CompleteSection(
+                    title: "Address: ", content: _addressController.text),
+                CompleteSection(title: "City: ", content: _cityController.text),
+                CompleteSection(
+                    title: "Pincode: ", content: _zipCodeController.text),
+                CompleteSection(
+                    title: "State: ", content: _stateController.text),
               ],
             )),
       ];
+}
+
+class CompleteSection extends StatelessWidget {
+  const CompleteSection({
+    Key? key,
+    required this.title,
+    required this.content,
+  }) : super(key: key);
+  final String title;
+  final String content;
+  @override
+  Widget build(BuildContext context) {
+    Size screen = MediaQuery.of(context).size;
+    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+      Text(
+        title,
+        style: const TextStyle(fontSize: 20),
+      ),
+      Flexible(
+        child: Text(
+          content,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontSize: 16),
+        ),
+      ),
+    ]);
+  }
 }
 
 class MyTextField extends StatelessWidget {
