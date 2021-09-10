@@ -1,4 +1,5 @@
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/screens/auth/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -9,46 +10,47 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
-      body: Stack(children: [
-        Container(
-          height: screen.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("assets/login_bg.png"),
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        height: screen.height,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/login_bg.png"),
+            fit: BoxFit.cover,
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SafeArea(
-                child: Container(
-                  height: screen.height * 0.45,
-                  margin: const EdgeInsets.only(
-                    left: 14,
-                    right: 14,
-                    top: 14,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
-                  ),
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(
-                                bottom: 4, left: 14, top: 4, right: 14),
-                            child: Text(
-                              "Login",
-                              style: Theme.of(context).textTheme.headline1,
-                            ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SafeArea(
+              child: Container(
+                height: screen.height * 0.45,
+                margin: const EdgeInsets.only(
+                  left: 14,
+                  right: 14,
+                  top: 14,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(14),
+                ),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              bottom: 4, left: 14, top: 4, right: 14),
+                          child: Text(
+                            "Login",
+                            style: Theme.of(context).textTheme.headline1,
                           ),
                         ),
-                        Padding(
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
                           padding: const EdgeInsets.only(
                             left: 14,
                             right: 14,
@@ -77,9 +79,15 @@ class LoginPage extends StatelessWidget {
                                     : "Please enter a valid email",
                           ),
                         ),
-                        textfield("Password", "Please enter your password",
-                            "Password", true),
-                        Align(
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: textfield("Password",
+                            "Please enter your password", "Password", true),
+                      ),
+                      Flexible(
+                        flex: 0,
+                        child: Align(
                           alignment: Alignment.centerRight,
                           child: Padding(
                               padding: const EdgeInsets.only(
@@ -87,9 +95,15 @@ class LoginPage extends StatelessWidget {
                               ),
                               child: InkWell(
                                   onTap: () {},
-                                  child: const Text("Forget password?"))),
+                                  child: const Text(
+                                    "Forget password?",
+                                    style: TextStyle(color: Colors.red),
+                                  ))),
                         ),
-                        Center(
+                      ),
+                      Flexible(
+                        flex: 1,
+                        child: Center(
                           child: InkWell(
                             onTap: () {
                               if (_formKey.currentState!.validate()) {
@@ -101,9 +115,9 @@ class LoginPage extends StatelessWidget {
                             },
                             child: Container(
                               height: screen.height * 0.065,
-                              width: screen.width * 0.4,
+                              width: screen.width * 0.85,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(10),
                                 color: primaryColor,
                               ),
                               child: const Center(
@@ -118,30 +132,36 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Don't have a account? ",
-                              style: TextStyle(color: Colors.black),
-                            ),
-                            InkWell(
-                                onTap: () {},
-                                child: const Text(
-                                  "Sign Up",
-                                  style: TextStyle(color: primaryColor),
-                                ))
-                          ],
-                        ),
-                      ],
-                    ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "Don't have a account? ",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SignUpPage()),
+                                );
+                              },
+                              child: const Text(
+                                "Sign Up",
+                                style: TextStyle(color: primaryColor),
+                              ))
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ]),
+      ),
     );
   }
 

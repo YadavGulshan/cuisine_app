@@ -124,6 +124,13 @@ flutter:
       fonts:
         - asset: assets/fonts/bubblegum_sans/bubblegumsans-regular.ttf
           weight: 700
+    - family: inter
+      fonts:
+        - asset: assets/fonts/Inter/static/Inter-Black.ttf
+        - asset: assets/fonts/Inter/static/Inter-Bold.ttf
+        - asset: assets/fonts/Inter/static/Inter-Light.ttf
+        - asset: assets/fonts/Inter/Inter-VariableFont_slnt,wght.ttf
+          weight: 700
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

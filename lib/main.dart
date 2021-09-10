@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: appTheme,
-          primaryColor: primaryLightColor,
+          primaryColor: primaryColor,
           iconTheme: const IconThemeData(color: primaryColor),
           primaryIconTheme: const IconThemeData(color: primaryColor),
           appBarTheme: (appTheme == Brightness.dark)
@@ -44,7 +44,11 @@ class MyApp extends StatelessWidget {
               : const AppBarTheme(color: Colors.white),
           fontFamily: 'ribik',
           textTheme: const TextTheme(
-            headline1: TextStyle(fontSize: 42.0, fontWeight: FontWeight.normal),
+            headline1: TextStyle(
+                fontSize: 48.0,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+                fontFamily: 'inter'),
             headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
             bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'rubik'),
           ),
