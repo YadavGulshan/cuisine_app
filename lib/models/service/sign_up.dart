@@ -28,11 +28,21 @@ Future<SignUpUser> signUprequest(
 
 class SignUpUser {
   final int id;
+  final String name;
+  final String email;
   final String token;
 
-  SignUpUser({required this.id, required this.token});
+  SignUpUser(
+      {required this.id,
+      required this.name,
+      required this.email,
+      required this.token});
 
   factory SignUpUser.fromJson(Map<String, dynamic> json) {
-    return SignUpUser(id: json['user']['id'], token: json['token']);
+    return SignUpUser(
+        id: json['user']['id'],
+        token: json['token'],
+        email: json['user']['email'],
+        name: json['user']['name']);
   }
 }

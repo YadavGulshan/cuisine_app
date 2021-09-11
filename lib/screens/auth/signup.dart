@@ -1,4 +1,5 @@
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/models/service/sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -29,6 +30,8 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _stateController = TextEditingController();
   TextEditingController _zipCodeController = TextEditingController();
 
+  /// Future for handling sign up action
+  Future<SignUpUser>? _signMeUp;
   bool _obsecure = true;
   IconData _icon = Icons.remove_red_eye;
   @override
@@ -48,9 +51,10 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
           Center(
-            child: SingleChildScrollView(
+            child: Theme(
+              data: Theme.of(context).copyWith(
+                  colorScheme: const ColorScheme.light(primary: primaryColor)),
               child: Stepper(
-                // physics:,
                 currentStep: currentStep,
                 steps: getStep(),
                 onStepContinue: () {
@@ -89,6 +93,22 @@ class _SignUpPageState extends State<SignUpPage> {
         ],
       ),
     );
+
+    /// Future that will rout the user to homepage after the confirmation by server.
+    FutureBuilder<SignUpUser> buildFutureBuilder() {
+      return FutureBuilder<SignUpUser>(
+        future: _signMeUp,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Text(snapshot.data!.name);
+          } else if (snapshot.hasError) {
+            return Text('${snapshot.error}');
+          }
+
+          return const CircularProgressIndicator();
+        },
+      );
+    }
   }
 
   List<Step> getStep() => [
@@ -296,28 +316,34 @@ class CompleteSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
-    return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      SizedBox(
-        width: screen.width * 0.26,
-        // height: screen.height * 0.05,
-        child: Text(
-          title,
-          style: const TextStyle(fontSize: 20),
-          textAlign: TextAlign.end,
-        ),
-      ),
-      Flexible(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            content,
-            maxLines: 5,
-            // overflow: TextOverflow.ellipsis,
-            style: const TextStyle(fontSize: 16),
+    return Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          SizedBox(
+            width: screen.width * 0.26,
+            // height: screen.height * 0.05,
+            child: Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                title,
+                style: const TextStyle(fontSize: 20),
+                textAlign: TextAlign.end,
+              ),
+            ),
           ),
-        ),
-      ),
-    ]);
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 16, left: 16, bottom: 8),
+              child: Text(
+                content,
+                // maxLines: 5,
+                // overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontSize: 18),
+              ),
+            ),
+          ),
+        ]);
   }
 }
 
