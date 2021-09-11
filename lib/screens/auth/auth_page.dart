@@ -21,50 +21,55 @@ class GetStartedPage extends StatelessWidget {
       body: Container(
         height: screen.height,
         width: screen.width,
-        color: primaryColor,
+        // color: primaryColor,
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          child: Stack(
+            // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               SizedBox(
-                height: screen.height * 0.5,
+                height: screen.height,
                 // color: Colors.black,
                 child: Image.asset(
-                  "assets/get_started_page.gif",
+                  "assets/login_bg.png",
+                  // "assets/get_started_page.gif",
                   fit: BoxFit.cover,
                 ),
               ),
               // Lottie.asset("assets/GetStartedPage_animation.json"),
-              Container(
-                height: screen.height * 0.27,
-                width: screen.width * 0.85,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.transparent,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    RichText(
-                      text: TextSpan(
-                          text: "Welcome to\n",
-                          style: Theme.of(context).textTheme.headline1,
-                          children: const [
-                            TextSpan(
-                                text: appName,
-                                style: TextStyle(
-                                  fontSize: 32,
-                                  color: Colors.lightGreenAccent,
-                                ))
-                          ]),
-                    ),
-                    InkWell(
-                        onTap: () {
-                          pushNewScreen(context, screen: LoginPage());
-                        },
-                        child: button(screen, "Get Started")),
-                  ],
+              Positioned(
+                bottom: 10,
+                left: 20,
+                child: Container(
+                  height: screen.height * 0.27,
+                  width: screen.width * 0.85,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.transparent,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      RichText(
+                        text: TextSpan(
+                            text: "Welcome to\n",
+                            style: Theme.of(context).textTheme.headline1,
+                            children: const [
+                              TextSpan(
+                                  text: appName,
+                                  style: TextStyle(
+                                    fontSize: 32,
+                                    color: Colors.green,
+                                  ))
+                            ]),
+                      ),
+                      InkWell(
+                          onTap: () {
+                            pushNewScreen(context, screen: LoginPage());
+                          },
+                          child: button(screen, "Get Started")),
+                    ],
+                  ),
                 ),
               )
             ],
@@ -82,7 +87,7 @@ Widget button(Size screen, String title) {
     width: screen.width * 0.4,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
-      color: Colors.blue[300],
+      color: primaryColor,
     ),
     child: Center(
       child: Text(

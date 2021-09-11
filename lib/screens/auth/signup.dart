@@ -213,10 +213,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                     validator: (value) {
-                      if (!(_confirmPasswordController !=
-                          _passwordController)) {
-                        return "Confirm password is not same";
+                      // Check if the password and confirm password are same
+                      if (value == null || value.isEmpty) {
+                        return "Password is required";
                       }
+                      if (value != _passwordController.text) {
+                        return "Password and Confirm Password must be same";
+                      }
+
                       return null;
                     },
                   ),
@@ -293,15 +297,20 @@ class CompleteSection extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     return Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-      Text(
-        title,
-        style: const TextStyle(fontSize: 20),
+      SizedBox(
+        width: screen.width * 0.26,
+        // height: screen.height * 0.05,
+        child: Text(
+          title,
+          style: const TextStyle(fontSize: 20),
+          textAlign: TextAlign.end,
+        ),
       ),
       Flexible(
         child: Text(
           content,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
+          maxLines: 5,
+          // overflow: TextOverflow.ellipsis,
           style: const TextStyle(fontSize: 16),
         ),
       ),
