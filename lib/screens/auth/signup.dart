@@ -307,11 +307,14 @@ class CompleteSection extends StatelessWidget {
         ),
       ),
       Flexible(
-        child: Text(
-          content,
-          maxLines: 5,
-          // overflow: TextOverflow.ellipsis,
-          style: const TextStyle(fontSize: 16),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            content,
+            maxLines: 5,
+            // overflow: TextOverflow.ellipsis,
+            style: const TextStyle(fontSize: 16),
+          ),
         ),
       ),
     ]);
