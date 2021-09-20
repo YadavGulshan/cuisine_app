@@ -1,5 +1,7 @@
+// ignore_for_file: prefer_final_fields
+
 import 'package:cuisine_app/constants.dart';
-import 'package:cuisine_app/models/service/sign_up.dart';
+import 'package:cuisine_app/models/service/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -31,7 +33,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _zipCodeController = TextEditingController();
 
   /// Future for handling sign up action
-  Future<SignUpUser>? _signMeUp;
+  Future<User>? _signMeUp;
   bool _obsecure = true;
   IconData _icon = Icons.remove_red_eye;
   @override
@@ -95,8 +97,8 @@ class _SignUpPageState extends State<SignUpPage> {
     );
 
     /// Future that will rout the user to homepage after the confirmation by server.
-    FutureBuilder<SignUpUser> buildFutureBuilder() {
-      return FutureBuilder<SignUpUser>(
+    FutureBuilder<User> buildFutureBuilder() {
+      return FutureBuilder<User>(
         future: _signMeUp,
         builder: (context, snapshot) {
           if (snapshot.hasData) {

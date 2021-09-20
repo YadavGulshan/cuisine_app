@@ -1,5 +1,7 @@
 import 'dart:convert';
+import 'package:cuisine_app/models/service/auth_service.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';
@@ -86,18 +88,15 @@ class AuthState extends ChangeNotifier {
         mem.setString("name", name);
         mem.setString("picture", picture);
       } else {
-        // remove the stored content.
+        // Overwrite the existing information.
 
         // Name
-        mem.setString("name", "");
         mem.setString("name", name);
 
         // Picture
-        mem.setString("picture", "");
         mem.setString("picture", picture);
 
         // Email
-        mem.setString("email", "");
         mem.setString("email", email);
       }
 
@@ -230,5 +229,134 @@ class AuthState extends ChangeNotifier {
 
   get log {
     return logs;
+  }
+}
+
+/// For our custom backend.
+class CustomAuth extends ChangeNotifier {
+  String name = "";
+  String email = "";
+  int phone = 0;
+  String address = "";
+  String city = "";
+  int pincode = 0;
+  String state = "";
+  bool isLoggedin = false;
+  bool isbusy = false;
+
+  Future<void> submitInfo(String name, String email, int phone, String address,
+      String city, int pincode, String state) async {
+    /// Storing the details in sharedPreferences
+    final mem = await SharedPreferences.getInstance();
+    mem.setString("name", name);
+    mem.setString("email", email);
+    mem.setInt("phone", phone);
+    mem.setString("address", address);
+    mem.setString("city", city);
+    mem.setInt("pincode", pincode);
+    mem.setString("state", state);
+  }
+
+  Future<void> setToken(String token) async {
+    // Write the token to the local storage
+    await secureStorage.write(key: 'token', value: token);
+  }
+
+  // Logout action
+  Future<void> logoutAction() async {
+    isLoggedin = false;
+    notifyListeners();
+    // Delete the token from local storage
+    await secureStorage.delete(key: 'token');
+    // Delete the data from shared preferences
+    final mem = await SharedPreferences.getInstance();
+    mem.setString("name", "");
+    mem.setString("email", "");
+    mem.setInt("phone", 0);
+    mem.setString("address", "");
+    mem.setString("city", "");
+    mem.setInt("pincode", 0);
+    mem.setString("state", "");
+  }
+
+  // A function that will send a post request to server with name, email and password.
+
+  Future<User> signUprequest(String name, String email, String password,
+      String confrimPassword) async {
+    isbusy = true;
+    notifyListeners();
+    final response = await http.post(
+      Uri.parse("$baseUrl/api/customer/register"),
+      headers: <String, String>{
+        'Aaccept': 'application/json',
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(<String, String>{
+        'name': name,
+        'email': email,
+        'password': password,
+        'confirm_password': confrimPassword,
+      }),
+    );
+    if (response.statusCode == 201) {
+      isbusy = false; // Auth completed
+      isLoggedin = true;
+      notifyListeners();
+      // Set token.
+      setToken(jsonDecode(response.body)["token"]);
+
+      return User.fromJson(jsonDecode(response.body));
+    } else {
+      isbusy = false;
+      notifyListeners();
+      throw Exception("Status Code: ${response.statusCode}");
+    }
+  }
+
+  // Login action
+  Future<User> loginAction(String email, String password) async {
+    isbusy = true;
+    notifyListeners();
+    // Send a post request to the server with the username and password
+    // and get the response.
+    final response = await http.post(Uri.parse("$baseUrl/api/customer/login"),
+        headers: <String, String>{
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: jsonEncode(<String, String>{
+          'email': email,
+          'password': password,
+        }));
+
+    if (response.statusCode == 201) {
+      isbusy = false;
+      isLoggedin = true;
+      notifyListeners();
+      return User.fromJson(jsonDecode(response.body));
+    } else {
+      isbusy = false;
+      notifyListeners();
+      throw Exception("Status code ${response.statusCode}");
+    }
+  }
+
+  // Initial Action.
+  initialAction() async {
+    isbusy = true;
+    notifyListeners();
+
+    /// Check if token is present in device.
+    var tokenVal = await secureStorage.read(key: "token");
+    if (tokenVal == null) {
+      isbusy == false;
+      isLoggedin == false;
+      notifyListeners();
+    } else {
+      isLoggedin = true;
+      // access the shared preferences.
+      final mem = await SharedPreferences.getInstance();
+      // setId(mem.getString("name"));
+    }
   }
 }

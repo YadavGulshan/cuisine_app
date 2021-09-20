@@ -18,7 +18,7 @@ class GetStartedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         height: screen.height,
         width: screen.width,
         // color: primaryColor,
