@@ -23,4 +23,3 @@ const AUTH0_REDIRECT_URI = 'com.auth0.cuisine://login-callback';
 const AUTH0_ISSUER = 'https://$AUTH0_DOMAIN';
 
 
-CLient sucks
