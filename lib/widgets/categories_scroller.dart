@@ -34,35 +34,42 @@ Widget categoryButton(
   String name,
   String imageUrl,
 ) {
-  return Column(
-    // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      CachedNetworkImage(
-        imageUrl: imageUrl,
-        imageBuilder: (context, imageProvider) => Container(
-          width: 80.0,
-          height: 80.0,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
-          ),
-        ),
-        placeholder: (context, url) => Shimmer.fromColors(
-            child: const SizedBox(
-              height: 80,
-              width: 80,
+  return InkWell(
+    onTap: () {
+      debugPrint("Tapped");
+
+      /// ROute to the a page with the search result for the category name.
+    },
+    child: Column(
+      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        CachedNetworkImage(
+          imageUrl: imageUrl,
+          imageBuilder: (context, imageProvider) => Container(
+            width: 80.0,
+            height: 80.0,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
             ),
-            baseColor: Theme.of(context).primaryColor,
-            highlightColor: Theme.of(context).primaryColorLight),
-        errorWidget: (context, url, error) => const Icon(Icons.error),
-      ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
-        child: Text(
-          name,
-          style: const TextStyle(fontSize: 18),
+          ),
+          placeholder: (context, url) => Shimmer.fromColors(
+              child: const SizedBox(
+                height: 80,
+                width: 80,
+              ),
+              baseColor: Theme.of(context).primaryColor,
+              highlightColor: Theme.of(context).primaryColorLight),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
-      )
-    ],
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
+          child: Text(
+            name,
+            style: const TextStyle(fontSize: 18),
+          ),
+        )
+      ],
+    ),
   );
 }

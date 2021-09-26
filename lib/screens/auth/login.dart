@@ -3,6 +3,7 @@ import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/screens/auth/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -125,10 +126,14 @@ class LoginPage extends StatelessWidget {
                                 // perform a post request with email and password.
                                 // if success, navigate to home page.
                                 // if failure, show error message.
-                                signInUser(
-                                    _emailController.text.toString(),
-                                    _passwordController.text.toString(),
-                                    context);
+                                // signInUser(
+                                //     _emailController.text.toString(),
+                                //     _passwordController.text.toString(),
+                                //     context);
+
+                                Provider.of<AuthService>(context, listen: false)
+                                    .signIn(_emailController.text,
+                                        _passwordController.text, context);
 
                                 // Navigator.push(
                                 //     context,

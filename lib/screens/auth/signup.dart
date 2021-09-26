@@ -2,7 +2,9 @@
 
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/models/service/auth_service.dart';
+import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -67,6 +69,14 @@ class _SignUpPageState extends State<SignUpPage> {
                       //   const SnackBar(content: Text('Processing Data')),
                       // );
 
+                      // signUpUser(_nameController.text, _emailController.text,
+                      //     _passwordController.text, context);
+
+                      Provider.of<AuthService>(context, listen: false).signUp(
+                          _nameController.text,
+                          _emailController.text,
+                          _passwordController.text,
+                          context);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

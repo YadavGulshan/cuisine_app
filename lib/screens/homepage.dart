@@ -179,7 +179,7 @@ class _MainPageState extends State<MainPage> {
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      "Eat what makes you happy",
+                      "Popular picks",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,

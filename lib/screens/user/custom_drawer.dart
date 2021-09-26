@@ -1,5 +1,9 @@
+import 'package:cuisine_app/main.dart';
+import 'package:cuisine_app/provider/authstream1.dart';
+import 'package:cuisine_app/screens/auth/auth_page.dart';
 import 'package:cuisine_app/widgets/toolbar_tiles.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MyCustomDrawer extends StatefulWidget {
   const MyCustomDrawer({
@@ -13,10 +17,12 @@ class MyCustomDrawer extends StatefulWidget {
 class _MyCustomDrawerState extends State<MyCustomDrawer> {
   @override
   Widget build(BuildContext context) {
+    AuthService provider = Provider.of(context, listen: false);
     Size screen = MediaQuery.of(context).size;
 
     return MaterialApp(
       home: Scaffold(
+        drawerEnableOpenDragGesture: false,
         body: Column(
           children: [
             SizedBox(
@@ -56,22 +62,20 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                               children: [
                                 SizedBox(
                                   width: screen.width * 0.7,
-                                  child: const Text(
-                                    "",
+                                  child: Text(
+                                    provider.userName,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 22,
-                                    ),
+                                    style: const TextStyle(
+                                        fontSize: 22, color: Colors.black),
                                   ),
                                 ),
                                 SizedBox(
                                   width: screen.width * 0.6,
-                                  child: const Text(
-                                    "",
+                                  child: Text(
+                                    provider.userEmail,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
+                                    style: const TextStyle(
+                                        fontSize: 14, color: Colors.black),
                                   ),
                                 ),
                               ],
@@ -109,7 +113,8 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
               icon: Icons.logout,
               title: "Log out",
               ontap: () {
-                Navigator.pop(context);
+                provider.logout();
+                // Navigator.pop(context);
               },
             ),
             const Divider(

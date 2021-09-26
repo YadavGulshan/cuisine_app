@@ -43,8 +43,9 @@ class RestaurantWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(14, 14, 14, 0),
         child: Container(
-          height: screenHeight * 0.35,
+          height: screenHeight * 0.3 + 10,
           decoration: BoxDecoration(
+            // color: Colors.amber,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
               color: Theme.of(context).primaryColorLight,
@@ -54,9 +55,12 @@ class RestaurantWidget extends StatelessWidget {
           child: Column(
             children: [
               CachedNetworkImage(
+                height: screenHeight * 0.2,
+
+                /// TODO: Breakpoint
                 imageUrl: imageUrl,
                 imageBuilder: (context, imageProvider) => Container(
-                  height: screenHeight * 0.20,
+                  height: screenHeight * 0.2,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12),
@@ -71,73 +75,77 @@ class RestaurantWidget extends StatelessWidget {
                 placeholder: (context, url) => Shimmer.fromColors(
                   baseColor: Colors.grey,
                   highlightColor: Colors.white,
-                  child: Container(height: screenHeight * 0.23),
+                  child: Container(height: screenHeight * 0.2),
                 ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            height: screenHeight * 0.05,
-                            width: screenWidth * 0.5,
-                            child: Text(
-                              title,
-                              overflow: TextOverflow.ellipsis,
-                              style: Theme.of(context).textTheme.headline6,
+              Container(
+                // color: Colors.black,
+                height: screenHeight * 0.09 + 10,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: SizedBox(
+                              // height: screenHeight * 0.05,
+                              width: screenWidth * 0.5,
+                              child: Text(
+                                title,
+                                overflow: TextOverflow.ellipsis,
+                                style: Theme.of(context).textTheme.headline6,
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: screenWidth * 0.5,
-                          child: Text(
-                            category,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                          ),
-                        )
-                      ],
+                          SizedBox(
+                            width: screenWidth * 0.5,
+                            child: Text(
+                              category,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                            ),
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                  const Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.green,
-                              borderRadius: BorderRadius.circular(5)),
-                          height: screenHeight * 0.035,
-                          width: screenWidth * 0.15,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                rating,
-                                overflow: TextOverflow.ellipsis,
-                                style: const TextStyle(
-                                  color: Colors.white,
+                    const Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                                color: Colors.green,
+                                borderRadius: BorderRadius.circular(5)),
+                            // height: screenHeight * 0.035,
+                            width: screenWidth * 0.15,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  rating,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                  ),
                                 ),
-                              ),
-                              const Icon(
-                                Icons.star,
-                                color: Colors.white,
-                                size: 20,
-                              ),
-                            ],
+                                const Icon(
+                                  Icons.star,
+                                  color: Colors.white,
+                                  size: 20,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

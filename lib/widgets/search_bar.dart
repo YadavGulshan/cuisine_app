@@ -1,3 +1,4 @@
+import 'package:cuisine_app/screens/user/search_result.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
@@ -10,6 +11,10 @@ class SearchBar extends StatelessWidget {
   bool autofocus;
   EdgeInsetsGeometry edgeInsetsGeometry;
   double blurRadius;
+  TextEditingController mycontroller = TextEditingController();
+
+  /// Form key
+  final _SearchformKey = GlobalKey<FormState>();
   SearchBar({
     Key? key,
     this.searchIcon = false,
@@ -27,12 +32,13 @@ class SearchBar extends StatelessWidget {
       padding: edgeInsetsGeometry,
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: primaryColor),
-            // color: (appTheme == Brightness.light)
-            //     ? Colors.white
-            //     : Colors.grey[800],
-            boxShadow: [BoxShadow(blurRadius: blurRadius)]),
+          color: Theme.of(context).primaryColorLight,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Theme.of(context).primaryColor),
+          boxShadow: [
+            BoxShadow(blurRadius: blurRadius),
+          ],
+        ),
         height: height,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -58,22 +64,32 @@ class SearchBar extends StatelessWidget {
             ),
             Flexible(
               fit: FlexFit.tight,
-              child: TextFormField(
-                onSaved: (value) {
-                  /// Perform a search request with db
-                  // get request
-                  http.get(Uri.parse("$baseUrl/restaurant/search/$value"));
-                  // TODO: complete this section.
-                },
-                enabled: true,
-                autofocus: autofocus,
-                // cursorHeight: 25,
-                style: const TextStyle(fontSize: 20),
-                decoration: InputDecoration(
+              child: Form(
+                key: _SearchformKey,
+                child: TextFormField(
+                  controller: mycontroller,
                   enabled: true,
-                  border: InputBorder.none,
-                  alignLabelWithHint: true,
-                  hintText: hinttext,
+                  autofocus: autofocus,
+                  onFieldSubmitted: (val) {
+                    debugPrint("Submitted");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => SearchResultPage(
+                          query: val,
+                        ),
+                      ),
+                    );
+                  },
+                  // cursorHeight: 25,
+                  style: Theme.of(context).textTheme.bodyText2,
+                  decoration: InputDecoration(
+                    enabled: true,
+                    border: InputBorder.none,
+                    alignLabelWithHint: true,
+                    hintText: hinttext,
+                    fillColor: Colors.white,
+                  ),
                 ),
               ),
             ),

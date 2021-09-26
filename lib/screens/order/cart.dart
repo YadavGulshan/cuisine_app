@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/checkout/checkout_widget.dart';
+import 'package:cuisine_app/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,16 +15,16 @@ class CartPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CartModel provider = Provider.of<CartModel>(context, listen: true);
-    TextStyle titlStyle = TextStyle(
+    TextStyle titlStyle = const TextStyle(
       fontWeight: FontWeight.w400,
       fontSize: 14,
     );
-    TextStyle amountStyle = TextStyle();
+    TextStyle amountStyle = const TextStyle();
 
     Size screen = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Cart",
           style: TextStyle(fontSize: 24),
         ),
@@ -31,9 +32,54 @@ class CartPage extends StatelessWidget {
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Container(
+              height: screen.height * 0.2,
+              color: Theme.of(context).primaryColorLight,
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Shipping address"),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text("edit"),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.place,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Gulshan Yadav",
+                            style: TextStyle(fontSize: 5),
+                          ),
+                          Text(7977421559.toString()),
+                          Text("Do laborum officia veniam aliqua."),
+                          Row(
+                            children: [Text("Thane West"), Text("400607")],
+                          ),
+                        ],
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
           // Cart List
           SizedBox(
-            height: screen.height * 0.7,
+            height: screen.height * 0.45,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: ListView.builder(
@@ -65,7 +111,7 @@ class CartPage extends StatelessWidget {
                 // Delivery Price
                 CheckoutTranscript(
                   title: "Delivery Charges",
-                  amount: 69, // TODO: Use backend for fetching this
+                  amount: 0, // TODO: Use backend for fetching this
                   titleStyle: titlStyle,
                   amountStyle: amountStyle,
                 ),
@@ -74,8 +120,8 @@ class CartPage extends StatelessWidget {
                   title: "Total",
 
                   // TODO: #issue: value is not being updated in realtime
-                  amount: provider.totalPrice + 69, // Fix this tooo. 69*
-                  titleStyle: TextStyle(
+                  amount: provider.totalPrice + 0, // Fix this tooo. 69*
+                  titleStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
@@ -102,7 +148,7 @@ class CartPage extends StatelessWidget {
                         onPressed: () {
                           // Provider.of<CartModel>(context).();
                         },
-                        child: Text(
+                        child: const Text(
                           "Checkout",
                           style: TextStyle(
                             fontSize: 20,
@@ -137,7 +183,7 @@ class CartContent extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            height: screen.height * 0.13,
+            height: screen.height * 0.10,
             width: screen.width * 0.3,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
@@ -164,7 +210,7 @@ class CartContent extends StatelessWidget {
                         .items[index]
                         .title
                         .toString(),
-                    style: TextStyle(fontSize: 20),
+                    style: const TextStyle(fontSize: 20),
                   ),
                 ),
                 Padding(
@@ -175,7 +221,7 @@ class CartContent extends StatelessWidget {
                             .items[index]
                             .price
                             .toString(),
-                    style: TextStyle(fontSize: 14),
+                    style: const TextStyle(fontSize: 14),
                     textAlign: TextAlign.left,
                   ),
                 ),
