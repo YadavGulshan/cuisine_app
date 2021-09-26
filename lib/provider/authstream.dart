@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:cuisine_app/models/service/auth_service.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:cuisine_app/constants.dart';
 import 'package:flutter/material.dart';

@@ -3,8 +3,6 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/screens/auth/login.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class GetStartedPage extends StatelessWidget {
   final loginCallback;
@@ -65,9 +63,12 @@ class GetStartedPage extends StatelessWidget {
                       ),
                       InkWell(
                           onTap: () {
-                            pushNewScreen(context, screen: LoginPage());
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage()));
                           },
-                          child: button(screen, "Get Started")),
+                          child: button(context, screen, "Get Started")),
                     ],
                   ),
                 ),
@@ -81,13 +82,13 @@ class GetStartedPage extends StatelessWidget {
   }
 }
 
-Widget button(Size screen, String title) {
+Widget button(context, Size screen, String title) {
   return Container(
     height: screen.height * 0.065,
     width: screen.width * 0.4,
     decoration: BoxDecoration(
       borderRadius: BorderRadius.circular(30),
-      color: primaryColor,
+      color: Theme.of(context).primaryColor,
     ),
     child: Center(
       child: Text(

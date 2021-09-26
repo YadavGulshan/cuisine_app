@@ -12,7 +12,7 @@ const Color myprimarylightColor = Color(0xffc7dfff);
 
 Brightness appTheme = Brightness.light;
 const String appName = "Atica";
-const String baseUrl = "http://127.0.0.1:800/api";
+const String baseUrl = "https://laravel-production-af1a.up.railway.app";
 // Some urls for testing
 String randomImage = "https://source.unsplash.com/user/erondu";
 String randomImage2 = "https://picsum.photos/800/400";

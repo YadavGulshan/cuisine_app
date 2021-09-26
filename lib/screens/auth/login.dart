@@ -1,4 +1,5 @@
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/screens/auth/signup.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
@@ -6,6 +7,9 @@ import 'package:email_validator/email_validator.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({Key? key}) : super(key: key);
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
@@ -56,19 +60,21 @@ class LoginPage extends StatelessWidget {
                             right: 14,
                           ),
                           child: TextFormField(
+                            controller: _emailController,
                             style: const TextStyle(fontSize: 20),
                             obscureText: false,
-                            decoration: const InputDecoration(
-                              contentPadding: EdgeInsets.all(10),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.all(10),
                               enabled: true,
-                              label: Text("Email"),
+                              label: const Text("Email"),
                               alignLabelWithHint: true,
                               hintText: "Email",
                               focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: primaryColor, width: 2.0),
+                                borderSide: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2.0),
                               ),
-                              enabledBorder: OutlineInputBorder(
+                              enabledBorder: const OutlineInputBorder(
                                 borderSide:
                                     BorderSide(color: Colors.black, width: 1.0),
                               ),
@@ -82,8 +88,13 @@ class LoginPage extends StatelessWidget {
                       ),
                       Flexible(
                         flex: 2,
-                        child: textfield("Password",
-                            "Please enter your password", "Password", true),
+                        child: textfield(
+                          "Password",
+                          "Please enter your password",
+                          _passwordController,
+                          "Password",
+                          false,
+                        ),
                       ),
                       Flexible(
                         flex: 0,
@@ -111,6 +122,18 @@ class LoginPage extends StatelessWidget {
                                   const SnackBar(
                                       content: Text('Processing Data')),
                                 );
+                                // perform a post request with email and password.
+                                // if success, navigate to home page.
+                                // if failure, show error message.
+                                signInUser(
+                                    _emailController.text.toString(),
+                                    _passwordController.text.toString(),
+                                    context);
+
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //         builder: (context) => const MainPage()));
                               }
                             },
                             child: Container(
@@ -145,12 +168,13 @@ class LoginPage extends StatelessWidget {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => SignUpPage()),
+                                      builder: (context) => const SignUpPage()),
                                 );
                               },
-                              child: const Text(
+                              child: Text(
                                 "Sign Up",
-                                style: TextStyle(color: primaryColor),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor),
                               ))
                         ],
                       ),
@@ -165,14 +189,15 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  Padding textfield(
-      String hint, String validatorString, String label, bool isobsecure) {
+  Padding textfield(String hint, String validatorString,
+      TextEditingController _controller, String label, bool isobsecure) {
     return Padding(
       padding: const EdgeInsets.only(
         left: 14,
         right: 14,
       ),
       child: TextFormField(
+        controller: _controller,
         style: const TextStyle(fontSize: 20),
         obscureText: isobsecure,
         decoration: InputDecoration(

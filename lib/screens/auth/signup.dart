@@ -3,11 +3,9 @@
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/models/service/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class SignUpPage extends StatefulWidget {
-  SignUpPage({Key? key}) : super(key: key);
+  const SignUpPage({Key? key}) : super(key: key);
 
   @override
   State<SignUpPage> createState() => _SignUpPageState();
@@ -55,7 +53,8 @@ class _SignUpPageState extends State<SignUpPage> {
           Center(
             child: Theme(
               data: Theme.of(context).copyWith(
-                  colorScheme: const ColorScheme.light(primary: primaryColor)),
+                  colorScheme: ColorScheme.light(
+                      primary: Theme.of(context).primaryColor)),
               child: Stepper(
                 currentStep: currentStep,
                 steps: getStep(),
@@ -64,9 +63,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     // Validate everything first
                     if (_signUpFormKey.currentState!.validate() &&
                         _addressFormKey.currentState!.validate()) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Processing Data')),
-                      );
+                      // ScaffoldMessenger.of(context).showSnackBar(
+                      //   const SnackBar(content: Text('Processing Data')),
+                      // );
+
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
@@ -95,22 +95,6 @@ class _SignUpPageState extends State<SignUpPage> {
         ],
       ),
     );
-
-    /// Future that will rout the user to homepage after the confirmation by server.
-    FutureBuilder<User> buildFutureBuilder() {
-      return FutureBuilder<User>(
-        future: _signMeUp,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Text(snapshot.data!.name);
-          } else if (snapshot.hasError) {
-            return Text('${snapshot.error}');
-          }
-
-          return const CircularProgressIndicator();
-        },
-      );
-    }
   }
 
   List<Step> getStep() => [

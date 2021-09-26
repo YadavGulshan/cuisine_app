@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
+import 'package:http/http.dart' as http;
 
 class SearchBar extends StatelessWidget {
   bool searchIcon;
@@ -58,6 +59,12 @@ class SearchBar extends StatelessWidget {
             Flexible(
               fit: FlexFit.tight,
               child: TextFormField(
+                onSaved: (value) {
+                  /// Perform a search request with db
+                  // get request
+                  http.get(Uri.parse("$baseUrl/restaurant/search/$value"));
+                  // TODO: complete this section.
+                },
                 enabled: true,
                 autofocus: autofocus,
                 // cursorHeight: 25,

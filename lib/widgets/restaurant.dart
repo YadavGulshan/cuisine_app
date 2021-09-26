@@ -41,44 +41,22 @@ class RestaurantWidget extends StatelessWidget {
             ));
       },
       child: Padding(
-        padding: const EdgeInsets.fromLTRB(14, 18, 14, 2),
-
-        // Elevation is used to create shadow on the card
+        padding: const EdgeInsets.fromLTRB(14, 14, 14, 0),
         child: Container(
           height: screenHeight * 0.35,
-          // height: 250,
-          // width: screenWidth * 0.9,
           decoration: BoxDecoration(
-            // color: (appTheme == Brightness.light)
-            //     ? primaryLightColor
-            //     : Colors.grey[800],
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              // color: (appTheme == Brightness.light)
-              //     ? primaryLightColor
-              //     : Colors.transparent,
-              color: primaryLightColor,
-              width: 2,
+              color: Theme.of(context).primaryColorLight,
+              width: 3,
             ),
           ),
           child: Column(
             children: [
-              // Image goes here.
-              // Container(
-              //   height: screenHeight * 0.23,
-              //   decoration: BoxDecoration(
-              // borderRadius: const BorderRadius.only(
-              //   topLeft: Radius.circular(12),
-              //   topRight: Radius.circular(12),
-              // ),
-              //     image: DecorationImage(
-              //         image: NetworkImage(imageUrl), fit: BoxFit.cover),
-              //   ),
-              // ),
               CachedNetworkImage(
                 imageUrl: imageUrl,
                 imageBuilder: (context, imageProvider) => Container(
-                  height: screenHeight * 0.23,
+                  height: screenHeight * 0.20,
                   decoration: BoxDecoration(
                     borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(12),
@@ -90,11 +68,6 @@ class RestaurantWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // placeholder: (context, url) => Container(
-                //   decoration: const BoxDecoration(
-                //     color: Colors.grey,
-                //   ),
-                // ),
                 placeholder: (context, url) => Shimmer.fromColors(
                   baseColor: Colors.grey,
                   highlightColor: Colors.white,
@@ -102,34 +75,25 @@ class RestaurantWidget extends StatelessWidget {
                 ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-
-              // Name Description and price.
               Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
                       children: [
-                        // Title of restaurant
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
-                            height: 20,
+                            height: screenHeight * 0.05,
                             width: screenWidth * 0.5,
-                            // color: Colors.red,
                             child: Text(
                               title,
                               overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
+                              style: Theme.of(context).textTheme.headline6,
                             ),
                           ),
                         ),
-                        // SHort description
                         SizedBox(
-                          height: 40,
                           width: screenWidth * 0.5,
                           child: Text(
                             category,
@@ -142,42 +106,34 @@ class RestaurantWidget extends StatelessWidget {
                   ),
                   const Spacer(),
                   Padding(
-                    padding: const EdgeInsets.all(14.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: Container(
-                            height: screenHeight / 24,
-                            width: screenWidth / 6.5,
-                            color: Colors.green,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  rating, // rating. // TODO: Implement rating later.
-                                  overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
-                                    // fontWeight: FontWeight.bold,
-                                    // fontSize: 18,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                                const Icon(
-                                  Icons.star,
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Colors.green,
+                              borderRadius: BorderRadius.circular(5)),
+                          height: screenHeight * 0.035,
+                          width: screenWidth * 0.15,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                rating,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(
                                   color: Colors.white,
-                                  size: 20,
                                 ),
-                              ],
-                            ),
+                              ),
+                              const Icon(
+                                Icons.star,
+                                color: Colors.white,
+                                size: 20,
+                              ),
+                            ],
                           ),
                         ),
-                        // Price section.
-                        // Text("₹200 for one",
-                        //     style: TextStyle(
-                        //       color: Colors.grey,
-                        //     ))
                       ],
                     ),
                   ),

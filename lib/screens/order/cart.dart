@@ -184,7 +184,7 @@ class CartContent extends StatelessWidget {
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: primaryLightColor,
+                    color: Theme.of(context).primaryColorLight,
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,

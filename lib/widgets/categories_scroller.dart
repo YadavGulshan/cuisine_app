@@ -52,15 +52,15 @@ Widget categoryButton(
               height: 80,
               width: 80,
             ),
-            baseColor: primaryColor,
-            highlightColor: primaryLightColor),
+            baseColor: Theme.of(context).primaryColor,
+            highlightColor: Theme.of(context).primaryColorLight),
         errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
       Padding(
         padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
         child: Text(
           name,
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
       )
     ],

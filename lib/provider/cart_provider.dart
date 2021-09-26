@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:cuisine_app/constants.dart';
 import 'package:flutter/cupertino.dart';
 
 class CartModel extends ChangeNotifier {

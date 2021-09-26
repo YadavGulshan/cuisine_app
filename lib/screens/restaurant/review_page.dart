@@ -30,7 +30,7 @@ class ReviewPage extends StatelessWidget {
                       height: screen.height * 0.068,
                       width: screen.width,
                       decoration: BoxDecoration(
-                        color: primaryLightColor,
+                        color: Theme.of(context).primaryColorLight,
                         borderRadius: const BorderRadius.all(
                           Radius.circular(20),
                         ),

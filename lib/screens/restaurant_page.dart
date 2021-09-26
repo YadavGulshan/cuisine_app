@@ -100,7 +100,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                       imageUrl: widget.imageUrl,
                       imageBuilder: (context, imageProvider) => Container(
                         decoration: BoxDecoration(
-                            color: primaryColor,
+                            color: Theme.of(context).primaryColor,
                             image: DecorationImage(
                               image: imageProvider,
                               fit: BoxFit.cover,
@@ -117,7 +117,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                           ),
                         ),
                         baseColor: primaryColor,
-                        highlightColor: primaryLightColor,
+                        highlightColor: Theme.of(context).primaryColorLight,
                       ),
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
@@ -213,7 +213,7 @@ class _RestaurantPageState extends State<RestaurantPage>
         floatingActionButton:
             (Provider.of<CartModel>(context, listen: true).totalQuantity != 0)
                 ? FloatingActionButton(
-                    backgroundColor: primaryColor,
+                    backgroundColor: Theme.of(context).primaryColor,
                     onPressed: () {
                       pushNewScreen(context, screen: CartPage());
                     },
