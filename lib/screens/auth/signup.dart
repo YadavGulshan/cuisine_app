@@ -137,6 +137,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   hint: "9876543210",
                   validatorText: "Phone",
                   controller: _phoneController,
+                  inputType: TextInputType.number,
                 ),
                 // Password section
                 Padding(
@@ -264,10 +265,12 @@ class _SignUpPageState extends State<SignUpPage> {
                       validatorText: "City",
                       controller: _cityController),
                   MyTextField(
-                      label: "Pincode",
-                      hint: "Pincode",
-                      validatorText: "pincode",
-                      controller: _zipCodeController),
+                    label: "Pincode",
+                    hint: "Pincode",
+                    validatorText: "pincode",
+                    controller: _zipCodeController,
+                    inputType: TextInputType.number,
+                  ),
                   MyTextField(
                       label: "State",
                       hint: "State",
@@ -351,11 +354,13 @@ class MyTextField extends StatelessWidget {
     required this.hint,
     required this.validatorText,
     required this.controller,
+    this.inputType = TextInputType.text,
   }) : super(key: key);
   final bool isobsecure;
   final String label;
   final String hint;
   final String validatorText;
+  TextInputType inputType;
   TextEditingController controller;
   @override
   Widget build(BuildContext context) {
@@ -367,6 +372,7 @@ class MyTextField extends StatelessWidget {
         top: 14,
       ),
       child: TextFormField(
+        keyboardType: inputType,
         controller: controller,
         style: const TextStyle(fontSize: 16),
         obscureText: isobsecure,

@@ -79,7 +79,7 @@ class RestaurantWidget extends StatelessWidget {
                 ),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
-              Container(
+              SizedBox(
                 // color: Colors.black,
                 height: screenHeight * 0.09 + 10,
                 child: Row(
@@ -116,12 +116,13 @@ class RestaurantWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Container(
                             decoration: BoxDecoration(
                                 color: Colors.green,
                                 borderRadius: BorderRadius.circular(5)),
-                            // height: screenHeight * 0.035,
+                            height: screenHeight * 0.04,
                             width: screenWidth * 0.15,
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

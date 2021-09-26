@@ -230,14 +230,17 @@ class AuthService extends ChangeNotifier {
     );
 
     if (response.statusCode == 201) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const MainPage()));
+      debugPrint("Done!!");
+
       /// Sign Up approved
       _isLoggedIn = true;
       _isbusy = false;
       notifyListeners();
+      debugPrint("Done!!");
 
       parseAndProcessInfo(jsonDecode(response.body));
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const MainPage()));
     } else {
       _isbusy = false;
       notifyListeners();
@@ -326,7 +329,7 @@ class AuthService extends ChangeNotifier {
 
     final token = await storage.read(key: 'token');
     debugPrint("Token: $token");
-    if (token != "") {
+    if (token != null) {
       final prefs = await SharedPreferences.getInstance();
       name = prefs.getString("name").toString();
       email = prefs.getString("email").toString();

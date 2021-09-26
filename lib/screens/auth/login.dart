@@ -94,7 +94,7 @@ class LoginPage extends StatelessWidget {
                           "Please enter your password",
                           _passwordController,
                           "Password",
-                          false,
+                          true,
                         ),
                       ),
                       Flexible(
@@ -170,7 +170,7 @@ class LoginPage extends StatelessWidget {
                           ),
                           InkWell(
                               onTap: () {
-                                Navigator.push(
+                                Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => const SignUpPage()),

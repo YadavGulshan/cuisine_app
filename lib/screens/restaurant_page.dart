@@ -18,7 +18,7 @@ import 'package:badges/badges.dart';
 import 'package:shimmer/shimmer.dart';
 
 class RestaurantPage extends StatefulWidget {
-  final String title;
+  String title;
   String address;
   String rating;
   String restaurantId;
@@ -179,7 +179,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                 //   parent: AlwaysScrollableScrollPhysics(),
                 // ),
                 controller: _controller,
-                children: const [
+                children: [
                   // DeliveryPage(),
                   // FutureBuilder<PaletteGenerator>(
                   //     future: _updatePaletteGenerator(), // async work
@@ -203,8 +203,10 @@ class _RestaurantPageState extends State<RestaurantPage>
                   //           }
                   //       }
                   //     }),
-                  DeliveryPage(),
-                  ReviewPage(),
+                  DeliveryPage(
+                    restaurantid: widget.restaurantId,
+                  ),
+                  const ReviewPage(),
                 ],
               ),
             ),
