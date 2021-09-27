@@ -2,6 +2,7 @@ import 'package:cuisine_app/main.dart';
 import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/screens/auth/auth_page.dart';
 import 'package:cuisine_app/screens/order/cart.dart';
+import 'package:cuisine_app/screens/user/myorders.dart';
 import 'package:cuisine_app/screens/user/profile_section.dart';
 import 'package:cuisine_app/widgets/toolbar_tiles.dart';
 import 'package:flutter/material.dart';
@@ -111,26 +112,26 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                 }),
             ToolBarTile(
                 icon: Icons.card_travel,
-                title: "Your Orders",
+                title: "My Orders",
                 ontap: () {
                   // Open cart page
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const CartPage()));
+                          builder: (context) => const MyOrders()));
                 }),
-            ToolBarTile(
-              icon: Icons.settings_outlined,
-              title: "Settings",
-              ontap: () {
-                openAppSettings();
-              },
-            ),
-            ToolBarTile(
-              icon: Icons.info_outline,
-              title: "About",
-              ontap: () {},
-            ),
+            // ToolBarTile(
+            //   icon: Icons.settings_outlined,
+            //   title: "Settings",
+            //   ontap: () {
+            //     openAppSettings();
+            //   },
+            // ),
+            // ToolBarTile(
+            //   icon: Icons.info_outline,
+            //   title: "About",
+            //   ontap: () {},
+            // ),
             ToolBarTile(
               icon: Icons.logout,
               title: "Log out",
@@ -215,14 +216,5 @@ class TitleWidget extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-_launchCaller() async {
-  const url = "tel:100";
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
   }
 }

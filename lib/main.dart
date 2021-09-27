@@ -6,6 +6,7 @@ import 'package:cuisine_app/provider/infoprovider.dart';
 import 'package:cuisine_app/screens/auth/auth_page.dart';
 import 'package:cuisine_app/screens/homepage.dart';
 import 'package:cuisine_app/screens/order/checkout/checkout_screen.dart';
+import 'package:cuisine_app/screens/user/myorders.dart';
 import 'package:cuisine_app/screens/user/profile_section.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/user.dart';
@@ -107,11 +108,12 @@ class InitialCheckState extends State<InitialCheck> {
   @override
   Widget build(BuildContext context) {
     AuthService provider = Provider.of<AuthService>(context, listen: true);
-    return (provider.busycheck)
-        ? const Center(child: CircularProgressIndicator())
-        : (provider.loginCheck)
-            ? const MainPage()
-            : const GetStartedPage();
-    // return ManageProfile();
+    // return (provider.busycheck)
+    //     ? const Center(child: CircularProgressIndicator())
+    //     : (provider.loginCheck)
+    //         ? const MainPage()
+    //         : const GetStartedPage();
+    // return MyOrders();
+    return ManageProfile();
   }
 }

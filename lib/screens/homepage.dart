@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:badges/badges.dart';
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/user/custom_drawer.dart';
 import 'package:cuisine_app/screens/user/search_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
@@ -16,6 +18,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+
+import 'order/cart.dart';
 
 class MainPage extends StatefulWidget {
   final logoutCallback;
@@ -70,187 +74,209 @@ class _MainPageState extends State<MainPage> {
     CurrentLocation provider = Provider.of<CurrentLocation>(context);
     var restaurantList;
     return Scaffold(
-        body: FutureBuilder(
-      future: futureRestaurant,
-      builder: (context, AsyncSnapshot<List<RestaurantList>> snapshot) {
-        if (snapshot.hasData) {
-          restaurantList = SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                var currentRestaurant = snapshot.data![index];
-                return RestaurantWidget(
-                  title: currentRestaurant.title,
-                  imageUrl: "$baseUrl/" + currentRestaurant.imageUrl,
-                  category: currentRestaurant.category,
-                  rating: currentRestaurant.rating,
-                  address: currentRestaurant.address,
-                  id: currentRestaurant.id.toString(),
-                );
-              },
-              childCount: snapshot.data?.length,
-            ),
-          );
+      body: FutureBuilder(
+        future: futureRestaurant,
+        builder: (context, AsyncSnapshot<List<RestaurantList>> snapshot) {
+          if (snapshot.hasData) {
+            restaurantList = SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  var currentRestaurant = snapshot.data![index];
+                  return RestaurantWidget(
+                    title: currentRestaurant.title,
+                    imageUrl: "$baseUrl/" + currentRestaurant.imageUrl,
+                    category: currentRestaurant.category,
+                    rating: currentRestaurant.rating,
+                    address: currentRestaurant.address,
+                    id: currentRestaurant.id.toString(),
+                  );
+                },
+                childCount: snapshot.data?.length,
+              ),
+            );
 
-          /// Main screen.
-          return CustomScrollView(
-            shrinkWrap: true,
-            slivers: [
-              SliverAppBar(
-                pinned: true,
-                elevation: 0.4,
-                expandedHeight: 110,
-                floating: false,
-                flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.pin,
-                  background: SafeArea(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  IconButton(
-                                    icon: Theme(
-                                      data: Theme.of(context).copyWith(),
-                                      child: const Icon(
-                                          Icons.location_on_outlined),
+            /// Main screen.
+            return CustomScrollView(
+              shrinkWrap: true,
+              slivers: [
+                SliverAppBar(
+                  pinned: true,
+                  elevation: 0.4,
+                  expandedHeight: 110,
+                  floating: false,
+                  flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.pin,
+                    background: SafeArea(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    IconButton(
+                                      icon: Theme(
+                                        data: Theme.of(context).copyWith(),
+                                        child: const Icon(
+                                            Icons.location_on_outlined),
+                                      ),
+                                      onPressed: () {
+                                        bottomSheet(context, screenHeight);
+                                      },
                                     ),
-                                    onPressed: () {
-                                      bottomSheet(context, screenHeight);
-                                    },
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                    width: screenWidth * 0.65,
-                                    child: Text(
-                                      provider.addressStatus,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: const TextStyle(
-                                        fontSize: 17,
-                                        fontStyle: FontStyle.normal,
-                                        fontWeight: FontWeight.w600,
-                                        decorationStyle:
-                                            TextDecorationStyle.dotted,
-                                        decoration: TextDecoration.underline,
+                                    SizedBox(
+                                      height: 20,
+                                      width: screenWidth * 0.65,
+                                      child: Text(
+                                        provider.addressStatus,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          fontSize: 17,
+                                          fontStyle: FontStyle.normal,
+                                          fontWeight: FontWeight.w600,
+                                          decorationStyle:
+                                              TextDecorationStyle.dotted,
+                                          decoration: TextDecoration.underline,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  pushNewScreen(context,
-                                      screen: const MyCustomDrawer());
-                                },
-                                icon: Theme(
-                                  data: Theme.of(context).copyWith(),
-                                  child: const Icon(
-                                    Icons.menu_outlined,
+                                  ],
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    pushNewScreen(context,
+                                        screen: const MyCustomDrawer());
+                                  },
+                                  icon: Theme(
+                                    data: Theme.of(context).copyWith(),
+                                    child: const Icon(
+                                      Icons.menu_outlined,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                bottom: PreferredSize(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
-                    child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: Theme.of(context).primaryColor,
-                            width: 1,
-                          ),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.grey,
-                              blurRadius: 4.0,
-                            ),
-                          ],
-                          color: Theme.of(context).primaryColorLight,
-                        ),
-                        height: screenHeight * 0.055,
-                        width: screenWidth * 0.9,
-                        child: InkWell(
-                          onTap: () {
-                            pushNewScreen(context, screen: const SearchPage());
-                          },
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
-                                Icon(
-                                  Icons.search_outlined,
-                                ),
-                                Text("Restaurant name, cuisine and more"),
                               ],
                             ),
-                          ),
-                        )),
-                  ),
-                  preferredSize: const Size.fromHeight(8),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Column(
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(14, 0, 0, 20),
-                      child: Align(
-                        alignment: Alignment.topLeft,
-                        child: Text(
-                          "Popular picks",
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.w500,
-                            wordSpacing: 0.6,
-                          ),
+                          ],
                         ),
                       ),
                     ),
-                  ],
+                  ),
+                  bottom: PreferredSize(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                      child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: Theme.of(context).primaryColor,
+                              width: 1,
+                            ),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.grey,
+                                blurRadius: 4.0,
+                              ),
+                            ],
+                            color: Theme.of(context).primaryColorLight,
+                          ),
+                          height: screenHeight * 0.055,
+                          width: screenWidth * 0.9,
+                          child: InkWell(
+                            onTap: () {
+                              pushNewScreen(context,
+                                  screen: const SearchPage());
+                            },
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(
+                                    Icons.search_outlined,
+                                  ),
+                                  Text("Restaurant name, cuisine and more"),
+                                ],
+                              ),
+                            ),
+                          )),
+                    ),
+                    preferredSize: const Size.fromHeight(8),
+                  ),
                 ),
-              ),
-              SliverGrid(
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 130,
-                  mainAxisSpacing: 5.0,
-                  crossAxisSpacing: 1.0,
-                  childAspectRatio: 0.9,
+                SliverToBoxAdapter(
+                  child: Column(
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(14, 0, 0, 20),
+                        child: Align(
+                          alignment: Alignment.topLeft,
+                          child: Text(
+                            "Popular picks",
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w500,
+                              wordSpacing: 0.6,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return categoryButton(TestCategory[index]["title"],
-                        TestCategory[index]["imageUrl"]);
+                SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 130,
+                    mainAxisSpacing: 5.0,
+                    crossAxisSpacing: 1.0,
+                    childAspectRatio: 0.9,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return categoryButton(TestCategory[index]["title"],
+                          TestCategory[index]["imageUrl"]);
+                    },
+                    childCount: TestCategory.length,
+                  ),
+                ),
+                restaurantList,
+              ],
+            );
+          } else if (snapshot.hasError) {
+            //TODO: error screen.
+            return const Center(
+              child: Text("Something gone Wrong."),
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
+      floatingActionButton:
+          (Provider.of<CartModel>(context, listen: true).totalQuantity != 0)
+              ? FloatingActionButton(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  onPressed: () {
+                    pushNewScreen(context, screen: const CartPage());
                   },
-                  childCount: TestCategory.length,
-                ),
-              ),
-              restaurantList,
-            ],
-          );
-        } else if (snapshot.hasError) {
-          //TODO: error screen.
-          return const Center(
-            child: Text("Something gone Wrong."),
-          );
-        }
-        return Center(
-          child: CircularProgressIndicator(),
-        );
-      },
-    ));
+                  child: Badge(
+                    badgeColor: Colors.white,
+                    animationType: BadgeAnimationType.fade,
+                    badgeContent: Text(
+                        Provider.of<CartModel>(context, listen: true)
+                            .totalQuantity
+                            .toString()),
+                    child: const Icon(
+                      Icons.shopping_cart_outlined,
+                      color: primaryLightColor,
+                    ),
+                  ))
+              : null,
+    );
   }
 }
 
