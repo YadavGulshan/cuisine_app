@@ -205,8 +205,17 @@ class AuthService extends ChangeNotifier {
     debugPrint("Task of storing info ended.");
   }
 
-  signUp(String _name, String _email, String _password,
-      BuildContext context) async {
+  signUp(
+    String _name,
+    String _email,
+    String _password,
+    BuildContext context,
+    String phone,
+    String address,
+    String city,
+    String pincode,
+    String state,
+  ) async {
     _isbusy = true;
     notifyListeners();
 
@@ -238,6 +247,13 @@ class AuthService extends ChangeNotifier {
       _isLoggedIn = true;
       _isbusy = false;
       notifyListeners();
+      final prefs = await SharedPreferences.getInstance();
+      prefs.setString("phone", phone);
+      prefs.setString("address", address);
+      prefs.setString("city", city);
+      prefs.setString("pincode", pincode);
+      prefs.setString("state", state);
+
       debugPrint("Done!!");
 
       parseAndProcessInfo(jsonDecode(response.body));

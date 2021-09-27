@@ -73,10 +73,16 @@ class _SignUpPageState extends State<SignUpPage> {
                       //     _passwordController.text, context);
 
                       Provider.of<AuthService>(context, listen: false).signUp(
-                          _nameController.text,
-                          _emailController.text,
-                          _passwordController.text,
-                          context);
+                        _nameController.text,
+                        _emailController.text,
+                        _passwordController.text,
+                        context,
+                        _phoneController.text,
+                        _addressController.text,
+                        _cityController.text,
+                        _zipCodeController.text,
+                        _stateController.text,
+                      );
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(

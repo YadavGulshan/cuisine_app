@@ -115,10 +115,11 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                 title: "My Orders",
                 ontap: () {
                   // Open cart page
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const MyOrders()));
+                  pushNewScreen(context, screen: const MyOrders());
+                  // Navigator.(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => const MyOrders()));
                 }),
             // ToolBarTile(
             //   icon: Icons.settings_outlined,
@@ -151,23 +152,26 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
               title: "Send Feedback",
               padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
               fontSize: 18,
-              ontap: () {
-                // SnackBar
-              },
+              toshowSnackbar: true,
+              color: Colors.green,
+              message: "Work in Progress",
             ),
             TitleWidget(
-                title: "Report a Safety Emergency",
-                padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
-                fontSize: 18,
-                // ontap: _launchCaller,
-                ontap: () {
-                  // launch("tel:100");
-                }),
+              title: "Report a Safety Emergency",
+              padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+              fontSize: 18,
+              // ontap: _launchCaller,
+              toshowSnackbar: true,
+              color: Colors.red,
+              message: 'Dial "100"!',
+            ),
             TitleWidget(
               title: "Rate us on Play Store",
               fontSize: 18,
               padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
-              ontap: () {},
+              toshowSnackbar: true,
+              message: "Thanks for rating us.",
+              color: Colors.blueAccent,
             ),
             const Spacer(
               flex: 3,
@@ -185,25 +189,30 @@ class TitleWidget extends StatelessWidget {
     required this.title,
     required this.padding,
     required this.fontSize,
-    required this.ontap,
+    this.color = Colors.black,
+    this.message = "",
+    this.toshowSnackbar = false,
   }) : super(key: key);
 
   final String title;
-  final VoidCallback ontap;
+  final Color color;
+  final String message;
   EdgeInsets padding;
   final double fontSize;
+  final bool toshowSnackbar;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
       child: InkWell(
         onTap: () {
-          ontap;
-          // SnackBar snackBar = const SnackBar(
-          //   content: Text("Work in progress"),
-          //   backgroundColor: Colors.blueAccent,
-          // );
-          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          if (toshowSnackbar) {
+            SnackBar snackBar = SnackBar(
+              content: Text(message),
+              backgroundColor: color,
+            );
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
         },
         child: Container(
           alignment: Alignment.centerLeft,
