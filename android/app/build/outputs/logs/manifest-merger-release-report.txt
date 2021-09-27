@@ -6,9 +6,10 @@ INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidMan
 INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:1:1-36:12
 MERGED from [:geolocator_android] /home/Gulshan/Projects/cuisine_app/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_appauth] /home/Gulshan/Projects/cuisine_app/build/flutter_appauth/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
-MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:sqflite] /home/Gulshan/Projects/cuisine_app/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
+MERGED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:2:1-14:12
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:permission_handler] /home/Gulshan/Projects/cuisine_app/build/permission_handler/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:flutter_secure_storage] /home/Gulshan/Projects/cuisine_app/build/flutter_secure_storage/intermediates/library_manifest/release/AndroidManifest.xml:2:1-11:12
@@ -85,6 +86,8 @@ MERGED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2
 		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:6:18-60
 application
 ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml:7:4-35:19
+MERGED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
+MERGED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:7:5-12:19
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/340206bb4856bf61e48bd10632b21882/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [com.google.android.gms:play-services-location:17.0.0] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/340206bb4856bf61e48bd10632b21882/jetified-play-services-location-17.0.0/AndroidManifest.xml:7:5-20
 MERGED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/d6aa2348038a9c21088d1f8eed5916c1/jetified-appauth-0.7.1/AndroidManifest.xml:26:5-44:19
@@ -151,12 +154,14 @@ MERGED from [:geolocator_android] /home/Gulshan/Projects/cuisine_app/build/geolo
 MERGED from [:geolocator_android] /home/Gulshan/Projects/cuisine_app/build/geolocator_android/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:flutter_appauth] /home/Gulshan/Projects/cuisine_app/build/flutter_appauth/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:flutter_appauth] /home/Gulshan/Projects/cuisine_app/build/flutter_appauth/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
-MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:geocoding] /home/Gulshan/Projects/cuisine_app/build/geocoding/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] /home/Gulshan/Projects/cuisine_app/build/shared_preferences/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:sqflite] /home/Gulshan/Projects/cuisine_app/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:sqflite] /home/Gulshan/Projects/cuisine_app/build/sqflite/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
+MERGED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:path_provider] /home/Gulshan/Projects/cuisine_app/build/path_provider/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
 MERGED from [:permission_handler] /home/Gulshan/Projects/cuisine_app/build/permission_handler/intermediates/library_manifest/release/AndroidManifest.xml:5:5-44
@@ -247,6 +252,14 @@ INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidMan
 		INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml
 		ADDED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml
 		INJECTED from /home/Gulshan/Projects/cuisine_app/android/app/src/main/AndroidManifest.xml
+activity#io.flutter.plugins.urllauncher.WebViewActivity
+ADDED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
+	android:exported
+		ADDED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
+	android:theme
+		ADDED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
+	android:name
+		ADDED from [:url_launcher] /home/Gulshan/Projects/cuisine_app/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
 activity#net.openid.appauth.AuthorizationManagementActivity
 ADDED from [net.openid:appauth:0.7.1] /home/Gulshan/.gradle/caches/transforms-2/files-2.1/d6aa2348038a9c21088d1f8eed5916c1/jetified-appauth-0.7.1/AndroidManifest.xml:27:9-31:75
 	android:launchMode

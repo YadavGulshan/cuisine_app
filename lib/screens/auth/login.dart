@@ -108,7 +108,7 @@ class LoginPage extends StatelessWidget {
                               child: InkWell(
                                   onTap: () {},
                                   child: const Text(
-                                    "Forget password?",
+                                    "Forgot password?",
                                     style: TextStyle(color: Colors.red),
                                   ))),
                         ),
@@ -210,7 +210,7 @@ class LoginPage extends StatelessWidget {
           enabled: true,
           label: Text(label),
           alignLabelWithHint: true,
-          hintText: hint,
+          // hintText: hint,
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: primaryColor, width: 2.0),
           ),
