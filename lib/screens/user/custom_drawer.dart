@@ -1,15 +1,20 @@
-import 'package:cuisine_app/services/login.dart';
-import 'package:cuisine_app/user.dart';
+import 'package:cuisine_app/main.dart';
+import 'package:cuisine_app/provider/authstream1.dart';
+import 'package:cuisine_app/screens/auth/auth_page.dart';
+import 'package:cuisine_app/screens/order/cart.dart';
+import 'package:cuisine_app/screens/user/profile_section.dart';
 import 'package:cuisine_app/widgets/toolbar_tiles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyCustomDrawer extends StatefulWidget {
   const MyCustomDrawer({
     Key? key,
   }) : super(key: key);
-  // double value;
+
   @override
   State<MyCustomDrawer> createState() => _MyCustomDrawerState();
 }
@@ -17,108 +22,194 @@ class MyCustomDrawer extends StatefulWidget {
 class _MyCustomDrawerState extends State<MyCustomDrawer> {
   @override
   Widget build(BuildContext context) {
-    double screenHeight = MediaQuery.of(context).size.height;
-    // double screenWidth = MediaQuery.of(context).size.width;
+    AuthService provider = Provider.of(context, listen: false);
+    Size screen = MediaQuery.of(context).size;
+
     return MaterialApp(
-      home: GestureDetector(
-        onPanUpdate: (details) {
-          // Swiping in right direction.
-          if (details.delta.dx > 0) {
-            Navigator.pop(context);
-          }
-        },
-        child: Scaffold(
-          body: Container(
-            color: Colors.white,
-            // color: const Color(0xFF27282C),
-            child: Column(
-              children: [
-                Container(
-                  color: const Color(0xFFE3E3E3),
-                  height: screenHeight / 5,
-                  // color: const Color(0xFF1D1E20),
-                  child: SafeArea(
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CircleAvatar(
-                          radius: 50,
-                          backgroundImage: NetworkImage(
-                              Provider.of<User>(context, listen: false)
-                                  .getUserImage),
-                        ),
-                        Center(
-                          child: Text(
-                            "Gulshan Yadav",
-                            style: GoogleFonts.lato(
-                              fontSize: 24,
-                              // color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        IconButton(
+      home: Scaffold(
+        drawerEnableOpenDragGesture: false,
+        body: Column(
+          children: [
+            SizedBox(
+              height: screen.height * 0.22,
+              child: SafeArea(
+                child: Column(
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 0, 0, 0),
+                        child: IconButton(
                             onPressed: () {
                               Navigator.pop(context);
                             },
                             icon: const Icon(
-                              Icons.close,
-                              color: Color(0xFFB2B1B6),
-                              size: 32,
-                            ))
-                      ],
+                              Icons.arrow_back_outlined,
+                            )),
+                      ),
                     ),
-                  ),
+                    Flexible(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          const CircleAvatar(
+                            radius: 40,
+                            child: Icon(
+                              Icons.person,
+                              size: 40,
+                            ),
+                          ),
+                          Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(
+                                  width: screen.width * 0.7,
+                                  child: Text(
+                                    provider.userName,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 22, color: Colors.black),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: screen.width * 0.6,
+                                  child: Text(
+                                    provider.userEmail,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                        fontSize: 14, color: Colors.black),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                TitleWidget(
-                  title: "FOOD AND GROCERIES ORDERS",
-                  padding: const EdgeInsets.fromLTRB(25, 14, 14, 0),
-                  fontSize: 18,
-                ),
-                ToolBarTile(
-                    icon: Icons.card_travel,
-                    title: "Your Orders",
-                    ontap: () {}),
-                ToolBarTile(
-                    icon: Icons.favorite_border_outlined,
-                    title: "Favourite Orders",
-                    ontap: () {}),
-                ToolBarTile(
-                  icon: Icons.library_books_outlined,
-                  title: "Address Book",
-                  ontap: () {},
-                ),
-                ToolBarTile(
-                  icon: Icons.info_outline,
-                  title: "About",
-                  ontap: () {},
-                ),
-                ToolBarTile(
-                  icon: Icons.logout,
-                  title: "Log out",
-                  ontap: () {
-                    AuthState.of().logout();
-                  },
-                ),
-                TitleWidget(
-                  title: "Send Feedback",
-                  padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
-                  fontSize: 18,
-                ),
-                TitleWidget(
-                  title: "Report a Safety Emergency",
-                  padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
-                  fontSize: 18,
-                ),
-                TitleWidget(
-                  title: "Rate us on Play Store",
-                  fontSize: 18,
-                  padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
-                ),
-                const Spacer(
-                  flex: 3,
-                ),
-              ],
+              ),
+            ),
+            Divider(
+              endIndent: 50,
+              thickness: 2,
+              color: Theme.of(context).primaryColor,
+            ),
+            // TitleWidget(
+            //   title: "FOOD AND GROCERIES ORDERS",
+            //   padding: const EdgeInsets.fromLTRB(25, 14, 14, 0),
+            //   fontSize: 18,
+            // ),
+            ToolBarTile(
+                icon: Icons.manage_accounts,
+                title: "Manage Profile",
+                ontap: () {
+                  pushNewScreen(context, screen: ManageProfile());
+                }),
+            ToolBarTile(
+                icon: Icons.card_travel,
+                title: "Your Orders",
+                ontap: () {
+                  // Open cart page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CartPage()));
+                }),
+            ToolBarTile(
+              icon: Icons.settings_outlined,
+              title: "Settings",
+              ontap: () {
+                openAppSettings();
+              },
+            ),
+            ToolBarTile(
+              icon: Icons.info_outline,
+              title: "About",
+              ontap: () {},
+            ),
+            ToolBarTile(
+              icon: Icons.logout,
+              title: "Log out",
+              ontap: () {
+                provider.logout();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (contex) => const GetStartedPage()));
+                // Navigator.pop(context);
+              },
+            ),
+            const Divider(
+              endIndent: 90,
+            ),
+            TitleWidget(
+              title: "Send Feedback",
+              padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+              fontSize: 18,
+              ontap: () {
+                // SnackBar
+              },
+            ),
+            TitleWidget(
+                title: "Report a Safety Emergency",
+                padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+                fontSize: 18,
+                // ontap: _launchCaller,
+                ontap: () {
+                  // launch("tel:100");
+                }),
+            TitleWidget(
+              title: "Rate us on Play Store",
+              fontSize: 18,
+              padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+              ontap: () {},
+            ),
+            const Spacer(
+              flex: 3,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class TitleWidget extends StatelessWidget {
+  TitleWidget({
+    Key? key,
+    required this.title,
+    required this.padding,
+    required this.fontSize,
+    required this.ontap,
+  }) : super(key: key);
+
+  final String title;
+  final VoidCallback ontap;
+  EdgeInsets padding;
+  final double fontSize;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: padding,
+      child: InkWell(
+        onTap: () {
+          ontap;
+          // SnackBar snackBar = const SnackBar(
+          //   content: Text("Work in progress"),
+          //   backgroundColor: Colors.blueAccent,
+          // );
+          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: fontSize,
             ),
           ),
         ),
@@ -127,33 +218,11 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
   }
 }
 
-// ignore: must_be_immutable
-class TitleWidget extends StatelessWidget {
-  TitleWidget({
-    Key? key,
-    required this.title,
-    required this.padding,
-    required this.fontSize,
-  }) : super(key: key);
-
-  final String title;
-  //  EdgeInsets padding = const EdgeInsets.fromLTRB(25, 14, 14, 0);
-  EdgeInsets padding;
-  final double fontSize;
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: padding,
-      child: Container(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: GoogleFonts.lato(
-            color: Colors.grey[600],
-            fontSize: fontSize,
-          ),
-        ),
-      ),
-    );
+_launchCaller() async {
+  const url = "tel:100";
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

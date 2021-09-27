@@ -1,0 +1,8 @@
+-keep class androidx.core.app.CoreComponentFactory { <init>(); }
+-keep class com.auth0.cuisine.MainActivity { <init>(); }
+-keep class com.google.android.gms.common.api.GoogleApiActivity { <init>(); }
+-keep class io.flutter.plugins.urllauncher.WebViewActivity { <init>(); }
+-keep class net.openid.appauth.AuthorizationManagementActivity { <init>(); }
+-keep class net.openid.appauth.RedirectUriReceiverActivity { <init>(); }
+-keep class androidx.browser.browseractions.BrowserActionsFallbackMenuView { <init>(android.content.Context, android.util.AttributeSet); }
+

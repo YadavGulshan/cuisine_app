@@ -52,3 +52,6 @@ app.*.map.json
 
 
 TODO.txt
+
+
+android/app/build/outputs/apk/debug/app-debug.apk

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="335.54297"
+   height="347.3418"
+   viewBox="0 0 88.779075 91.900852"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="category.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:snap-grids="false"
+     inkscape:snap-to-guides="false"
+     inkscape:snap-object-midpoints="true"
+     inkscape:zoom="0.60667088"
+     inkscape:cx="143.4056"
+     inkscape:cy="483.78785"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     units="px"
+     showborder="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-14.898315,-20.549133)">
+    <path
+       id="rect846"
+       style="fill:#00ff00;stroke:none;stroke-width:9.99999;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers fill stroke"
+       d="M 56.308594,77.666016 V 425.00781 H 391.85156 V 77.666016 Z M 74.046875,95.990234 H 374.11523 V 406.68164 H 74.046875 Z"
+       transform="scale(0.26458333)" />
+    <path
+       id="path1154"
+       style="fill:#00ffff;stroke-width:0.529167;stroke-linecap:round;stroke-linejoin:round;paint-order:markers fill stroke"
+       d="M 91.453222,66.499561 A 32.165369,32.165369 0 0 1 59.287857,98.664925 32.165369,32.165369 0 0 1 27.122485,66.499561 32.165369,32.165369 0 0 1 59.287857,34.334188 32.165369,32.165369 0 0 1 91.453222,66.499561 Z" />
+  </g>
+</svg>

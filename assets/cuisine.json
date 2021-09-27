@@ -1,0 +1,82 @@
+{
+    "id": 2,
+    "name": "Restaurant One",
+    "slug": "restaurant-one",
+    "category": "Veggie, North Indian Style",
+    "photo": "storage/images/restaurants/restaurant_one.jpg",
+    "phone": "9876543210",
+    "email": "restaurant.one@domain.com",
+    "owner": "The One Man",
+    "isBanned": 0,
+    "address": "123st, hello ,world",
+    "city": "hello",
+    "state": "world",
+    "zip": 654321,
+    "latitude": null,
+    "longitude": null,
+    "isAdmin": 0,
+    "created_at": "2021-08-30T04:51:34.000000Z",
+    "updated_at": "2021-08-30T04:51:34.000000Z",
+    "cuisines": [{
+            "id": 1,
+            "name": "Chilly Noodles",
+            "price": 400,
+            "image": "storage/images/cuisines/chilly-noodles.jpg",
+            "isPublished": 1,
+            "restaurant_id": 2,
+            "created_at": "2021-08-30T04:51:37.000000Z",
+            "updated_at": "2021-08-30T04:51:37.000000Z"
+        },
+        {
+            "id": 2,
+            "name": "Black Burger",
+            "price": 800,
+            "image": "storage/images/cuisines/black-burger.jpg",
+            "isPublished": 1,
+            "restaurant_id": 2,
+            "created_at": "2021-08-30T04:51:37.000000Z",
+            "updated_at": "2021-08-30T04:51:37.000000Z"
+        },
+        {
+            "id": 6,
+            "name": "Tomato Pizza",
+            "price": 647,
+            "image": "storage/images/cuisines/tomato-pizza.jpg",
+            "isPublished": 1,
+            "restaurant_id": 2,
+            "created_at": "2021-08-30T04:51:40.000000Z",
+            "updated_at": "2021-08-30T04:51:40.000000Z"
+        }
+    ],
+    "reviews": [{
+            "id": 1,
+            "restaurant_id": 2,
+            "customer_id": 1,
+            "rating": 3,
+            "message": "Hmm Not BAd Not Good",
+            "photo": null,
+            "created_at": "2021-08-30T04:51:43.000000Z",
+            "updated_at": "2021-08-30T04:51:43.000000Z"
+        },
+        {
+            "id": 4,
+            "restaurant_id": 2,
+            "customer_id": 1,
+            "rating": 5,
+            "message": "hmmm",
+            "photo": "storage/images/reviews/6EuQNO6oMf7VIB2SZUlZTpSzfdMxb8kNByEaaDpQ.png",
+            "created_at": "2021-08-30T05:30:51.000000Z",
+            "updated_at": "2021-08-30T05:30:51.000000Z"
+        },
+        {
+            "id": 5,
+            "restaurant_id": 2,
+            "customer_id": 1,
+            "rating": 5,
+            "message": "hmmm",
+            "photo": "storage/images/reviews/81CTkEMEUH1eYrz6vmxdAYi8PxYMPN3B9Z33qGXc.png",
+            "created_at": "2021-08-30T05:31:15.000000Z",
+            "updated_at": "2021-08-30T05:31:15.000000Z"
+        }
+    ]
+}
