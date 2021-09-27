@@ -149,7 +149,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: _obsecure,
                     decoration: InputDecoration(
                       labelText: "Password",
-                      hintText: "Password",
+                      // hintText: "Password",
                       contentPadding: const EdgeInsets.all(10),
                       enabled: true,
                       alignLabelWithHint: true,
@@ -198,7 +198,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     obscureText: _obsecure,
                     decoration: InputDecoration(
                       labelText: "Confirm Password",
-                      hintText: "Confirm Password",
+                      // hintText: "Confirm Password",
                       contentPadding: const EdgeInsets.all(10),
                       enabled: true,
                       alignLabelWithHint: true,
@@ -381,7 +381,7 @@ class MyTextField extends StatelessWidget {
           enabled: true,
           label: Text(label),
           alignLabelWithHint: true,
-          hintText: hint,
+          // hintText: hint,
           focusedBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: primaryColor, width: 2.0),
           ),

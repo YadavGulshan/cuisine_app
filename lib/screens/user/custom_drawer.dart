@@ -1,9 +1,14 @@
 import 'package:cuisine_app/main.dart';
 import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/screens/auth/auth_page.dart';
+import 'package:cuisine_app/screens/order/cart.dart';
+import 'package:cuisine_app/screens/user/profile_section.dart';
 import 'package:cuisine_app/widgets/toolbar_tiles.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyCustomDrawer extends StatefulWidget {
   const MyCustomDrawer({
@@ -88,21 +93,38 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
                 ),
               ),
             ),
-            TitleWidget(
-              title: "FOOD AND GROCERIES ORDERS",
-              padding: const EdgeInsets.fromLTRB(25, 14, 14, 0),
-              fontSize: 18,
+            Divider(
+              endIndent: 50,
+              thickness: 2,
+              color: Theme.of(context).primaryColor,
             ),
+            // TitleWidget(
+            //   title: "FOOD AND GROCERIES ORDERS",
+            //   padding: const EdgeInsets.fromLTRB(25, 14, 14, 0),
+            //   fontSize: 18,
+            // ),
             ToolBarTile(
-                icon: Icons.card_travel, title: "Your Orders", ontap: () {}),
+                icon: Icons.manage_accounts,
+                title: "Manage Profile",
+                ontap: () {
+                  pushNewScreen(context, screen: ManageProfile());
+                }),
             ToolBarTile(
-                icon: Icons.favorite_border_outlined,
-                title: "Favourite Orders",
-                ontap: () {}),
+                icon: Icons.card_travel,
+                title: "Your Orders",
+                ontap: () {
+                  // Open cart page
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CartPage()));
+                }),
             ToolBarTile(
               icon: Icons.settings_outlined,
               title: "Settings",
-              ontap: () {},
+              ontap: () {
+                openAppSettings();
+              },
             ),
             ToolBarTile(
               icon: Icons.info_outline,
@@ -114,6 +136,10 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
               title: "Log out",
               ontap: () {
                 provider.logout();
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (contex) => const GetStartedPage()));
                 // Navigator.pop(context);
               },
             ),
@@ -124,16 +150,23 @@ class _MyCustomDrawerState extends State<MyCustomDrawer> {
               title: "Send Feedback",
               padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
               fontSize: 18,
+              ontap: () {
+                // SnackBar
+              },
             ),
             TitleWidget(
-              title: "Report a Safety Emergency",
-              padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
-              fontSize: 18,
-            ),
+                title: "Report a Safety Emergency",
+                padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+                fontSize: 18,
+                // ontap: _launchCaller,
+                ontap: () {
+                  // launch("tel:100");
+                }),
             TitleWidget(
               title: "Rate us on Play Store",
               fontSize: 18,
               padding: const EdgeInsets.fromLTRB(25, 16, 14, 0),
+              ontap: () {},
             ),
             const Spacer(
               flex: 3,
@@ -151,25 +184,45 @@ class TitleWidget extends StatelessWidget {
     required this.title,
     required this.padding,
     required this.fontSize,
+    required this.ontap,
   }) : super(key: key);
 
   final String title;
-
+  final VoidCallback ontap;
   EdgeInsets padding;
   final double fontSize;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: padding,
-      child: Container(
-        alignment: Alignment.centerLeft,
-        child: Text(
-          title,
-          style: TextStyle(
-            fontSize: fontSize,
+      child: InkWell(
+        onTap: () {
+          ontap;
+          // SnackBar snackBar = const SnackBar(
+          //   content: Text("Work in progress"),
+          //   backgroundColor: Colors.blueAccent,
+          // );
+          // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
+        child: Container(
+          alignment: Alignment.centerLeft,
+          child: Text(
+            title,
+            style: TextStyle(
+              fontSize: fontSize,
+            ),
           ),
         ),
       ),
     );
+  }
+}
+
+_launchCaller() async {
+  const url = "tel:100";
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

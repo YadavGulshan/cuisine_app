@@ -121,8 +121,15 @@ class CurrentLocation extends ChangeNotifier {
     // Set the lon and lat
     latitude = postition.latitude;
     longitude = postition.longitude;
-    address =
-        "${placemark.name.toString()}, ${placemark.subLocality.toString()}";
+    address = placemark.name.toString() +
+        ", " +
+        placemark.subLocality.toString() +
+        ", " +
+        placemark.locality.toString() +
+        ", " +
+        placemark.administrativeArea.toString() +
+        ", " +
+        placemark.country.toString();
 
     notifyListeners();
   }

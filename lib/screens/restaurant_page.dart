@@ -41,61 +41,41 @@ class RestaurantPage extends StatefulWidget {
 class _RestaurantPageState extends State<RestaurantPage>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
-  // Generate palette from the image.
-  // Color? headColor =
-  //     (appTheme == Brightness.light) ? Colors.white : Colors.grey[800];
+
   void _updatePaletteGenerator() async {
     var paletteGenerator = await PaletteGenerator.fromImageProvider(
       Image.network(widget.imageUrl).image,
     );
     debugPrint(paletteGenerator.colors.toString());
-    setState(() {
-      // headColor = paletteGenerator.dominantColor as Color?;
-    });
+    setState(() {});
   }
 
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
-    // _updatePaletteGenerator();
+    // Delete the cart content.
+    Provider.of<CartModel>(context, listen: false).removeAllItems();
   }
 
   @override
   Widget build(BuildContext context) {
-    //
     final List<String> _tabs = <String>['Delivery', 'Reviews'];
     Size screen = MediaQuery.of(context).size;
     return DefaultTabController(
       length: _tabs.length,
       child: Scaffold(
         body: NestedScrollView(
-          // physics: const BouncingScrollPhysics(
-          //   parent: AlwaysScrollableScrollPhysics(),
-          // ),
-          // physics: const ClampingScrollPhysics(
-          //   parent: AlwaysScrollableScrollPhysics(),
-          // ),
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return [
               SliverOverlapAbsorber(
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
                 sliver: SliverAppBar(
-                  // pinned: true,
                   elevation: 10,
                   expandedHeight: screen.height * 0.4,
                   floating: false,
                   flexibleSpace: FlexibleSpaceBar(
-                    // collapseMode: CollapseMode.pin,
-                    // background: Container(
-                    //   decoration: BoxDecoration(
-                    //     color: primaryColor,
-                    //     image: DecorationImage(
-                    //       image: NetworkImage(widget.imageUrl),
-                    //       fit: BoxFit.cover,
-                    //     ),
-                    //   ),
                     background: CachedNetworkImage(
                       imageUrl: widget.imageUrl,
                       imageBuilder: (context, imageProvider) => Container(
@@ -122,48 +102,9 @@ class _RestaurantPageState extends State<RestaurantPage>
                       errorWidget: (context, url, error) =>
                           const Icon(Icons.error),
                     ),
-                    // child: SafeArea(
-                    //   child: Align(
-                    //     alignment: Alignment.topLeft,
-                    //     child: IconButton(
-                    //       onPressed: () {
-                    //         Navigator.pop(context);
-                    //       },
-                    //       icon: const Icon(Icons.arrow_back_ios_new_outlined),
-                    //     ),
-                    //   ),
-                    // ),
                   ),
                   bottom: PreferredSize(
-                    preferredSize: const Size.fromHeight(72),
-                    // child: FutureBuilder<PaletteGenerator>(
-                    //   future: _updatePaletteGenerator(),
-                    //   builder: (BuildContext context,
-                    //       AsyncSnapshot<PaletteGenerator> snapshot) {
-                    //     switch (snapshot.connectionState) {
-                    //       case ConnectionState.waiting:
-                    //         return headSection(
-                    //             (appTheme == Brightness.light)
-                    //                 ? Colors.white24
-                    //                 : Colors.black26,
-                    //             textStyle,
-                    //             screen);
-                    //       default:
-                    //         if (snapshot.hasError) {
-                    //           return headSection(
-                    //               (appTheme == Brightness.light)
-                    //                   ? Colors.white24
-                    //                   : Colors.black26,
-                    //               textStyle,
-                    //               screen);
-                    //         } else {
-                    //           var face = snapshot.data?.dominantColor?.color;
-                    //           return headSection(face, textStyle, screen);
-                    //         }
-                    //     }
-                    //   },
-                    // ),
-                    // child: headSection(headColor, screen),
+                    preferredSize: const Size.fromHeight(75 + 27),
                     child: headSection(Colors.black, screen),
                   ),
                 ),
@@ -175,38 +116,14 @@ class _RestaurantPageState extends State<RestaurantPage>
                 .copyWith(statusBarColor: Colors.white10),
             child: SafeArea(
               child: TabBarView(
-                // physics: const BouncingScrollPhysics(
-                //   parent: AlwaysScrollableScrollPhysics(),
-                // ),
                 controller: _controller,
                 children: [
-                  // DeliveryPage(),
-                  // FutureBuilder<PaletteGenerator>(
-                  //     future: _updatePaletteGenerator(), // async work
-                  //     builder: (BuildContext context,
-                  //         AsyncSnapshot<PaletteGenerator> snapshot) {
-                  //       switch (snapshot.connectionState) {
-                  //         case ConnectionState.waiting:
-                  //           return const Center(child: CircularProgressIndicator());
-                  //         default:
-                  //           if (snapshot.hasError) {
-                  //             return Text('Error: ${snapshot.error}');
-                  //           } else {
-                  //             // Color color=new Color(snapshot.data.dominantColor.color);
-                  //             var face = snapshot.data?.dominantColor?.color;
-                  //             return Center(
-                  //               child: Container(
-                  //                   color: face,
-                  //                   height: 20,
-                  //                   child: Text('color: ${face.toString()}')),
-                  //             );
-                  //           }
-                  //       }
-                  //     }),
                   DeliveryPage(
-                    restaurantid: widget.restaurantId,
+                    restaurantid: widget.category,
                   ),
-                  const ReviewPage(),
+                  ReviewPage(
+                    restaurant: widget.category,
+                  ),
                 ],
               ),
             ),
@@ -217,7 +134,7 @@ class _RestaurantPageState extends State<RestaurantPage>
                 ? FloatingActionButton(
                     backgroundColor: Theme.of(context).primaryColor,
                     onPressed: () {
-                      pushNewScreen(context, screen: CartPage());
+                      pushNewScreen(context, screen: const CartPage());
                     },
                     child: Badge(
                       badgeColor: Colors.white,
@@ -237,118 +154,111 @@ class _RestaurantPageState extends State<RestaurantPage>
   }
 
   Widget headSection(Color? face, Size screen) {
-    var textStyle = TextStyle(
+    var textStyle = const TextStyle(
       color: Colors.white,
-      // color: (appTheme == Brightness.light) ? Colors.black : Colors.white,
       fontWeight: FontWeight.w400,
       fontSize: 14,
     );
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 9,
-      ),
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              // Title section
-              Padding(
-                padding: const EdgeInsets.only(left: 14),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 4,
-                      ),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 14),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 4,
+                    ),
+                    child: SizedBox(
+                      width: screen.width * 0.5,
                       child: Text(
                         widget.title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
-                          // color: (appTheme == Brightness.light)
-                          //     ? Colors.black
-                          //     : Colors.white,
                         ),
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        bottom: 2,
-                      ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      bottom: 2,
+                    ),
+                    child: SizedBox(
+                      width: screen.width * 0.8,
                       child: Text(
                         widget.category,
                         style: textStyle,
+                        overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Text(
+                  ),
+                  SizedBox(
+                    width: screen.width * 0.8,
+                    child: Text(
                       widget.address,
                       style: textStyle,
-                    )
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Container(
+              height: screen.height * 0.05,
+              width: screen.width * 0.15,
+              decoration: const BoxDecoration(
+                color: Colors.green,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+              ),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(widget.rating,
+                        style: const TextStyle(color: Colors.white)),
+                    const Icon(Icons.star, color: Colors.white, size: 18)
                   ],
                 ),
               ),
-              // rating
-              Container(
-                height: screen.height * 0.05,
-                width: screen.width * 0.15,
-                decoration: const BoxDecoration(
-                  color: Colors.green,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                  ),
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(widget.rating,
-                          style: const TextStyle(color: Colors.white)
-                          // textAlign: TextAlign.center,
-                          ),
-                      const Icon(Icons.star, color: Colors.white, size: 18)
-                    ],
-                  ),
+            ),
+          ],
+        ),
+        TabBar(
+          automaticIndicatorColorAdjustment: true,
+          indicatorWeight: 4,
+          labelColor: Colors.white,
+          tabs: [
+            Tab(
+              child: Text(
+                "Delivery",
+                style: TextStyle(
+                  fontSize: screen.height * 0.022,
                 ),
               ),
-            ],
-          ),
-          TabBar(
-            automaticIndicatorColorAdjustment: true,
-            indicatorWeight: 4,
-            labelColor: Colors.white,
-            // labelColor:
-            //     (appTheme == Brightness.light) ? Colors.black : Colors.white,
-            // physics: const BouncingScrollPhysics(
-            //     parent: AlwaysScrollableScrollPhysics()),
-            tabs: [
-              Tab(
-                child: Text(
-                  "Delivery",
-                  style: TextStyle(
-                    fontSize: screen.height * 0.022,
-                  ),
+            ),
+            Tab(
+              child: Text(
+                "Reviews",
+                style: TextStyle(
+                  fontSize: screen.height * 0.022,
                 ),
-                // child: customTabLabel(screen, "Delivery"),
               ),
-              Tab(
-                child: Text(
-                  "Reviews",
-                  style: TextStyle(
-                    fontSize: screen.height * 0.022,
-                  ),
-                ),
-                // child: customTabLabel(screen, "Reviews"),
-              )
-            ],
-            controller: _controller,
-          ),
-        ],
-      ),
+            )
+          ],
+          controller: _controller,
+        ),
+      ],
     );
   }
 

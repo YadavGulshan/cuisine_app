@@ -1,0 +1,31 @@
+[{
+        "id": 1,
+        "name": "Chilly Noodles",
+        "price": 400,
+        "image": "storage / images / cuisines / chilly - noodles.jpg",
+        "isPublished": 1,
+        "restaurant_id": 2,
+        "created_at": "2021 - 09 - 26 T14: 19: 04.000000 Z",
+        "updated_at": "2021 - 09 - 26 T14: 19: 04.000000 Z"
+    },
+    {
+        "id": 2,
+        "name": "Black Burger",
+        "price": 800,
+        "image": "storage / images / cuisines / black - burger.jpg",
+        "isPublished": 1,
+        "restaurant_id": 2,
+        "created_at": "2021 - 09 - 26 T14: 19: 04.000000 Z",
+        "updated_at": "2021 - 09 - 26 T14: 19: 04.000000 Z"
+    },
+    {
+        "id": 6,
+        "name": "Tomato Pizza",
+        "price": 647,
+        "image": "storage / images / cuisines / tomato - pizza.jpg",
+        "isPublished": 1,
+        "restaurant_id": 2,
+        "created_at": "2021 - 09 - 26 T14: 19: 04.000000 Z",
+        "updated_at": "2021 - 09 - 26 T14: 19: 04.000000 Z"
+    }
+]

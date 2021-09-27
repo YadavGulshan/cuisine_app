@@ -22,12 +22,14 @@ class DeliveryPage extends StatefulWidget {
 }
 
 class _DeliveryPageState extends State<DeliveryPage> {
-  late Future<List<RestaurantCuisines>> futureCuisine;
+  late Future<List<RestaurantCuisines>> futureCuisine =
+      fetchCuisine(widget.restaurantid);
 
   @override
   void initState() {
     super.initState();
     futureCuisine = fetchCuisine(widget.restaurantid);
+    debugPrint("##############Future cuisine: " + futureCuisine.toString());
   }
 
   @override
@@ -38,7 +40,10 @@ class _DeliveryPageState extends State<DeliveryPage> {
     return FutureBuilder(
       future: futureCuisine,
       builder: (context, AsyncSnapshot<List<RestaurantCuisines>> snapshot) {
+        debugPrint("###########Snapshot: " + snapshot.toString());
         if (snapshot.hasData) {
+          debugPrint("###########Snapshot has data: " +
+              snapshot.data![0].name.toString());
           cuisinegrid = SliverGrid(
             gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               maxCrossAxisExtent: 200.0,
@@ -48,31 +53,28 @@ class _DeliveryPageState extends State<DeliveryPage> {
             ),
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                var currentCuisine = snapshot.data![index];
+                // var currentCuisine = snapshot.data![index];
                 return Menu(
-                  id: currentCuisine.id.toString(),
-                  title: currentCuisine.name,
-                  price: currentCuisine.price,
-                  imageUrl: "$baseUrl/" + currentCuisine.imageUrl,
+                  id: snapshot.data![index].id.toString(),
+                  title: snapshot.data![index].name,
+                  price: snapshot.data![index].price,
+                  imageUrl: "$baseUrl/" + snapshot.data![index].imageUrl,
                 );
               },
               childCount: snapshot.data?.length,
             ),
           );
           return CustomScrollView(
-            // physics: const BouncingScrollPhysics(
-            //   parent: AlwaysScrollableScrollPhysics(),
-            // ),
             slivers: [
               SliverOverlapInjector(
-                // This is the flip side of the SliverOverlapAbsorber
-                // above.
                 handle:
                     NestedScrollView.sliverOverlapAbsorberHandleFor(context),
               ),
+              cuisinegrid,
             ],
           );
         } else if (snapshot.hasError) {
+          debugPrint(snapshot.toString());
           return const Center(
             child: Text("Something Gone Wrong"),
           );
@@ -105,36 +107,19 @@ class Menu extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        height: screen.height * 0.35,
+        height: screen.height * 0.4,
         width: screen.width * 0.45,
         decoration: BoxDecoration(
-          // color: (appTheme == Brightness.light)
-          //     ? primaryLightColor
-          //     : Colors.grey[600],
           borderRadius: BorderRadius.circular(10),
           border: Border.all(width: 0.1, color: primaryColor),
         ),
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Container(
-            //   height: screen.height * 0.17,
-            //   decoration: BoxDecoration(
-            // borderRadius: const BorderRadius.only(
-            //   topLeft: Radius.circular(10),
-            //   topRight: Radius.circular(10),
-            // ),
-            //     image: DecorationImage(
-            //       image: NetworkImage(imageUrl),
-            //       fit: BoxFit.cover,
-            //     ),
-            //   ),
-            // ),
             CachedNetworkImage(
               imageUrl: imageUrl,
               imageBuilder: (context, imageProvider) => Container(
-                height: screen.height * 0.17,
+                height: screen.height * 0.15,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(10),
@@ -366,28 +351,29 @@ class RestaurantCuisines {
   final String name;
   final int price;
   final String imageUrl;
-  final String restaurantid;
+  final int restaurantid;
 
   RestaurantCuisines(
       this.id, this.name, this.price, this.imageUrl, this.restaurantid);
 
   RestaurantCuisines.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        name = json['name'],
-        imageUrl = json['image'],
-        price = json['price'],
-        restaurantid = json['restaurant_id'];
+      : id = json['id'] ?? 0,
+        name = json['name'] ?? "",
+        imageUrl = json['image'] ?? "",
+        price = json['price'] ?? 0,
+        restaurantid = json['restaurant_id'] ?? 0;
 }
 
 Future<List<RestaurantCuisines>> fetchCuisine(String id) async {
-  final http.Response response =
-      await http.get(Uri.parse("$baseUrl/api/restaurant/$id"));
+  final http.Response response = await http.get(
+      Uri.parse("$baseUrl/api/restaurant/slug/$id")); //TODO: Use id instead.
 
   if (response.statusCode == 200) {
-    print("Hey###################################");
-    print(response.body);
+    debugPrint("Hey###################################");
+    debugPrint(response.body);
     Map result = jsonDecode(response.body);
     List<dynamic> cuisineInfo = result['cuisines'];
+    debugPrint("Cuisine Info: " + cuisineInfo.toString());
     return cuisineInfo.map((e) => RestaurantCuisines.fromJson(e)).toList();
   } else {
     /// Nothing found.

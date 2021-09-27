@@ -6,6 +6,7 @@ import 'package:cuisine_app/provider/infoprovider.dart';
 import 'package:cuisine_app/screens/auth/auth_page.dart';
 import 'package:cuisine_app/screens/homepage.dart';
 import 'package:cuisine_app/screens/order/checkout/checkout_screen.dart';
+import 'package:cuisine_app/screens/user/profile_section.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/user.dart';
 import 'package:flutter/material.dart';
@@ -111,5 +112,6 @@ class InitialCheckState extends State<InitialCheck> {
         : (provider.loginCheck)
             ? const MainPage()
             : const GetStartedPage();
+    // return ManageProfile();
   }
 }

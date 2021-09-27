@@ -15,6 +15,7 @@ class RestaurantWidget extends StatelessWidget {
       required this.category,
       required this.rating,
       required this.address,
+      this.showRating = true,
       required this.id})
       : super(key: key);
   final String title;
@@ -23,6 +24,7 @@ class RestaurantWidget extends StatelessWidget {
   final String rating;
   final String address;
   final String id;
+  final bool showRating;
 
   @override
   Widget build(BuildContext context) {
@@ -112,39 +114,41 @@ class RestaurantWidget extends StatelessWidget {
                       ),
                     ),
                     const Spacer(),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                color: Colors.green,
-                                borderRadius: BorderRadius.circular(5)),
-                            height: screenHeight * 0.04,
-                            width: screenWidth * 0.15,
-                            child: Row(
+                    (showRating)
+                        ? Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
-                                  rating,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(
-                                    color: Colors.white,
+                                Container(
+                                  decoration: BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius: BorderRadius.circular(5)),
+                                  height: screenHeight * 0.04,
+                                  width: screenWidth * 0.15,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        rating,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      const Icon(
+                                        Icons.star,
+                                        color: Colors.white,
+                                        size: 20,
+                                      ),
+                                    ],
                                   ),
-                                ),
-                                const Icon(
-                                  Icons.star,
-                                  color: Colors.white,
-                                  size: 20,
                                 ),
                               ],
                             ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          )
+                        : Container(),
                   ],
                 ),
               ),

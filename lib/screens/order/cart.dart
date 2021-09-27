@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/checkout/checkout_widget.dart';
+import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/user.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -50,25 +53,62 @@ class CartPage extends StatelessWidget {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.place,
-                        color: Theme.of(context).primaryColor,
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Icon(
+                          Icons.place,
+                          size: 30,
+                          color: Theme.of(context).primaryColor,
+                        ),
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Gulshan Yadav",
-                            style: TextStyle(fontSize: 5),
+                          SizedBox(
+                            // color: Colors.amber,
+                            width: screen.width * 0.7,
+                            child: Text(
+                              Provider.of<AuthService>(context).userName,
+                              // "test1@test.com",
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                          Text(7977421559.toString()),
-                          Text("Do laborum officia veniam aliqua."),
-                          Row(
-                            children: [Text("Thane West"), Text("400607")],
+                          Padding(
+                            padding: const EdgeInsets.only(top: 4, bottom: 4),
+                            child: SizedBox(
+                              // color: Colors.amber,
+                              width: screen.width * 0.7,
+                              child: Text(
+                                Provider.of<AuthService>(context).userEmail,
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                                // "test1@test.com",
+                              ),
+                            ),
                           ),
+                          SizedBox(
+                            // color: Colors.amber,
+                            width: screen.width * 0.7,
+                            child: Text(
+                              Provider.of<CurrentLocation>(context,
+                                      listen: false)
+                                  .addressStatus,
+                              // "Unamed road, Patlipada",
+                              style: const TextStyle(fontSize: 14),
+                              maxLines: 10,
+                            ),
+                          ),
+                          // Row(
+                          //   children: [Text("Thane West"), Text("400607")],
+                          // ),
                         ],
                       )
                     ],
@@ -205,12 +245,16 @@ class CartContent extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: Text(
-                    Provider.of<CartModel>(context, listen: false)
-                        .items[index]
-                        .title
-                        .toString(),
-                    style: const TextStyle(fontSize: 20),
+                  child: Container(
+                    width: screen.width * 0.5,
+                    child: Text(
+                      Provider.of<CartModel>(context, listen: false)
+                          .items[index]
+                          .title
+                          .toString(),
+                      style: const TextStyle(fontSize: 20),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
                 ),
                 Padding(
@@ -240,7 +284,7 @@ class CartContent extends StatelessWidget {
                           onPressed: () {
                             Provider.of<CartModel>(context, listen: false)
                                 .items[index]
-                                .subCuisine();
+                                .quantity--;
                           },
                           icon: const Icon(Icons.remove)), // remove
                       Text(Provider.of<CartModel>(context, listen: true)
@@ -251,7 +295,7 @@ class CartContent extends StatelessWidget {
                           onPressed: () {
                             Provider.of<CartModel>(context, listen: false)
                                 .items[index]
-                                .addCuisine();
+                                .quantity++;
                           },
                           icon: const Icon(Icons.add)),
                     ],

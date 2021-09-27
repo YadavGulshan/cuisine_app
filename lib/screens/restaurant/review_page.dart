@@ -1,114 +1,156 @@
+import 'dart:convert';
+
 import 'package:cuisine_app/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
 
-class ReviewPage extends StatelessWidget {
-  const ReviewPage({Key? key}) : super(key: key);
+class ReviewPage extends StatefulWidget {
+  String restaurant;
+  ReviewPage({Key? key, required this.restaurant}) : super(key: key);
+
+  @override
+  State<ReviewPage> createState() => _ReviewPageState();
+}
+
+class _ReviewPageState extends State<ReviewPage> {
+  late Future<List<RestaurantReview>> futureReviews;
+
+  @override
+  void initState() {
+    super.initState();
+    futureReviews = fetchRestaurantReviews(widget.restaurant);
+  }
 
   @override
   Widget build(BuildContext context) {
+    var restaurantReview;
     Size screen = MediaQuery.of(context).size;
-    return CustomScrollView(
-      slivers: [
-        SliverOverlapInjector(
-          // This is the flip side of the SliverOverlapAbsorber
-          // above.
-          handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
-        ),
-        SliverToBoxAdapter(
-          child: Stack(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(14.0),
-                child: Column(
-                  children: [
-                    // Review about the restaurant.
+    return FutureBuilder(
+      future: futureReviews,
+      builder: (context, AsyncSnapshot<List<RestaurantReview>> snapshot) {
+        if (snapshot.hasData) {
+          debugPrint("Snapshot has data");
+          debugPrint(snapshot.data![0].review.toString());
+          restaurantReview = SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                // var currentRestaurantReview = snapshot.data![index];
+                debugPrint("######################### Review:" +
+                    snapshot.data![index].review +
+                    "\n");
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ReviewHandler(
+                    // profileUrl: snapshot.data![index].imageUrl,
+                    review: snapshot.data![index].review,
+                    // reviewImage: "$baseUrl/" + snapshot.data![index].imageUrl,
+                    stars: snapshot.data![index].rating,
+                    name: snapshot.data![index].customerid,
+                  ),
+                );
+              },
+              childCount: snapshot.data?.length,
+            ),
+          );
+          return CustomScrollView(
+            slivers: [
+              SliverOverlapInjector(
+                // This is the flip side of the SliverOverlapAbsorber
+                // above.
+                handle:
+                    NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: Column(
+                    children: [
+                      // Review about the restaurant.
 
-                    // TODO: Use bottom sheet to ask the review from the user.
-                    Container(
-                      height: screen.height * 0.068,
-                      width: screen.width,
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).primaryColorLight,
-                        borderRadius: const BorderRadius.all(
-                          Radius.circular(20),
-                        ),
-                        border: Border.all(
-                          color: primaryColor,
-                          width: 1,
-                        ),
-                      ),
-                      child: TextFormField(
-                        cursorHeight: 30,
-                        maxLines: 5,
-                        decoration: InputDecoration(
-                          contentPadding: const EdgeInsets.only(
-                              bottom: 10, top: 10, left: 0, right: 0),
-                          icon: Padding(
-                              padding: const EdgeInsets.only(
-                                left: 2,
-                                right: 0,
-                              ),
-                              child: IconButton(
-                                icon: const Icon(Icons.attachment),
-                                onPressed: () {},
-                              )),
-                          // hintText:,
-                          suffixIcon: Padding(
-                            padding: const EdgeInsets.only(
-                              bottom: 8,
-                              top: 8,
-                              right: 8,
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: ElevatedButton(
-                                child: const Text("Comment"),
-                                onPressed: () {},
-                              ),
-                            ),
+                      // TODO: Use bottom sheet to ask the review from the user.
+                      Container(
+                        height: screen.height * 0.068,
+                        width: screen.width,
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).primaryColorLight,
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(20),
                           ),
-                          border: InputBorder.none,
+                          border: Border.all(
+                            color: primaryColor,
+                            width: 1,
+                          ),
+                        ),
+                        child: TextFormField(
+                          // cursorHeight: 30,
+                          style: const TextStyle(fontSize: 20),
+                          maxLines: 50,
+                          decoration: InputDecoration(
+                            // contentPadding: const EdgeInsets.only(
+                            //     bottom: 0, top: 10, left: 0, right: 0),
+                            icon: Padding(
+                                padding: const EdgeInsets.only(
+                                  // left: 2,
+                                  right: 0,
+                                ),
+                                child: IconButton(
+                                  icon: const Icon(Icons.attachment),
+                                  onPressed: () {},
+                                )),
+                            // hintText:,
+                            suffixIcon: Padding(
+                              padding: const EdgeInsets.only(
+                                bottom: 8,
+                                top: 8,
+                                right: 8,
+                              ),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: ElevatedButton(
+                                  child: const Text(
+                                    "Review",
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  onPressed: () {
+                                    // Snackbar
+                                    SnackBar snackBar = const SnackBar(
+                                      content: Text(
+                                        "Review submitted!",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      backgroundColor: Colors.green,
+                                    );
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                  },
+                                ),
+                              ),
+                            ),
+                            border: InputBorder.none,
+                          ),
                         ),
                       ),
-                    ),
-
-                    // Reviews goes here..
-                    ReviewHandler(
-                      name: "Gulshan yadav",
-                      profileUrl: testUrl,
-                      stars: 5,
-                      review:
-                          "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
-                      reviewImage: testUrl,
-                      screen: screen,
-                    ),
-                    ReviewHandler(
-                      name: "Gulshan yadav",
-                      profileUrl: randomImage2,
-                      stars: 5,
-                      review:
-                          "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
-                      reviewImage: randomImage,
-                      screen: screen,
-                    ),
-                    ReviewHandler(
-                      name: "Gulshan yadav",
-                      profileUrl: randomImage2,
-                      stars: 5,
-                      review:
-                          "Aliqua aute culpa fugiat enim. Dolor anim occaecat irure Lorem do qui ea nostrud culpa nulla non nisi nostrud in. Proident commodo Lorem incididunt non laboris id ullamco.",
-                      reviewImage: randomImage,
-                      screen: screen,
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
+              restaurantReview,
             ],
-          ),
-        ),
-      ],
+          );
+        } else if (snapshot.hasError) {
+          debugPrint("${snapshot.error}");
+          return const Center(
+            child: Text("Something Gone Wrong"),
+          );
+        }
+
+        return const Center(
+          child: CircularProgressIndicator(),
+        );
+      },
     );
   }
 }
@@ -117,87 +159,94 @@ class ReviewHandler extends StatelessWidget {
   const ReviewHandler({
     Key? key,
     required this.name,
-    required this.profileUrl,
+    // required this.profileUrl,
     required this.stars,
     required this.review,
-    required this.reviewImage,
-    required this.screen,
+    // required this.reviewImage,
   }) : super(key: key);
   final String name;
-  final String profileUrl;
+  // final String profileUrl;
   final int stars;
   final String review;
-  final String reviewImage;
-  final Size screen;
+  // final String reviewImage;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Row(
-          // Profile section
-          children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(profileUrl),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(14.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
+    Size screen = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            // mainAxisAlignment: MainAxisAlignment.center,
+            // Profile section
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 4, left: 2, right: 4),
+                child: SizedBox(
+                  width: screen.width * 0.5,
+                  child: Text(
                     name,
-                    style: TextStyle(
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: GoogleFonts.lato(
                       fontWeight: FontWeight.bold,
+                      fontSize: 20,
                     ),
                   ),
-                  // Star section
-                  StarDisplayWidget(
-                    filledStar: const Icon(Icons.star, color: Colors.yellow),
-                    unfilledStar: const Icon(
-                      Icons.star,
-                      color: Colors.grey,
-                    ),
-                    value: stars,
-                  ),
-                  // Image of reviews
-                ],
+                ),
               ),
-            ),
-          ],
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: Container(
-            height: screen.height * 0.17,
-            width: screen.width,
-            decoration: BoxDecoration(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
+              // Star section
+              StarDisplayWidget(
+                filledStar: const Icon(Icons.star, color: Color(0xFFF59E0B)),
+                unfilledStar: const Icon(
+                  Icons.star,
+                  color: Colors.grey,
+                  size: 14,
+                ),
+                value: stars,
               ),
-              color: primaryLightColor,
-              image: DecorationImage(
-                image: NetworkImage(reviewImage),
-                fit: BoxFit.cover,
+            ],
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 4,
+              ),
+              child: Text(
+                review,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 10,
+                textAlign: TextAlign.start,
+                style: const TextStyle(color: Colors.black),
               ),
             ),
           ),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: SizedBox(
-            height: screen.height * 0.1,
-            width: screen.width * 0.9,
-            child: Text(
-              review,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 3,
-            ),
-          ),
-        )
-      ],
+          // (reviewImage != " ")
+          //     ? Align(
+          //         alignment: Alignment.centerLeft,
+          //         child: Container(
+          //           height: screen.height * 0.17,
+          //           width: screen.width,
+          //           decoration: BoxDecoration(
+          //             borderRadius: const BorderRadius.only(
+          //               topLeft: Radius.circular(10),
+          //               topRight: Radius.circular(10),
+          //             ),
+          //             color: primaryLightColor,
+          //             image: DecorationImage(
+          //               image: NetworkImage("$baseUrl/" + reviewImage),
+          //               fit: BoxFit.cover,
+          //             ),
+          //           ),
+          //         ),
+          //       )
+          //     : Container(),
+        ],
+      ),
     );
   }
 }
@@ -224,3 +273,50 @@ class StarDisplayWidget extends StatelessWidget {
     );
   }
 }
+
+class RestaurantReview {
+  final int id;
+  final int restaurantId;
+  final int rating;
+  final String review;
+  final String customerid;
+  final String imageUrl;
+  RestaurantReview(this.id, this.restaurantId, this.rating, this.review,
+      this.customerid, this.imageUrl);
+
+  RestaurantReview.fromJson(Map<String, dynamic> json)
+      : id = json['id'] ?? 0,
+        restaurantId = json['restaurant_id'] ?? 0,
+        rating = json['rating'] ?? 0,
+        review = json['message'] ?? '',
+        customerid = json['customer']['name'] ?? "",
+        imageUrl = json['photo'] ?? "";
+}
+
+Future<List<RestaurantReview>> fetchRestaurantReviews(
+    String restaurantId) async {
+  final http.Response response = await http.get(Uri.parse(
+      "$baseUrl/api/restaurant/slug/$restaurantId")); //TODO: Use id instead.
+
+  if (response.statusCode == 200) {
+    debugPrint("Hey###################################");
+    debugPrint(response.body);
+    Map result = jsonDecode(response.body);
+    List<dynamic> ratingInfo = result['reviews'];
+    debugPrint("############Rating info:" + ratingInfo.toString());
+    return ratingInfo.map((e) => RestaurantReview.fromJson(e)).toList();
+  } else {
+    /// Nothing found.
+    throw Exception("Something gone wrong");
+  }
+}
+/* {
+        "id": 1,
+        "restaurant_id": 2,
+        "customer_id": 1,
+        "rating": 3,
+        "message": "Hmm Not BAd Not Good",
+        "photo": null,
+        "created_at": "2021-08-30T04:51:43.000000Z",
+        "updated_at": "2021-08-30T04:51:43.000000Z"
+        }, */

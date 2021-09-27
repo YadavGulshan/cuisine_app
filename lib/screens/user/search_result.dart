@@ -3,12 +3,26 @@ import 'dart:convert';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/widgets/restaurant.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-class SearchResultPage extends StatelessWidget {
+class SearchResultPage extends StatefulWidget {
   String query;
   SearchResultPage({Key? key, required this.query}) : super(key: key);
+
+  @override
+  State<SearchResultPage> createState() => _SearchResultPageState();
+}
+
+class _SearchResultPageState extends State<SearchResultPage> {
+  late Future<List<SearchResult>> _searchResult;
+  @override
+  void initState() {
+    super.initState();
+    _searchResult = fetchQuery(widget.query);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +39,7 @@ class SearchResultPage extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline5,
                     children: [
                       TextSpan(
-                        text: '"$query"',
+                        text: '"${widget.query}"',
                         style: GoogleFonts.lato(
                           fontStyle: FontStyle.italic,
                           color: Colors.blue,
@@ -35,29 +49,53 @@ class SearchResultPage extends StatelessWidget {
               ),
             ),
             FutureBuilder(
-              future: fetchQuery(query),
+              future: _searchResult,
               builder: (BuildContext context,
                   AsyncSnapshot<List<SearchResult>> snapshot) {
                 if (snapshot.hasData) {
-                  debugPrint("lenght");
-                  debugPrint(snapshot.data?.length.toString());
-                  ListView.builder(
-                      itemCount: snapshot.data?.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        var currentRestaurant = snapshot.data![index];
-                        print("index: " + index.toString());
-                        debugPrint(currentRestaurant.name);
-                        // return RestaurantWidget(
-                        //     title: currentRestaurant.name,
-                        //     imageUrl: randomImage,
-                        //     category: currentRestaurant.category,
-                        //     rating: currentRestaurant.rating.toString(),
-                        //     address: currentRestaurant.address,
-                        //     id: currentRestaurant.id.toString());
-                        return Center(
-                          child: Text(currentRestaurant.name),
+                  // debugPrint(
+                  //     "COnnection state: " + ConnectionState.done.toString());
+                  debugPrint("length: " + snapshot.data!.length.toString());
+                  // debugPrint(snapshot.data?[0].name.toString());
+                  return (snapshot.data!.length > 0)
+                      ? Expanded(
+                          child: ListView.builder(
+                              itemCount: snapshot.data?.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                var currentRestaurant = snapshot.data![index];
+                                debugPrint("index: " + index.toString());
+                                debugPrint(snapshot.data![index].name);
+                                return RestaurantWidget(
+                                  title: currentRestaurant.name,
+                                  imageUrl:
+                                      "$baseUrl/" + currentRestaurant.imageUrl,
+                                  category: currentRestaurant.category,
+                                  rating: currentRestaurant.rating.toString(),
+                                  address: currentRestaurant.address,
+                                  id: currentRestaurant.id.toString(),
+                                  showRating: false,
+                                );
+                                // return Center(
+                                //   child: Text(currentRestaurant.name),
+                                // );
+                              }),
+                        )
+                      : Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.asset(
+                                "assets/notfound.svg",
+                                height:
+                                    MediaQuery.of(context).size.height * 0.5,
+                              ),
+                              Text(
+                                "No results found",
+                                style: GoogleFonts.inter(fontSize: 20),
+                              ),
+                            ],
+                          ),
                         );
-                      });
                 } else if (snapshot.hasError) {
                   return Center(
                     child: Image.asset("assets/somethinggonewrong.png"),

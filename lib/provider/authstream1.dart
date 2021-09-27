@@ -329,7 +329,7 @@ class AuthService extends ChangeNotifier {
 
     final token = await storage.read(key: 'token');
     debugPrint("Token: $token");
-    if (token != null) {
+    if (token != null && token.isNotEmpty) {
       final prefs = await SharedPreferences.getInstance();
       name = prefs.getString("name").toString();
       email = prefs.getString("email").toString();

@@ -93,13 +93,34 @@ List Testrestaurants = [
 
 // Name and imageUrl
 List TestCategory = [
-  {"title": "Noodles", "imageUrl": "https://picsum.photos/id/1018/200/300"},
+  {
+    "title": "Noodles",
+    "imageUrl":
+        "https://images.pexels.com/photos/2456435/pexels-photo-2456435.jpeg?crop=entropy&cs=srgb&dl=pexels-engin-akyurt-2456435.jpg&fit=crop&fm=jpg&h=426&w=640"
+  },
   {
     "title": "French Fries",
-    "imageUrl": "https://picsum.photos/id/1018/200/300"
+    "imageUrl":
+        "https://images.pexels.com/photos/1893555/pexels-photo-1893555.jpeg?crop=entropy&cs=srgb&dl=pexels-valeria-boltneva-1893555.jpg&fit=crop&fm=jpg&h=426&w=640"
   },
-  {"title": "Salad", "imageUrl": "https://picsum.photos/id/1018/200/300"},
-  {"title": "Coffie", "imageUrl": "https://picsum.photos/id/1018/200/300"},
-  {"title": "Egg", "imageUrl": "https://picsum.photos/id/1018/200/300"},
-  {"title": "Pizza", "imageUrl": "https://picsum.photos/id/1018/200/300"},
+  {
+    "title": "Salad",
+    "imageUrl":
+        "https://images.pexels.com/photos/1059905/pexels-photo-1059905.jpeg?crop=entropy&cs=srgb&dl=pexels-chan-walrus-1059905.jpg&fit=crop&fm=jpg&h=360&w=640"
+  },
+  {
+    "title": "Coffie",
+    "imageUrl":
+        "https://images.pexels.com/photos/982612/pexels-photo-982612.jpeg?crop=entropy&cs=srgb&dl=pexels-kevin-menajang-982612.jpg&fit=crop&fm=jpg&h=426&w=640"
+  },
+  {
+    "title": "Egg",
+    "imageUrl":
+        "https://images.pexels.com/photos/1833337/pexels-photo-1833337.jpeg?crop=entropy&cs=srgb&dl=pexels-valeria-boltneva-1833337.jpg&fit=crop&fm=jpg&h=959&w=640"
+  },
+  {
+    "title": "Pizza",
+    "imageUrl":
+        "https://images.pexels.com/photos/1146760/pexels-photo-1146760.jpeg?crop=entropy&cs=srgb&dl=pexels-kristina-paukshtite-1146760.jpg&fit=crop&fm=jpg&h=426&w=640"
+  },
 ];
