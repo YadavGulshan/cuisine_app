@@ -20,7 +20,7 @@ class RestaurantWidget extends StatelessWidget {
       : super(key: key);
   final String title;
   final String imageUrl;
-  final String category;
+  final List<dynamic> category;
   final String rating;
   final String address;
   final String id;
@@ -39,7 +39,7 @@ class RestaurantWidget extends StatelessWidget {
               title: title,
               address: address,
               rating: rating,
-              category: category,
+              category: category.join(" "),
             ));
       },
       child: Padding(
@@ -105,7 +105,7 @@ class RestaurantWidget extends StatelessWidget {
                           SizedBox(
                             width: screenWidth * 0.5,
                             child: Text(
-                              category,
+                              category.join(" "),
                               overflow: TextOverflow.ellipsis,
                               maxLines: 2,
                             ),

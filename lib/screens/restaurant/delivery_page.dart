@@ -185,20 +185,20 @@ class Menu extends StatelessWidget {
                     child: InkWell(
                       onTap: () {
                         CartModel provider =
-                            Provider.of<CartModel>(context, listen: false);
-                        CartItem cartItem = CartItem(
-                          id: id,
-                          title: title,
-                          price: price,
-                          quantity: 1,
-                          // TODO: Keep note of this.
-                          imageUrl: imageUrl,
-                        );
+                            Provider.of<CartModel>(context, listen: true);
+                        // CartItem cartItem = CartItem(
+                        //   id: id,
+                        //   title: title,
+                        //   price: price,
+                        //   quantity: 1,
+                        //   // TODO: Keep note of this.
+                        //   imageUrl: imageUrl,
+                        // );
 
                         // Add the item to the cart
 
                         Provider.of<CartModel>(context, listen: false)
-                            .addItem(cartItem);
+                            .addItem(id, title, price.toDouble(), imageUrl);
 
                         // Print the cart
                         debugPrint(
@@ -365,8 +365,10 @@ class RestaurantCuisines {
 }
 
 Future<List<RestaurantCuisines>> fetchCuisine(String id) async {
-  final http.Response response = await http.get(
-      Uri.parse("$baseUrl/api/restaurant/slug/$id")); //TODO: Use id instead.
+  final http.Response response = await http
+      // .get(Uri.parse("$baseUrl/api/restaurant/$id")); //TODO: Use id instead.
+      .get(Uri.parse(
+          "http://150.230.233.221/api/restaurant/2")); //TODO: Use id instead.
 
   if (response.statusCode == 200) {
     debugPrint("Hey###################################");
@@ -377,6 +379,7 @@ Future<List<RestaurantCuisines>> fetchCuisine(String id) async {
     return cuisineInfo.map((e) => RestaurantCuisines.fromJson(e)).toList();
   } else {
     /// Nothing found.
+    debugPrint("##Error: " + response.body);
     throw Exception("Something gone wrong");
   }
 }

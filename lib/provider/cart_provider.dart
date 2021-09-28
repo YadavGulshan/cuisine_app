@@ -1,189 +1,298 @@
+// // import 'package:flutter/cupertino.dart';
+
+// // class CartModel extends ChangeNotifier {
+// //   // Store the items in cart with id and quantity
+// //   Map<String, int> _items = {};
+
+// //   Map<String, int> get items {
+// //     return {..._items};
+// //   }
+
+// //   int get itemCount {
+// //     return _items.length;
+// //   }
+
+// //   double get totalAmount {
+// //     double total = 0.0;
+// //     _items.forEach((key, value) {
+// //       total += value * _items[key]!.toDouble();
+// //     });
+// //     return total;
+// //   }
+
+// //   void addItem(String productId) {
+// //     if (_items.containsKey(productId)) {
+// //       _items.update(productId, (value) => value + 1);
+
+// //       // Update the cart
+// //       notifyListeners();
+// //     } else {
+// //       _items.putIfAbsent(productId, () => 1);
+// //       // Update the cart
+// //       notifyListeners();
+// //     }
+// //   }
+
+// //   void removeItem(String productId) {
+// //     if (_items.containsKey(productId)) {
+// //       if (_items[productId] == 1) {
+// //         _items.remove(productId);
+// //       } else {
+// //         _items.update(productId, (value) => value - 1);
+// //       }
+// //       // Update the cart
+// //       notifyListeners();
+// //     }
+// //   }
+
+// //   void removeSingleItem(String productId) {
+// //     if (_items.containsKey(productId)) {
+// //       _items.remove(productId);
+// //       // Update the cart
+// //       notifyListeners();
+// //     }
+// //   }
+
+// //   void clear() {
+// //     _items = {};
+// //     notifyListeners();
+// //   }
+
+// //   void removeItemFromCart(String productId) {
+// //     _items.remove(productId);
+// //     notifyListeners();
+// //   }
+
+// //   void addSingleItem(String productId) {
+// //     if (_items.containsKey(productId)) {
+// //       _items.update(productId, (value) => value + 1);
+// //       // Update the cart
+// //       notifyListeners();
+// //     } else {
+// //       _items.putIfAbsent(productId, () => 1);
+// //       // Update the cart
+// //       notifyListeners();
+// //     }
+// //   }
+
+// //   void removeSingleItemFromCart(String productId) {
+// //     if (_items.containsKey(productId)) {
+// //       _items.update(productId, (value) => value - 1);
+// //       // Update the cart
+// //       notifyListeners();
+// //     }
+// //   }
+
+// //   void updateItemQuantity(String productId, int quantity) {
+// //     if (quantity > 0) {
+// //       _items.update(productId, (value) => quantity);
+// //       notifyListeners();
+// //     } else {
+// //       removeItemFromCart(productId);
+// //     }
+// //   }
+// // }
+
+// // class CartItem {
+// //   final String id;
+// //   final String title;
+// //   final int quantity;
+// //   final double price;
+// //   final String imageUrl;
+
+// //   CartItem(this.id, this.title, this.quantity, this.price, this.imageUrl);
+// // }
+
 // import 'package:flutter/cupertino.dart';
+// import 'package:provider/provider.dart';
 
 // class CartModel extends ChangeNotifier {
-//   // Store the items in cart with id and quantity
-//   Map<String, int> _items = {};
+//   // This cart will reset after user changes the screen, from one restaurant to another.
+//   // Store id and price of the product
+//   List<CartItem> _items = [];
 
-//   Map<String, int> get items {
-//     return {..._items};
+//   // Getter
+//   List<CartItem> get items => _items;
+
+//   // Add item to cart
+//   void addItem(CartItem item) {
+//     _items.add(item);
+//     notifyListeners();
 //   }
 
-//   int get itemCount {
-//     return _items.length;
+//   // Remove item from cart
+//   void removeItem(CartItem item) {
+//     _items.remove(item);
+//     notifyListeners();
 //   }
 
-//   double get totalAmount {
+//   // Remove all items from cart
+//   void removeAllItems() {
+//     _items.clear();
+//     notifyListeners();
+//   }
+
+//   // Get total price of all items in cart
+//   double get totalPrice {
 //     double total = 0.0;
-//     _items.forEach((key, value) {
-//       total += value * _items[key]!.toDouble();
-//     });
+//     for (var item in _items) {
+//       total += item.price;
+//     }
 //     return total;
 //   }
 
-//   void addItem(String productId) {
-//     if (_items.containsKey(productId)) {
-//       _items.update(productId, (value) => value + 1);
-
-//       // Update the cart
-//       notifyListeners();
-//     } else {
-//       _items.putIfAbsent(productId, () => 1);
-//       // Update the cart
-//       notifyListeners();
+//   // Get total quantity of all items in cart
+//   int get totalQuantity {
+//     int total = 0;
+//     for (var item in _items) {
+//       total += item.quantity;
 //     }
+//     return total;
 //   }
 
-//   void removeItem(String productId) {
-//     if (_items.containsKey(productId)) {
-//       if (_items[productId] == 1) {
-//         _items.remove(productId);
-//       } else {
-//         _items.update(productId, (value) => value - 1);
+//   // Get the quantity of a specific item
+//   int getItemQuantity(String id) {
+//     int quantity = 0;
+//     for (var item in _items) {
+//       if (item.id == id) {
+//         quantity = item.quantity;
 //       }
-//       // Update the cart
-//       notifyListeners();
 //     }
-//   }
-
-//   void removeSingleItem(String productId) {
-//     if (_items.containsKey(productId)) {
-//       _items.remove(productId);
-//       // Update the cart
-//       notifyListeners();
-//     }
-//   }
-
-//   void clear() {
-//     _items = {};
-//     notifyListeners();
-//   }
-
-//   void removeItemFromCart(String productId) {
-//     _items.remove(productId);
-//     notifyListeners();
-//   }
-
-//   void addSingleItem(String productId) {
-//     if (_items.containsKey(productId)) {
-//       _items.update(productId, (value) => value + 1);
-//       // Update the cart
-//       notifyListeners();
-//     } else {
-//       _items.putIfAbsent(productId, () => 1);
-//       // Update the cart
-//       notifyListeners();
-//     }
-//   }
-
-//   void removeSingleItemFromCart(String productId) {
-//     if (_items.containsKey(productId)) {
-//       _items.update(productId, (value) => value - 1);
-//       // Update the cart
-//       notifyListeners();
-//     }
-//   }
-
-//   void updateItemQuantity(String productId, int quantity) {
-//     if (quantity > 0) {
-//       _items.update(productId, (value) => quantity);
-//       notifyListeners();
-//     } else {
-//       removeItemFromCart(productId);
-//     }
+//     return quantity;
 //   }
 // }
 
-// class CartItem {
+// class CartItem extends ChangeNotifier {
 //   final String id;
 //   final String title;
-//   final int quantity;
-//   final double price;
+//   int quantity;
+//   final int price;
 //   final String imageUrl;
 
-//   CartItem(this.id, this.title, this.quantity, this.price, this.imageUrl);
+//   CartItem({
+//     required this.id,
+//     required this.title,
+//     required this.quantity,
+//     required this.price,
+//     required this.imageUrl,
+//   });
+
+//   // void addCuisine() {
+//   //   quantity++;
+//   //   notifyListeners();
+//   // }
+
+//   // void subCuisine() {
+//   //   quantity -= 1;
+//   //   notifyListeners();
+//   // }
 // }
 
-import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
+// page to write the cart logic.
+
+import 'package:flutter/material.dart';
 
 class CartModel extends ChangeNotifier {
-  // This cart will reset after user changes the screen, from one restaurant to another.
-  // Store id and price of the product
-  List<CartItem> _items = [];
-
-  // Getter
-  List<CartItem> get items => _items;
+  /// List of items and then the quantity of each item.
+  /// List -> [id, Quantity]
+  List<Map<String, dynamic>> items = [];
 
   // Add item to cart
-  void addItem(CartItem item) {
-    _items.add(item);
-    notifyListeners();
+  void addItem(String id, String title, double price, String image) {
+    // Check if item is already in the cart
+    var item = items.firstWhere((element) => element['id'] == id);
+    if (item != null) {
+      // update the quantity in items
+      item['quantity']++;
+
+      notifyListeners();
+    } else {
+      // add item to items
+      items.add({
+        'id': id,
+        'title': title,
+        'price': price,
+        'image': image,
+        'quantity': 1,
+        'imageUrl': image,
+      });
+      notifyListeners();
+    }
   }
 
   // Remove item from cart
-  void removeItem(CartItem item) {
-    _items.remove(item);
-    notifyListeners();
+  void removeItem(String id) {
+    var item = items.firstWhere((element) => element['id'] == id);
+    if (item != null) {
+      if (item['quantity'] >= 1) {
+        item['quantity']--;
+        notifyListeners();
+      }
+    }
   }
 
   // Remove all items from cart
   void removeAllItems() {
-    _items.clear();
+    items.clear();
     notifyListeners();
   }
 
   // Get total price of all items in cart
   double get totalPrice {
     double total = 0.0;
-    for (var item in _items) {
-      total += item.price;
+    for (var item in items) {
+      total += item['price'] * item['quantity'];
     }
     return total;
   }
 
   // Get total quantity of all items in cart
   int get totalQuantity {
-    int total = 0;
-    for (var item in _items) {
-      total += item.quantity;
+    var total = 0;
+    for (var item in items) {
+      total += item['quantity'] as int;
     }
     return total;
   }
 
   // Get the quantity of a specific item
   int getItemQuantity(String id) {
-    int quantity = 0;
-    for (var item in _items) {
-      if (item.id == id) {
-        quantity = item.quantity;
+    var quantity = 0;
+    for (var item in items) {
+      if (item['id'] == id) {
+        quantity = item['quantity'] as int;
       }
     }
     return quantity;
   }
+
+  // Get the total price of a specific item
+  double getItemPrice(String id) {
+    var price = 0.0;
+    for (var item in items) {
+      if (item['id'] == id) {
+        price = item['price'] * item['quantity'];
+      }
+    }
+    return price;
+  }
+
+  // increase the quantity of a specific item
+  void increaseItemQuantity(String id) {
+    var item = items.firstWhere((element) => element['id'] == id);
+    if (item != null) {
+      item['quantity']++;
+      notifyListeners();
+    }
+  }
 }
 
-class CartItem extends ChangeNotifier {
-  final String id;
-  final String title;
-  int quantity;
-  final int price;
+class CartItem {
+  final int id;
+  final String name;
+  final String price;
   final String imageUrl;
+  final int restaurantId;
 
-  CartItem({
-    required this.id,
-    required this.title,
-    required this.quantity,
-    required this.price,
-    required this.imageUrl,
-  });
-
-  // void addCuisine() {
-  //   quantity++;
-  //   notifyListeners();
-  // }
-
-  // void subCuisine() {
-  //   quantity -= 1;
-  //   notifyListeners();
-  // }
+  CartItem(this.id, this.name, this.price, this.imageUrl, this.restaurantId);
 }

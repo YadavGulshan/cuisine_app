@@ -57,7 +57,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                   //     "COnnection state: " + ConnectionState.done.toString());
                   debugPrint("length: " + snapshot.data!.length.toString());
                   // debugPrint(snapshot.data?[0].name.toString());
-                  return (snapshot.data!.length > 0)
+                  return (snapshot.data!.isNotEmpty)
                       ? Expanded(
                           child: ListView.builder(
                               itemCount: snapshot.data?.length,
@@ -133,7 +133,7 @@ class SearchResult {
   final String name;
   final String imageUrl;
   final String address;
-  final String category;
+  final List<String> category;
   final double rating = 5;
 
   SearchResult({
@@ -163,7 +163,7 @@ class SearchResult {
         id = json['id'],
         imageUrl = json['photo'],
         address = json['address'],
-        category = json['slug'];
+        category = json['categories'];
 }
 
 // {

@@ -232,8 +232,7 @@ class CartContent extends StatelessWidget {
                   image: NetworkImage(
                     Provider.of<CartModel>(context, listen: false)
                         .items
-                        .elementAt(index)
-                        .imageUrl,
+                        .elementAt(index)['imageUrl'],
                   ),
                 )),
           ),
@@ -249,9 +248,7 @@ class CartContent extends StatelessWidget {
                     width: screen.width * 0.5,
                     child: Text(
                       Provider.of<CartModel>(context, listen: false)
-                          .items[index]
-                          .title
-                          .toString(),
+                          .items[index]['name'],
                       style: const TextStyle(fontSize: 20),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -262,9 +259,7 @@ class CartContent extends StatelessWidget {
                   child: Text(
                     "₹ " +
                         Provider.of<CartModel>(context, listen: false)
-                            .items[index]
-                            .price
-                            .toString(),
+                            .items[index]['price'],
                     style: const TextStyle(fontSize: 14),
                     textAlign: TextAlign.left,
                   ),
@@ -283,8 +278,7 @@ class CartContent extends StatelessWidget {
                       IconButton(
                           onPressed: () {
                             Provider.of<CartModel>(context, listen: false)
-                                .items[index]
-                                .quantity--;
+                                .removeItem(index.toString());
                           },
                           icon: const Icon(Icons.remove)), // remove
                       Text(Provider.of<CartModel>(context, listen: true)
@@ -294,8 +288,7 @@ class CartContent extends StatelessWidget {
                           padding: const EdgeInsets.all(0),
                           onPressed: () {
                             Provider.of<CartModel>(context, listen: false)
-                                .items[index]
-                                .quantity++;
+                                .increaseItemQuantity(index.toString());
                           },
                           icon: const Icon(Icons.add)),
                     ],

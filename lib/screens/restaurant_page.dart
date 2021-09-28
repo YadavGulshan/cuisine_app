@@ -55,7 +55,7 @@ class _RestaurantPageState extends State<RestaurantPage>
     super.initState();
     _controller = TabController(length: 2, vsync: this);
     // Delete the cart content.
-    Provider.of<CartModel>(context, listen: false).removeAllItems();
+    // Provider.of<CartModel>(context, listen: false).removeAllItems();
   }
 
   @override

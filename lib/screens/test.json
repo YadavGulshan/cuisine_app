@@ -1,0 +1,25 @@
+[{
+    "id": 2,
+    "name": "KFC Restaurant",
+    "slug": "kfc - restaurant",
+    "photo": " storage / images / restaurants / restaurant_kfc.jpg",
+    "phone": "02226487077",
+    "email": "restaurant.kfc @domain.com",
+    "owner": "john smith",
+    "isBanned": 0,
+    "address": "24,B,Bharti,Shirley Rajan Road,Bandra(w)",
+    "city": "Mumbai",
+    "state": "Maharashtra",
+    "zip": 400050,
+    "latitude": null,
+    "longitude": null,
+    "isAdmin": 0,
+    "created_at": "2021 - 09 - 27 T07: 58: 43.000000 Z",
+    "updated_at": "2021 - 09 - 27 T07: 58: 43.000000 ",
+    "orders_count": 0,
+    "reviews_avg_rating": 3.0000,
+    "categories": [
+        "hey",
+        "hi"
+    ]
+}]

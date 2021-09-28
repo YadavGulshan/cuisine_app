@@ -40,7 +40,6 @@ class _MainPageState extends State<MainPage> {
   String address = "";
 
   late Future<List<RestaurantList>> futureRestaurant;
-
   bool _isExpanded = false;
 
   String _categorySubtitile = "Show more";
@@ -82,10 +81,12 @@ class _MainPageState extends State<MainPage> {
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   var currentRestaurant = snapshot.data![index];
+                  // implement the widget here.
+
                   return RestaurantWidget(
                     title: currentRestaurant.title,
                     imageUrl: "$baseUrl/" + currentRestaurant.imageUrl,
-                    category: currentRestaurant.category,
+                    category: currentRestaurant.categories,
                     rating: currentRestaurant.rating,
                     address: currentRestaurant.address,
                     id: currentRestaurant.id.toString(),
@@ -251,7 +252,7 @@ class _MainPageState extends State<MainPage> {
               child: Text("Something gone Wrong."),
             );
           }
-          return Center(
+          return const Center(
             child: CircularProgressIndicator(),
           );
         },
@@ -350,18 +351,24 @@ class RestaurantList {
   final String title;
   final String imageUrl;
   final String rating;
+  final List<dynamic> categories;
   final String address;
-  final String category;
 
-  RestaurantList(this.id, this.title, this.imageUrl, this.rating, this.address,
-      this.category);
+  RestaurantList(
+    this.id,
+    this.title,
+    this.imageUrl,
+    this.categories,
+    this.rating,
+    this.address,
+  );
 
   RestaurantList.fromJson(Map<String, dynamic> json)
       : title = json['name'],
         id = json['id'],
         imageUrl = json['photo'],
         address = json['address'],
-        category = json['slug'],
+        categories = json['categories'],
         rating = 5.toString();
 }
 
@@ -372,12 +379,35 @@ Future<List<RestaurantList>> fetchRestaurant() async {
   if (response.statusCode == 200) {
     Map result = jsonDecode(response.body);
     List<dynamic> restaurantInfo = result['data'];
+    debugPrint(restaurantInfo.toString());
     return restaurantInfo.map((e) => RestaurantList.fromJson(e)).toList();
   } else {
     /// Nothing found.
     throw Exception("Something gone wrong");
   }
 }
+
+// class Category {
+//   final String title;
+//   Category(this.title);
+
+//   Category.fromJson(Map<String, dynamic> json) : title = json['name'];
+// }
+
+// Future<List<Category>> fetchCategory() async {
+//   final http.Response response =
+//       await http.get(Uri.parse("$baseUrl/api/restaurants"));
+
+//   if (response.statusCode == 200) {
+//     Map result = jsonDecode(response.body);
+//     List<dynamic> categoryInfo = result['categories'];
+//     debugPrint("#############CategoryInfo: " + categoryInfo.toString());
+//     return categoryInfo.map((e) => Category.fromJson(e)).toList();
+//   } else {
+//     /// Nothing found.
+//     throw Exception("Something gone wrong");
+//   }
+// }
 
 /*
 "id": 1,
@@ -398,4 +428,23 @@ Future<List<RestaurantList>> fetchRestaurant() async {
             "isAdmin": 1,
             "created_at": "2021-08-30T04:51:30.000000Z",
             "updated_at": "2021-08-30T04:51:30.000000Z"
+*/
+
+/*
+restaurantList = SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  var currentRestaurant = snapshot.data![index];
+                  return RestaurantWidget(
+                    title: currentRestaurant.title,
+                    imageUrl: "$baseUrl/" + currentRestaurant.imageUrl,
+                    category: currentRestaurant.category,
+                    rating: currentRestaurant.rating,
+                    address: currentRestaurant.address,
+                    id: currentRestaurant.id.toString(),
+                  );
+                },
+                childCount: snapshot.data?.length,
+              ),
+            );
 */
