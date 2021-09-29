@@ -4,12 +4,14 @@ import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/checkout/checkout_widget.dart';
+import 'package:cuisine_app/screens/order/checkout_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:cuisine_app/user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
@@ -187,6 +189,7 @@ class CartPage extends StatelessWidget {
                                 MaterialStateProperty.all(primaryColor)),
                         onPressed: () {
                           // Provider.of<CartModel>(context).();
+                          pushNewScreen(context, screen: const CheckoutPage());
                         },
                         child: const Text(
                           "Checkout",

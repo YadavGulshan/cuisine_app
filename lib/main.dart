@@ -4,6 +4,7 @@ import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/provider/infoprovider.dart';
 import 'package:cuisine_app/screens/auth/auth_page.dart';
 import 'package:cuisine_app/screens/homepage.dart';
+import 'package:cuisine_app/screens/order/checkout_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -70,7 +71,8 @@ class MyApp extends StatelessWidget {
               ),
               button: GoogleFonts.rubik(fontSize: 16.0, color: Colors.white)),
         ),
-        home: const InitialCheck(),
+        // home: const InitialCheck(),
+        home: const CheckoutPage(),
         // home: CheckoutScreen(),
       ),
     );
