@@ -331,7 +331,7 @@ class AuthService extends ChangeNotifier {
 
     // final token = await storage.read(key: 'token');
     final pref = await SharedPreferences.getInstance();
-    final token = pref.getString("token");
+    token = pref.getString("token")!;
 
     debugPrint("Token: $token");
     if (token != null && token.isNotEmpty) {
@@ -339,6 +339,7 @@ class AuthService extends ChangeNotifier {
       name = prefs.getString("name").toString();
       email = prefs.getString("email").toString();
       id = prefs.getInt("id")!.toInt();
+      token = prefs.getString("token").toString();
       _isbusy = false;
       // If token is stored in memory, then set the token and set the isLoggedIn to true.
       _isLoggedIn = true;
