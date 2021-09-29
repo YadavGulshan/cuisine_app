@@ -197,10 +197,11 @@ class AuthService extends ChangeNotifier {
     prefs.setInt("id", id);
     prefs.setString("name", name);
     prefs.setString("email", email);
+    prefs.setString("token", token);
 
     /// Store the token in secure storage.
-    const storage = FlutterSecureStorage();
-    await storage.write(key: "token", value: token);
+    // const storage = FlutterSecureStorage();
+    // await storage.write(key: "token", value: token);
 
     debugPrint("Task of storing info ended.");
   }
@@ -309,11 +310,12 @@ class AuthService extends ChangeNotifier {
     prefs.remove("email");
     prefs.remove("name");
     prefs.remove("id");
+    prefs.remove("token");
 
     // delete the token.
-    const storage = FlutterSecureStorage();
-    await storage.write(
-        key: "token", value: ""); // overwrite the value with null
+    // const storage = FlutterSecureStorage();
+    // await storage.write(
+    //     key: "token", value: ""); // overwrite the value with null
 
     _isLoggedIn = false;
     notifyListeners();
@@ -325,9 +327,12 @@ class AuthService extends ChangeNotifier {
     _isbusy = true;
     notifyListeners();
     // Check the memory if token is stored or not.
-    const storage = FlutterSecureStorage();
+    // const storage = FlutterSecureStorage();
 
-    final token = await storage.read(key: 'token');
+    // final token = await storage.read(key: 'token');
+    final pref = await SharedPreferences.getInstance();
+    final token = pref.getString("token");
+
     debugPrint("Token: $token");
     if (token != null && token.isNotEmpty) {
       final prefs = await SharedPreferences.getInstance();

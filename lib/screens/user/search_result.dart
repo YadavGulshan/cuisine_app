@@ -120,9 +120,9 @@ Future<List<SearchResult>> fetchQuery(String query) async {
       await http.get(Uri.parse("$baseUrl/api/restaurant/search/$query"));
 
   if (response.statusCode == 200) {
-    Map result = jsonDecode(response.body);
-    List<dynamic> restaurantInfo = result['data'];
-    return restaurantInfo.map((e) => SearchResult.fromJson(e)).toList();
+    List result = jsonDecode(response.body);
+    // List<dynamic> restaurantInfo = result['data'];
+    return result.map((e) => SearchResult.fromJson(e)).toList();
   } else {
     /// Nothing found.
     throw Exception("Nothing found.");
@@ -135,7 +135,7 @@ class SearchResult {
   final String imageUrl;
   final String address;
   final String category;
-  final double rating;
+  final String rating;
   final String slug;
 
   SearchResult({

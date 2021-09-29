@@ -70,9 +70,6 @@ class MyApp extends StatelessWidget {
               ),
               button: GoogleFonts.rubik(fontSize: 16.0, color: Colors.white)),
         ),
-        // home: (Provider.of<AuthService>(context).loginCheck)
-        //     ? const MainPage()
-        //     : const GetStartedPage(),
         home: const InitialCheck(),
         // home: CheckoutScreen(),
       ),

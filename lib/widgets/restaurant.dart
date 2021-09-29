@@ -22,7 +22,7 @@ class RestaurantWidget extends StatelessWidget {
   final String title;
   final String imageUrl;
   final String category;
-  final double rating;
+  final String rating;
   final String address;
   final String id;
   final bool showRating;
@@ -40,7 +40,7 @@ class RestaurantWidget extends StatelessWidget {
               imageUrl: imageUrl,
               title: title,
               address: address,
-              rating: rating.toStringAsFixed(1),
+              rating: rating[0] + rating[1] + rating[2],
               category: category,
               slug: slug,
             ));
@@ -110,7 +110,7 @@ class RestaurantWidget extends StatelessWidget {
                             child: Text(
                               category,
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 2,
+                              maxLines: 1,
                             ),
                           )
                         ],
@@ -133,15 +133,11 @@ class RestaurantWidget extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Container(
-                                        width: screenWidth * 0.1,
-                                        color: Colors.amber,
-                                        child: Text(
-                                          rating.toStringAsFixed(1),
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                          ),
+                                      Text(
+                                        rating[0] + rating[1] + rating[2],
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                          color: Colors.white,
                                         ),
                                       ),
                                       const Icon(

@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/screens/user/search_page.dart';
+import 'package:cuisine_app/screens/user/search_result.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer/shimmer.dart';
 
+/// Not being used
 class CategoriesScroller extends StatelessWidget {
   const CategoriesScroller({Key? key}) : super(key: key);
 
@@ -17,10 +20,10 @@ class CategoriesScroller extends StatelessWidget {
         padding: const EdgeInsets.all(14.0),
         child: Row(
           children: <Widget>[
-            categoryButton("Category", testUrl),
-            categoryButton("Category", testUrl),
-            categoryButton("Category", testUrl),
-            categoryButton("Category", testUrl),
+            categoryButton("Category", testUrl, context),
+            categoryButton("Category", testUrl, context),
+            categoryButton("Category", testUrl, context),
+            categoryButton("Category", testUrl, context),
           ],
         ),
       ),
@@ -33,10 +36,17 @@ Widget categoryButton(
   // double screenWidth,
   String name,
   String imageUrl,
+  context,
 ) {
   return InkWell(
     onTap: () {
       debugPrint("Tapped");
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SearchResultPage(
+                    query: name,
+                  )));
 
       /// ROute to the a page with the search result for the category name.
     },

@@ -232,8 +232,11 @@ class _MainPageState extends State<MainPage> {
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    return categoryButton(TestCategory[index]["title"],
-                        TestCategory[index]["imageUrl"]);
+                    return categoryButton(
+                      TestCategory[index]["title"],
+                      TestCategory[index]["imageUrl"],
+                      context,
+                    );
                   },
                   childCount: TestCategory.length,
                 ),
@@ -326,7 +329,7 @@ class RestaurantList {
   final String imageUrl;
   final String address;
   final String slug;
-  double reviewsAvgRating;
+  final String reviewsAvgRating;
   List<String> category;
 
   RestaurantList(this.id, this.title, this.imageUrl, this.address,
@@ -339,6 +342,7 @@ class RestaurantList {
         address = json['address'],
         category = json['category'].cast<String>(),
         slug = json['slug'],
+        // String to double
         reviewsAvgRating = json["reviews_avg_rating"];
 }
 
