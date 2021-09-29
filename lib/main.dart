@@ -71,8 +71,8 @@ class MyApp extends StatelessWidget {
               ),
               button: GoogleFonts.rubik(fontSize: 16.0, color: Colors.white)),
         ),
-        // home: const InitialCheck(),
-        home: const CheckoutPage(),
+        home: const InitialCheck(),
+        // home: const CheckoutPage(),
         // home: CheckoutScreen(),
       ),
     );

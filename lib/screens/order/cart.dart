@@ -188,8 +188,20 @@ class CartPage extends StatelessWidget {
                             backgroundColor:
                                 MaterialStateProperty.all(primaryColor)),
                         onPressed: () {
-                          // Provider.of<CartModel>(context).();
-                          pushNewScreen(context, screen: const CheckoutPage());
+                          // Provider.of<CartModel>(context).()
+                          // if cart is empty then do not allow checkout
+                          if (Provider.of<CartModel>(context).totalQuantity !=
+                              0) {
+                            pushNewScreen(context,
+                                screen: const CheckoutPage());
+                          } else {
+                            SnackBar snackBar = const SnackBar(
+                              content: Text("Please add something in cart"),
+                              backgroundColor: Colors.blue,
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
                         },
                         child: const Text(
                           "Checkout",

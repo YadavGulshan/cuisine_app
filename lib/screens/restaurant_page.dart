@@ -44,20 +44,14 @@ class _RestaurantPageState extends State<RestaurantPage>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
 
-  void _updatePaletteGenerator() async {
-    var paletteGenerator = await PaletteGenerator.fromImageProvider(
-      Image.network(widget.imageUrl).image,
-    );
-    debugPrint(paletteGenerator.colors.toString());
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
     // Delete the cart content.
-    Provider.of<CartModel>(context, listen: false).removeAllItems();
+    if (Provider.of<CartModel>(context, listen: false).totalQuantity != 0) {
+      Provider.of<CartModel>(context, listen: false).removeAllItems();
+    }
   }
 
   @override
