@@ -24,6 +24,7 @@ class RestaurantPage extends StatefulWidget {
   String restaurantId;
   String category;
   String imageUrl;
+  String slug;
   RestaurantPage(
       {Key? key,
       required this.restaurantId,
@@ -31,6 +32,7 @@ class RestaurantPage extends StatefulWidget {
       required this.address,
       required this.rating,
       required this.imageUrl,
+      required this.slug,
       this.category = ""})
       : super(key: key);
 
@@ -119,10 +121,10 @@ class _RestaurantPageState extends State<RestaurantPage>
                 controller: _controller,
                 children: [
                   DeliveryPage(
-                    restaurantid: widget.category,
+                    restaurantid: widget.slug,
                   ),
                   ReviewPage(
-                    restaurant: widget.category,
+                    restaurant: widget.slug,
                   ),
                 ],
               ),

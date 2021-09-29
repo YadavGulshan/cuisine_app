@@ -81,9 +81,10 @@ class _MainPageState extends State<MainPage> {
                 return RestaurantWidget(
                   title: currentRestaurant.title,
                   imageUrl: "$baseUrl/" + currentRestaurant.imageUrl,
-                  category: currentRestaurant.category,
-                  rating: currentRestaurant.rating,
+                  category: currentRestaurant.category.join(", "),
+                  rating: currentRestaurant.reviewsAvgRating,
                   address: currentRestaurant.address,
+                  slug: currentRestaurant.slug,
                   id: currentRestaurant.id.toString(),
                 );
               },
@@ -323,20 +324,22 @@ class RestaurantList {
   final int id;
   final String title;
   final String imageUrl;
-  final String rating;
   final String address;
-  final String category;
+  final String slug;
+  double reviewsAvgRating;
+  List<String> category;
 
-  RestaurantList(this.id, this.title, this.imageUrl, this.rating, this.address,
-      this.category);
+  RestaurantList(this.id, this.title, this.imageUrl, this.address,
+      this.category, this.reviewsAvgRating, this.slug);
 
   RestaurantList.fromJson(Map<String, dynamic> json)
       : title = json['name'],
         id = json['id'],
         imageUrl = json['photo'],
         address = json['address'],
-        category = json['slug'],
-        rating = 5.toString();
+        category = json['category'].cast<String>(),
+        slug = json['slug'],
+        reviewsAvgRating = json["reviews_avg_rating"];
 }
 
 Future<List<RestaurantList>> fetchRestaurant() async {
@@ -344,9 +347,9 @@ Future<List<RestaurantList>> fetchRestaurant() async {
       await http.get(Uri.parse("$baseUrl/api/restaurants"));
 
   if (response.statusCode == 200) {
-    Map result = jsonDecode(response.body);
-    List<dynamic> restaurantInfo = result['data'];
-    return restaurantInfo.map((e) => RestaurantList.fromJson(e)).toList();
+    List<dynamic> result = jsonDecode(response.body);
+    // List<dynamic> restaurantInfo = result[''];
+    return result.map((e) => RestaurantList.fromJson(e)).toList();
   } else {
     /// Nothing found.
     throw Exception("Something gone wrong");
