@@ -4,28 +4,25 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/cart.dart';
-import 'package:cuisine_app/screens/order/cart_bottomscreen.dart';
 import 'package:cuisine_app/screens/restaurant/delivery_page.dart';
 import 'package:cuisine_app/screens/restaurant/review_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:palette_generator/palette_generator.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart';
 import 'package:shimmer/shimmer.dart';
 
 class RestaurantPage extends StatefulWidget {
-  String title;
-  String address;
-  String rating;
-  String restaurantId;
-  String category;
-  String imageUrl;
-  String slug;
-  RestaurantPage(
+  final String title;
+  final String address;
+  final String rating;
+  final String restaurantId;
+  final String category;
+  final String imageUrl;
+  final String slug;
+  const RestaurantPage(
       {Key? key,
       required this.restaurantId,
       required this.title,
@@ -136,9 +133,10 @@ class _RestaurantPageState extends State<RestaurantPage>
                       badgeColor: Colors.white,
                       animationType: BadgeAnimationType.fade,
                       badgeContent: Text(
-                          Provider.of<CartModel>(context, listen: true)
-                              .totalQuantity
-                              .toString()),
+                        Provider.of<CartModel>(context, listen: true)
+                            .totalQuantity
+                            .toString(),
+                      ),
                       child: const Icon(
                         Icons.shopping_cart_outlined,
                         color: primaryLightColor,
