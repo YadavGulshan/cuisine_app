@@ -73,7 +73,8 @@ class CartPage extends StatelessWidget {
                             // color: Colors.amber,
                             width: screen.width * 0.7,
                             child: Text(
-                              Provider.of<AuthService>(context).userName,
+                              Provider.of<AuthService>(context, listen: false)
+                                  .userName,
                               // "test1@test.com",
                               style: const TextStyle(
                                 fontSize: 20,
@@ -89,7 +90,8 @@ class CartPage extends StatelessWidget {
                               // color: Colors.amber,
                               width: screen.width * 0.7,
                               child: Text(
-                                Provider.of<AuthService>(context).userEmail,
+                                Provider.of<AuthService>(context, listen: false)
+                                    .userEmail,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 // "test1@test.com",
@@ -224,8 +226,8 @@ class CartPage extends StatelessWidget {
 }
 
 class CartContent extends StatelessWidget {
-  int index;
-  CartContent({
+  final int index;
+  const CartContent({
     Key? key,
     required this.index,
   }) : super(key: key);
@@ -260,7 +262,7 @@ class CartContent extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: Container(
+                  child: SizedBox(
                     width: screen.width * 0.5,
                     child: Text(
                       Provider.of<CartModel>(context, listen: false)
@@ -302,9 +304,18 @@ class CartContent extends StatelessWidget {
                                 .quantity--;
                           },
                           icon: const Icon(Icons.remove)), // remove
-                      Text(Provider.of<CartModel>(context, listen: true)
-                          .getItemQuantity(index.toString())
-                          .toString()), // Quantity
+                      // Text(Provider.of<CartModel>(context, listen: true)
+                      //     .getItemQuantity(index.toString())
+                      //     .toString()),
+                      //
+                      Text(
+                        context
+                            .watch<CartModel>()
+                            .items[index]
+                            .quantity
+                            .toString(),
+                      ),
+
                       IconButton(
                           padding: const EdgeInsets.all(0),
                           onPressed: () {
