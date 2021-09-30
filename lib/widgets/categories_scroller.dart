@@ -76,6 +76,8 @@ Widget categoryButton(
           padding: const EdgeInsets.fromLTRB(0, 2, 0, 0),
           child: Text(
             name,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             style: const TextStyle(fontSize: 18),
           ),
         )

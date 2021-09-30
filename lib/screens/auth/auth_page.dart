@@ -28,10 +28,8 @@ class GetStartedPage extends StatelessWidget {
               // color: Colors.black,
               child: Image.asset(
                 "assets/login_bg.png",
-                // "assets/get_started_page.gif",
                 // fit: BoxFit.cover,
                 fit: BoxFit.cover,
-                color: Colors.red,
               ),
             ),
             Positioned(

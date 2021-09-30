@@ -89,6 +89,8 @@ class InitialCheck extends StatefulWidget {
 class InitialCheckState extends State<InitialCheck> {
   void initialAction() {
     Provider.of<AuthService>(context, listen: false).initialAction(context);
+    debugPrint(
+        Provider.of<AuthService>(context, listen: false).userToken.toString());
   }
 
   @override

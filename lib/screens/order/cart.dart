@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/models/service/payment.dart';
 import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/checkout/checkout_widget.dart';
@@ -195,10 +196,16 @@ class CartPage extends StatelessWidget {
                         onPressed: () {
                           // Provider.of<CartModel>(context).()
                           // if cart is empty then do not allow checkout
-                          if (Provider.of<CartModel>(context).totalQuantity !=
+                          if (Provider.of<CartModel>(context, listen: false)
+                                  .totalQuantity !=
                               0) {
-                            pushNewScreen(context,
-                                screen: const CheckoutPage());
+                            createPayment(
+                              Provider.of<AuthService>(context, listen: false)
+                                  .userToken,
+                              Provider.of<CartModel>(context, listen: false)
+                                  .totalPrice,
+                              context,
+                            );
                           } else {
                             SnackBar snackBar = const SnackBar(
                               content: Text("Please add something in cart"),
