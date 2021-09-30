@@ -82,19 +82,9 @@ class _SearchResultPageState extends State<SearchResultPage> {
                               }),
                         )
                       : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/notfound.svg",
-                                height:
-                                    MediaQuery.of(context).size.height * 0.5,
-                              ),
-                              Text(
-                                "No results found",
-                                style: GoogleFonts.inter(fontSize: 20),
-                              ),
-                            ],
+                          child: Text(
+                            "No results found",
+                            style: GoogleFonts.inter(fontSize: 20),
                           ),
                         );
                 } else if (snapshot.hasError) {
