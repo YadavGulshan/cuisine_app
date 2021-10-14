@@ -1,18 +1,56 @@
 /// Manage Profile.
 /// TODO: Add profile management.
+import 'package:cuisine_app/screens/user/bottomsheet.dart';
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ManageProfile extends StatelessWidget {
+class ManageProfile extends StatefulWidget {
   ManageProfile({Key? key}) : super(key: key);
 
-  // text editing controllers
+  @override
+  State<ManageProfile> createState() => _ManageProfileState();
+}
+
+class _ManageProfileState extends State<ManageProfile> {
   TextEditingController nameController = TextEditingController();
+
   TextEditingController phoneController = TextEditingController();
+
   TextEditingController addressController = TextEditingController();
+
   TextEditingController cityController = TextEditingController();
+
   TextEditingController stateController = TextEditingController();
+
   TextEditingController zipController = TextEditingController();
+  late String name = "";
+  late String phone = "";
+  late String address = "";
+  late String city = "";
+  late String state = "";
+  late String zip = "";
+  late String email = "";
+  void GetUserDetails() async {
+    final prefs = await SharedPreferences.getInstance();
+    name = prefs.getString("name").toString();
+    email = prefs.getString("email").toString();
+    phone = prefs.getString("phone").toString();
+    address = prefs.getString("address").toString();
+    city = prefs.getString("city").toString();
+    state = prefs.getString("state").toString();
+    zip = prefs.getString("pincode").toString();
+    debugPrint("Action completed");
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    GetUserDetails();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +66,7 @@ class ManageProfile extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(
-                    bottom: 16,
+                    bottom: 0,
                     top: 16,
                   ),
                   child: Text(
@@ -39,54 +77,56 @@ class ManageProfile extends StatelessWidget {
                     ),
                   ),
                 ),
-
-                const Padding(
-                  padding: EdgeInsets.only(
-                    bottom: 16,
-                    top: 4,
-                  ),
-                  child: CircleAvatar(
-                    child: Icon(Icons.person, size: 35),
-                    radius: 40,
-                  ),
+                Divider(
+                  thickness: 2,
+                  endIndent: 50,
+                  color: Theme.of(context).primaryColorLight,
                 ),
-                textfield("hint", "validatorString", nameController, "Name",
-                    false, context, 1, 1, false),
-                textfield("hint", "validatorString", phoneController, "Phone",
-                    false, context, 1, 1, true),
-                textfield("hint", "validatorString", addressController,
-                    "Address", false, context, 3, 3, false),
-                textfield("hint", "validatorString", cityController, "City",
-                    false, context, 1, 1, false),
-                textfield("hint", "validatorString", stateController, "State",
-                    false, context, 1, 1, false),
-                textfield("hint", "validatorString", zipController, "Pincode",
-                    false, context, 1, 1, true),
-                // Bunch of text fields
-
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: CircleAvatar(
+                //     child: Icon(Icons.person, size: 35),
+                //     radius: 40,
+                //   ),
+                // ),
+                Details(title: "Name", value: name),
+                Details(title: "Email", value: email),
+                Details(title: "Phone", value: phone),
+                Details(title: "Address", value: address),
+                Details(title: "City", value: city),
+                Details(title: "State", value: state),
+                Details(title: "Zip", value: zip),
                 // Save button
-                Align(
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 24,
+                  ),
+                  child: Align(
                     alignment: Alignment.bottomRight,
                     child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).primaryColor,
-                          ),
-                          padding: MaterialStateProperty.all(
-                              const EdgeInsets.all(8)),
+                      style: ButtonStyle(
+                        // backgroundColor: MaterialStateProperty.all(
+                        //   Theme.of(context).primaryColor,
+                        // ),
+                        padding:
+                            MaterialStateProperty.all(const EdgeInsets.all(8)),
+                      ),
+                      onPressed: () {
+                        // SnackBar snackBar = const SnackBar(
+                        //   content: Text("Profile Saved"),
+                        //   duration: Duration(seconds: 1),
+                        // );
+                        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                      child: const Text(
+                        "Edit Details",
+                        style: TextStyle(
+                          fontSize: 16,
                         ),
-                        onPressed: () {
-                          SnackBar snackBar = const SnackBar(
-                            content: Text("Profile Saved"),
-                            duration: Duration(seconds: 1),
-                            backgroundColor: Colors.green,
-                          );
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        },
-                        child: const Text(
-                          "Save",
-                          style: TextStyle(fontSize: 24, color: Colors.white),
-                        ))),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -129,9 +169,7 @@ class ManageProfile extends StatelessWidget {
             borderSide:
                 BorderSide(color: Theme.of(context).primaryColor, width: 2.0),
           ),
-          enabledBorder: const OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black, width: 1.0),
-          ),
+          enabledBorder: const OutlineInputBorder(),
         ),
         // validator: (value) {
         //   if (value == null || value.isEmpty) {
@@ -139,6 +177,58 @@ class ManageProfile extends StatelessWidget {
         //   }
         //   return null;
         // },
+      ),
+    );
+  }
+}
+
+class Details extends StatelessWidget {
+  final String title;
+  final String value;
+  const Details({Key? key, required this.title, required this.value})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        top: 16,
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(
+              right: 8,
+            ),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: Text(
+                title + ": ",
+                textAlign: TextAlign.start,
+                style: GoogleFonts.lato(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).primaryColor,
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.5,
+            // height: MediaQuery.of(context).size.height * 0.05,
+            child: Text(
+              value,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+              style: GoogleFonts.lato(
+                fontSize: 20,
+                color: Colors.grey[550],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }

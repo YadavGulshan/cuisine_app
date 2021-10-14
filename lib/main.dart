@@ -1,14 +1,11 @@
-import 'package:cuisine_app/provider/authstream.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/provider/infoprovider.dart';
 import 'package:cuisine_app/screens/auth/auth_page.dart';
 import 'package:cuisine_app/screens/homepage.dart';
-import 'package:cuisine_app/screens/order/checkout/checkout_screen.dart';
-import 'package:cuisine_app/screens/user/profile_section.dart';
+import 'package:cuisine_app/screens/order/checkout_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
-import 'package:cuisine_app/user.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -44,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Atica',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: Brightness.light,
@@ -74,10 +71,8 @@ class MyApp extends StatelessWidget {
               ),
               button: GoogleFonts.rubik(fontSize: 16.0, color: Colors.white)),
         ),
-        // home: (Provider.of<AuthService>(context).loginCheck)
-        //     ? const MainPage()
-        //     : const GetStartedPage(),
         home: const InitialCheck(),
+        // home: const CheckoutPage(),
         // home: CheckoutScreen(),
       ),
     );
@@ -94,6 +89,8 @@ class InitialCheck extends StatefulWidget {
 class InitialCheckState extends State<InitialCheck> {
   void initialAction() {
     Provider.of<AuthService>(context, listen: false).initialAction(context);
+    debugPrint(
+        Provider.of<AuthService>(context, listen: false).userToken.toString());
   }
 
   @override

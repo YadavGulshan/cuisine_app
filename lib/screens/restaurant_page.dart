@@ -4,33 +4,32 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/cart.dart';
-import 'package:cuisine_app/screens/order/cart_bottomscreen.dart';
 import 'package:cuisine_app/screens/restaurant/delivery_page.dart';
 import 'package:cuisine_app/screens/restaurant/review_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:palette_generator/palette_generator.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import 'package:badges/badges.dart';
 import 'package:shimmer/shimmer.dart';
 
 class RestaurantPage extends StatefulWidget {
-  String title;
-  String address;
-  String rating;
-  String restaurantId;
-  String category;
-  String imageUrl;
-  RestaurantPage(
+  final String title;
+  final String address;
+  final String rating;
+  final String restaurantId;
+  final String category;
+  final String imageUrl;
+  final String slug;
+  const RestaurantPage(
       {Key? key,
       required this.restaurantId,
       required this.title,
       required this.address,
       required this.rating,
       required this.imageUrl,
+      required this.slug,
       this.category = ""})
       : super(key: key);
 
@@ -42,20 +41,14 @@ class _RestaurantPageState extends State<RestaurantPage>
     with SingleTickerProviderStateMixin {
   late TabController _controller;
 
-  void _updatePaletteGenerator() async {
-    var paletteGenerator = await PaletteGenerator.fromImageProvider(
-      Image.network(widget.imageUrl).image,
-    );
-    debugPrint(paletteGenerator.colors.toString());
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
     _controller = TabController(length: 2, vsync: this);
     // Delete the cart content.
-    Provider.of<CartModel>(context, listen: false).removeAllItems();
+    if (Provider.of<CartModel>(context, listen: false).totalQuantity != 0) {
+      Provider.of<CartModel>(context, listen: false).removeAllItems();
+    }
   }
 
   @override
@@ -119,10 +112,10 @@ class _RestaurantPageState extends State<RestaurantPage>
                 controller: _controller,
                 children: [
                   DeliveryPage(
-                    restaurantid: widget.category,
+                    restaurantid: widget.slug,
                   ),
                   ReviewPage(
-                    restaurant: widget.category,
+                    restaurant: widget.slug,
                   ),
                 ],
               ),
@@ -134,15 +127,19 @@ class _RestaurantPageState extends State<RestaurantPage>
                 ? FloatingActionButton(
                     backgroundColor: Theme.of(context).primaryColor,
                     onPressed: () {
-                      pushNewScreen(context, screen: const CartPage());
+                      pushNewScreen(context,
+                          screen: CartPage(
+                            restaurantId: widget.restaurantId,
+                          ));
                     },
                     child: Badge(
                       badgeColor: Colors.white,
                       animationType: BadgeAnimationType.fade,
                       badgeContent: Text(
-                          Provider.of<CartModel>(context, listen: true)
-                              .totalQuantity
-                              .toString()),
+                        Provider.of<CartModel>(context, listen: true)
+                            .totalQuantity
+                            .toString(),
+                      ),
                       child: const Icon(
                         Icons.shopping_cart_outlined,
                         color: primaryLightColor,

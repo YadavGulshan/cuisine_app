@@ -99,7 +99,7 @@ List TestCategory = [
         "https://images.pexels.com/photos/2456435/pexels-photo-2456435.jpeg?crop=entropy&cs=srgb&dl=pexels-engin-akyurt-2456435.jpg&fit=crop&fm=jpg&h=426&w=640"
   },
   {
-    "title": "French Fries",
+    "title": "Fries",
     "imageUrl":
         "https://images.pexels.com/photos/1893555/pexels-photo-1893555.jpeg?crop=entropy&cs=srgb&dl=pexels-valeria-boltneva-1893555.jpg&fit=crop&fm=jpg&h=426&w=640"
   },

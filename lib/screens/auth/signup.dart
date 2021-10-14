@@ -33,7 +33,6 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _zipCodeController = TextEditingController();
 
   /// Future for handling sign up action
-  Future<User>? _signMeUp;
   bool _obsecure = true;
   IconData _icon = Icons.remove_red_eye;
   @override

@@ -114,121 +114,133 @@ class Menu extends StatelessWidget {
           border: Border.all(width: 0.1, color: primaryColor),
         ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CachedNetworkImage(
-              imageUrl: imageUrl,
-              imageBuilder: (context, imageProvider) => Container(
-                height: screen.height * 0.15,
-                decoration: BoxDecoration(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                  ),
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              placeholder: (context, url) => Shimmer.fromColors(
-                child: Container(
-                  height: screen.height * 0.17,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(10),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      imageBuilder: (context, imageProvider) => Container(
+                        height: screen.height * 0.17,
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        child: Container(
+                          height: screen.height * 0.17,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                        baseColor: Theme.of(context).primaryColor,
+                        highlightColor: Theme.of(context).primaryColorLight,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
                   ),
-                ),
-                baseColor: Theme.of(context).primaryColor,
-                highlightColor: Theme.of(context).primaryColorLight,
-              ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: screen.width * 0.04,
-              ),
-              child: Text(
-                title,
-                style: TextStyle(
-                  fontSize: screen.height * 0.025,
-                  fontWeight: FontWeight.w500,
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: screen.height * 0.01),
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
                   Padding(
                     padding: EdgeInsets.only(
                       left: screen.width * 0.04,
                     ),
                     child: Text(
-                      "₹ " + price.toString(),
+                      title,
                       style: TextStyle(
-                        fontSize: screen.height * 0.02,
+                        fontSize: screen.height * 0.025,
+                        fontWeight: FontWeight.w500,
                       ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  const Spacer(),
                   Padding(
-                    padding: EdgeInsets.only(
-                      right: screen.width * 0.04,
-                    ),
-                    // Button that adds the item to the cart
-                    child: InkWell(
-                      onTap: () {
-                        CartModel provider =
-                            Provider.of<CartModel>(context, listen: false);
-                        CartItem cartItem = CartItem(
-                          id: id,
-                          title: title,
-                          price: price,
-                          quantity: 1,
-                          // TODO: Keep note of this.
-                          imageUrl: imageUrl,
-                        );
-
-                        // Add the item to the cart
-
-                        Provider.of<CartModel>(context, listen: false)
-                            .addItem(cartItem);
-
-                        // Print the cart
-                        debugPrint(
-                          "############### Item added to cart##############\nPrice: " +
-                              provider.totalPrice.toString(),
-                        );
-
-                        // TODO: Remove this section, if not using
-                        debugPrint(
-                            "%%%%%%%%%%%%%%%%%%%%%%%%hi%%%%%%%%%%%%%%%%%%%%%%%");
-
-                        // Find the ScaffoldMessenger in the widget tree
-                        // and use it to show a SnackBar.
-                        // (provider.totalQuantity == 0)
-                        //     ? debugPrint("&&&&&&&&&&&&&&&&&&&&&&&&&&")
-                        //     : ScaffoldMessenger.of(context)
-                        //         .showSnackBar(snackBar);
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          // color: const Color(0xFF78e6fa),
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(10),
+                    padding: EdgeInsets.only(top: screen.height * 0.01),
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: screen.width * 0.04,
+                          ),
+                          child: Text(
+                            "₹ " + price.toString(),
+                            style: TextStyle(
+                              fontSize: screen.height * 0.02,
+                            ),
+                            textAlign: TextAlign.left,
+                          ),
                         ),
-                        child: Icon(
-                          Icons.add,
-                          size: screen.height * 0.04,
-                          color: Colors.white,
+                        const Spacer(),
+                        Padding(
+                          padding: EdgeInsets.only(
+                            right: screen.width * 0.04,
+                          ),
+                          // Button that adds the item to the cart
+                          child: InkWell(
+                            onTap: () {
+                              CartModel provider = Provider.of<CartModel>(
+                                  context,
+                                  listen: false);
+                              CartItem cartItem = CartItem(
+                                id: id,
+                                title: title,
+                                price: price,
+                                quantity: 1,
+                                // TODO: Keep note of this.
+                                imageUrl: imageUrl,
+                              );
+
+                              // Add the item to the cart
+
+                              Provider.of<CartModel>(context, listen: false)
+                                  .addItem(cartItem);
+
+                              // Print the cart
+                              debugPrint(
+                                "############### Item added to cart##############\nPrice: " +
+                                    provider.totalPrice.toString(),
+                              );
+
+                              // TODO: Remove this section, if not using
+                              debugPrint(
+                                  "%%%%%%%%%%%%%%%%%%%%%%%%hi%%%%%%%%%%%%%%%%%%%%%%%");
+
+                              // Find the ScaffoldMessenger in the widget tree
+                              // and use it to show a SnackBar.
+                              // (provider.totalQuantity == 0)
+                              //     ? debugPrint("&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                              //     : ScaffoldMessenger.of(context)
+                              //         .showSnackBar(snackBar);
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                // color: const Color(0xFF78e6fa),
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Icon(
+                                Icons.add,
+                                size: screen.height * 0.04,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
                   ),
                 ],

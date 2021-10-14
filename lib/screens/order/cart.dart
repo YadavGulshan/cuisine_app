@@ -1,19 +1,16 @@
-import 'dart:ui';
-
 import 'package:cuisine_app/constants.dart';
+import 'package:cuisine_app/models/service/payment.dart';
 import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/checkout/checkout_widget.dart';
 import 'package:cuisine_app/services/geolocation.dart';
-import 'package:cuisine_app/user.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:cuisine_app/widgets/cart_content.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+  final String restaurantId;
+  const CartPage({Key? key, required this.restaurantId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +68,8 @@ class CartPage extends StatelessWidget {
                             // color: Colors.amber,
                             width: screen.width * 0.7,
                             child: Text(
-                              Provider.of<AuthService>(context).userName,
+                              Provider.of<AuthService>(context, listen: false)
+                                  .userName,
                               // "test1@test.com",
                               style: const TextStyle(
                                 fontSize: 20,
@@ -87,7 +85,8 @@ class CartPage extends StatelessWidget {
                               // color: Colors.amber,
                               width: screen.width * 0.7,
                               child: Text(
-                                Provider.of<AuthService>(context).userEmail,
+                                Provider.of<AuthService>(context, listen: false)
+                                    .userEmail,
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 // "test1@test.com",
@@ -165,7 +164,7 @@ class CartPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
-                  amountStyle: TextStyle(),
+                  amountStyle: const TextStyle(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -186,7 +185,29 @@ class CartPage extends StatelessWidget {
                             backgroundColor:
                                 MaterialStateProperty.all(primaryColor)),
                         onPressed: () {
-                          // Provider.of<CartModel>(context).();
+                          // Provider.of<CartModel>(context).()
+                          // if cart is empty then do not allow checkout
+                          if (Provider.of<CartModel>(context, listen: false)
+                                  .totalQuantity !=
+                              0) {
+                            createPayment(
+                              Provider.of<AuthService>(context, listen: false)
+                                  .userToken,
+                              Provider.of<CartModel>(context, listen: false)
+                                  .totalPrice,
+                              restaurantId,
+                              Provider.of<CartModel>(context, listen: false)
+                                  .items,
+                              context,
+                            );
+                          } else {
+                            SnackBar snackBar = const SnackBar(
+                              content: Text("Please add something in cart"),
+                              backgroundColor: Colors.blue,
+                            );
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(snackBar);
+                          }
                         },
                         child: const Text(
                           "Checkout",
@@ -202,108 +223,6 @@ class CartPage extends StatelessWidget {
               ],
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class CartContent extends StatelessWidget {
-  int index;
-  CartContent({
-    Key? key,
-    required this.index,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Size screen = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Row(
-        children: [
-          Container(
-            height: screen.height * 0.10,
-            width: screen.width * 0.3,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    Provider.of<CartModel>(context, listen: false)
-                        .items
-                        .elementAt(index)
-                        .imageUrl,
-                  ),
-                )),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Container(
-                    width: screen.width * 0.5,
-                    child: Text(
-                      Provider.of<CartModel>(context, listen: false)
-                          .items[index]
-                          .title
-                          .toString(),
-                      style: const TextStyle(fontSize: 20),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(2.0),
-                  child: Text(
-                    "₹ " +
-                        Provider.of<CartModel>(context, listen: false)
-                            .items[index]
-                            .price
-                            .toString(),
-                    style: const TextStyle(fontSize: 14),
-                    textAlign: TextAlign.left,
-                  ),
-                ),
-
-                // Quantity section.
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Theme.of(context).primaryColorLight,
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      IconButton(
-                          onPressed: () {
-                            Provider.of<CartModel>(context, listen: false)
-                                .items[index]
-                                .quantity--;
-                          },
-                          icon: const Icon(Icons.remove)), // remove
-                      Text(Provider.of<CartModel>(context, listen: true)
-                          .getItemQuantity(index.toString())
-                          .toString()), // Quantity
-                      IconButton(
-                          padding: const EdgeInsets.all(0),
-                          onPressed: () {
-                            Provider.of<CartModel>(context, listen: false)
-                                .items[index]
-                                .quantity++;
-                          },
-                          icon: const Icon(Icons.add)),
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )
         ],
       ),
     );

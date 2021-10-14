@@ -57,7 +57,7 @@ class _SearchResultPageState extends State<SearchResultPage> {
                   //     "COnnection state: " + ConnectionState.done.toString());
                   debugPrint("length: " + snapshot.data!.length.toString());
                   // debugPrint(snapshot.data?[0].name.toString());
-                  return (snapshot.data!.length > 0)
+                  return (snapshot.data!.isNotEmpty)
                       ? Expanded(
                           child: ListView.builder(
                               itemCount: snapshot.data?.length,
@@ -70,8 +70,9 @@ class _SearchResultPageState extends State<SearchResultPage> {
                                   imageUrl:
                                       "$baseUrl/" + currentRestaurant.imageUrl,
                                   category: currentRestaurant.category,
-                                  rating: currentRestaurant.rating.toString(),
+                                  rating: currentRestaurant.rating,
                                   address: currentRestaurant.address,
+                                  slug: currentRestaurant.slug,
                                   id: currentRestaurant.id.toString(),
                                   showRating: false,
                                 );
@@ -81,19 +82,9 @@ class _SearchResultPageState extends State<SearchResultPage> {
                               }),
                         )
                       : Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SvgPicture.asset(
-                                "assets/notfound.svg",
-                                height:
-                                    MediaQuery.of(context).size.height * 0.5,
-                              ),
-                              Text(
-                                "No results found",
-                                style: GoogleFonts.inter(fontSize: 20),
-                              ),
-                            ],
+                          child: Text(
+                            "No results found",
+                            style: GoogleFonts.inter(fontSize: 20),
                           ),
                         );
                 } else if (snapshot.hasError) {
@@ -119,9 +110,9 @@ Future<List<SearchResult>> fetchQuery(String query) async {
       await http.get(Uri.parse("$baseUrl/api/restaurant/search/$query"));
 
   if (response.statusCode == 200) {
-    Map result = jsonDecode(response.body);
-    List<dynamic> restaurantInfo = result['data'];
-    return restaurantInfo.map((e) => SearchResult.fromJson(e)).toList();
+    List result = jsonDecode(response.body);
+    // List<dynamic> restaurantInfo = result['data'];
+    return result.map((e) => SearchResult.fromJson(e)).toList();
   } else {
     /// Nothing found.
     throw Exception("Nothing found.");
@@ -134,7 +125,8 @@ class SearchResult {
   final String imageUrl;
   final String address;
   final String category;
-  final double rating = 5;
+  final String rating;
+  final String slug;
 
   SearchResult({
     required this.id,
@@ -142,7 +134,8 @@ class SearchResult {
     required this.imageUrl,
     required this.address,
     required this.category,
-    // required this.rating,
+    required this.rating,
+    required this.slug,
   });
 
   // SearchResult.fromJson(Map<String, dynamic> json) {
@@ -163,7 +156,9 @@ class SearchResult {
         id = json['id'],
         imageUrl = json['photo'],
         address = json['address'],
-        category = json['slug'];
+        category = json['category'].cast<String>().join(', '),
+        rating = json['reviews_avg_rating'],
+        slug = json['slug'];
 }
 
 // {
