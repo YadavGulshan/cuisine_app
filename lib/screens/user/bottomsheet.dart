@@ -13,15 +13,14 @@ Future<dynamic> bottomSheet(BuildContext context, double height) {
       useRootNavigator: true,
       isScrollControlled: true,
       builder: (BuildContext context) {
-        return Container(
+        return SizedBox(
           height: height * 0.7,
-          decoration: BoxDecoration(),
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(14, 14, 0, 4),
+              const Padding(
+                padding: EdgeInsets.fromLTRB(14, 14, 0, 4),
                 child: Text(
                   "Search location",
                   style: TextStyle(

@@ -1,25 +1,16 @@
-import 'dart:convert';
-import 'dart:ui';
-
 import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/models/service/payment.dart';
 import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:cuisine_app/provider/cart_provider.dart';
 import 'package:cuisine_app/screens/order/checkout/checkout_widget.dart';
-import 'package:cuisine_app/screens/order/checkout_page.dart';
 import 'package:cuisine_app/services/geolocation.dart';
-import 'package:cuisine_app/user.dart';
 import 'package:cuisine_app/widgets/cart_content.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
 
 class CartPage extends StatelessWidget {
-  const CartPage({Key? key}) : super(key: key);
+  final String restaurantId;
+  const CartPage({Key? key, required this.restaurantId}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +164,7 @@ class CartPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 18,
                   ),
-                  amountStyle: TextStyle(),
+                  amountStyle: const TextStyle(),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -204,6 +195,9 @@ class CartPage extends StatelessWidget {
                                   .userToken,
                               Provider.of<CartModel>(context, listen: false)
                                   .totalPrice,
+                              restaurantId,
+                              Provider.of<CartModel>(context, listen: false)
+                                  .items,
                               context,
                             );
                           } else {

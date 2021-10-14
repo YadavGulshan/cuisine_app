@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Atica',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           brightness: Brightness.light,

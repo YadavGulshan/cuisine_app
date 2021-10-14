@@ -127,7 +127,10 @@ class _RestaurantPageState extends State<RestaurantPage>
                 ? FloatingActionButton(
                     backgroundColor: Theme.of(context).primaryColor,
                     onPressed: () {
-                      pushNewScreen(context, screen: const CartPage());
+                      pushNewScreen(context,
+                          screen: CartPage(
+                            restaurantId: widget.restaurantId,
+                          ));
                     },
                     child: Badge(
                       badgeColor: Colors.white,

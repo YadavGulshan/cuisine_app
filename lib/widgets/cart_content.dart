@@ -24,10 +24,6 @@ class CartContent extends StatelessWidget {
                 image: DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    // Provider.of<CartModel>(context, listen: false)
-                    //     .items
-                    //     .elementAt(index)
-                    //     .imageUrl,
                     context.watch<CartModel>().items.elementAt(index).imageUrl,
                   ),
                 )),
@@ -56,16 +52,10 @@ class CartContent extends StatelessWidget {
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "₹ ${context.watch<CartModel>().items[index].price}",
-                    // Provider.of<CartModel>(context, listen: false)
-                    //     .items[index]
-                    //     .price
-                    //     .toString(),
                     style: const TextStyle(fontSize: 14),
                     textAlign: TextAlign.left,
                   ),
                 ),
-
-                // Quantity section.
                 Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
@@ -77,25 +67,14 @@ class CartContent extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: () {
-                            // Provider.of<CartModel>(context, listen: false)
-                            //     .items[index]
-                            //     .quantity--;
                             context.read<CartModel>().items[index].quantity--;
                           },
-                          icon: const Icon(Icons.remove)), // remove
-                      // Text(Provider.of<CartModel>(context, listen: true)
-                      //     .getItemQuantity(index.toString())
-                      //     .toString()),
-                      //
+                          icon: const Icon(Icons.remove)),
                       Text(
                           "${context.watch<CartModel>().items[index].quantity}"),
-
                       IconButton(
                           padding: const EdgeInsets.all(0),
                           onPressed: () {
-                            // Provider.of<CartModel>(context, listen: false)
-                            //     .items[index]
-                            //     .quantity++;
                             context.read<CartModel>().items[index].quantity++;
                           },
                           icon: const Icon(Icons.add)),

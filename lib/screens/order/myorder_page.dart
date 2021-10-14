@@ -4,6 +4,7 @@ import 'package:cuisine_app/constants.dart';
 import 'package:cuisine_app/provider/authstream.dart';
 import 'package:cuisine_app/provider/authstream1.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -136,7 +137,11 @@ class OrderTiles extends StatelessWidget {
                       const Spacer(),
                       Text(
                         "ID: #" + orderId,
-                        style: TextStyle(fontSize: 20, color: Colors.grey[700]),
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.grey[700],
+                          fontWeight: FontWeight.w100,
+                        ),
                       ),
                     ]),
                 Row(
@@ -195,7 +200,7 @@ Future<List<PreviousOrders>> fetchPreviousOrder(
   debugPrint("Token: $token, id: $id");
   final response = await http.get(
     Uri.parse(
-      "$baseUrl/api/order/1",
+      "$baseUrl/api/order/$id",
     ),
     headers: {
       "Accept": 'application/json',

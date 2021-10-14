@@ -119,36 +119,38 @@ class Menu extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    imageBuilder: (context, imageProvider) => Container(
-                      height: screen.height * 0.17,
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                        image: DecorationImage(
-                          image: imageProvider,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    placeholder: (context, url) => Shimmer.fromColors(
-                      child: Container(
+                  Expanded(
+                    child: CachedNetworkImage(
+                      imageUrl: imageUrl,
+                      imageBuilder: (context, imageProvider) => Container(
                         height: screen.height * 0.17,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                        decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10),
                           ),
+                          image: DecorationImage(
+                            image: imageProvider,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
-                      baseColor: Theme.of(context).primaryColor,
-                      highlightColor: Theme.of(context).primaryColorLight,
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        child: Container(
+                          height: screen.height * 0.17,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                          ),
+                        ),
+                        baseColor: Theme.of(context).primaryColor,
+                        highlightColor: Theme.of(context).primaryColorLight,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
                     ),
-                    errorWidget: (context, url, error) =>
-                        const Icon(Icons.error),
                   ),
                   Padding(
                     padding: EdgeInsets.only(
